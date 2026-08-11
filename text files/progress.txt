@@ -1,19 +1,21 @@
-day seven 8/6:
+day 7 8/6:
 	added 
 	tilemaps 
 	gun
 	bullets
 	better camera
-day eight 8/7:
+day 8 8/7:
 	folders
 	better movement gravity and shooting
-day nine 8/8:
+day 9 8/8:
 	add enemy
 	added movement contact damage and action chooser to the enemy
-day ten 8/9:
+day 10 8/9:
 	added hp to the enemy
 	enemy now can get damage and dying
 	make the enemy scene and add a position for the player to spawn(the buggy version)
-day eleven 8/10:
+day 11 8/10:
 	fixed enemy spawn location
 	make the spawn location summon the enemy again if the enemy or the spawn location is not on screen
+day 12 8/11
+	fixed delete enemy/respawn out of screen
