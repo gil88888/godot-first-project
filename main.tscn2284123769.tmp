@@ -1,0 +1,319 @@
+[gd_scene format=3 uid="uid://d32vlgw68dqe2"]
+
+[ext_resource type="Texture2D" uid="uid://ca1w5f68uno15" path="res://resources/images/test block.png" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://dxjijxdhib7s7" path="res://character_body_2d.gd" id="1_h2yge"]
+[ext_resource type="Script" uid="uid://4afho6xrdcdq" path="res://area_2d.gd" id="3_7mycd"]
+[ext_resource type="Script" uid="uid://du7j7cctwwgl0" path="res://camera_2d.gd" id="4_lquwl"]
+[ext_resource type="Texture2D" uid="uid://ciok17ihl1lyi" path="res://resources/images/floor.png" id="5_272bh"]
+[ext_resource type="Script" uid="uid://btuav11qksixe" path="res://jumping_block.gd" id="6_272bh"]
+[ext_resource type="Texture2D" uid="uid://cc7ka8jiw2t18" path="res://resources/images/jump_block/jump block_1.png" id="7_dg77c"]
+[ext_resource type="Texture2D" uid="uid://citb3pymnysm2" path="res://resources/images/jump_block/jump block disabled_1.png" id="7_w48qg"]
+[ext_resource type="Texture2D" uid="uid://1w8n64n2n6wt" path="res://resources/images/jump_block/jump block disabled_2.png" id="8_vivmo"]
+[ext_resource type="Texture2D" uid="uid://dq8s7kkom55uw" path="res://resources/images/jump_block/jump block_2.png" id="8_ycdy4"]
+[ext_resource type="Texture2D" uid="uid://djlacrqc6a6sf" path="res://resources/images/jump_block/jump block_3.png" id="9_w48qg"]
+[ext_resource type="Texture2D" uid="uid://bfkkdn0hkybh1" path="res://resources/images/jump_block/jump block_4.png" id="10_vivmo"]
+[ext_resource type="Texture2D" uid="uid://b0k3u345bat22" path="res://resources/images/jump_block/jump block_5.png" id="11_2cqfq"]
+[ext_resource type="Texture2D" uid="uid://dm1xp0kb4pw32" path="res://resources/images/spikes.png" id="12_074og"]
+[ext_resource type="Texture2D" uid="uid://dyd0lir8q066k" path="res://resources/images/jump_block/jump block_6.png" id="12_yaehf"]
+[ext_resource type="Script" uid="uid://f1vpegfpoyrk" path="res://spikes_hit_zone.gd" id="13_074og"]
+[ext_resource type="Script" uid="uid://ch70bgx8whf6k" path="res://player_hp_popup.gd" id="14_074og"]
+[ext_resource type="Script" uid="uid://b2w5glm7tphb7" path="res://player_invincible.gd" id="15_cegan"]
+[ext_resource type="Texture2D" uid="uid://lbmw0dyxsb48" path="res://resources/images/hp bar.png" id="15_vivmo"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_cean3"]
+font_size = 25
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hhp3w"]
+size = Vector2(1927, 260.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cean3"]
+size = Vector2(298, 117)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ao2f3"]
+size = Vector2(1713, 95)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5bs5c"]
+size = Vector2(100.5, 93)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gdyli"]
+animations = [{
+"frames": [{
+"duration": 1.2,
+"texture": ExtResource("7_w48qg")
+}, {
+"duration": 1.2,
+"texture": ExtResource("8_vivmo")
+}],
+"loop": 1,
+"name": &"jump_block_disabled_anim",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_dg77c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ycdy4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_w48qg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_vivmo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_2cqfq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_yaehf")
+}],
+"loop": 1,
+"name": &"jump_block_enabled_anim",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yaehf"]
+size = Vector2(168, 60)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cegan"]
+size = Vector2(168, 60.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1bvp3"]
+size = Vector2(69.71056, 62.168777)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_of8pq"]
+size = Vector2(171, 157)
+
+[sub_resource type="GDScript" id="GDScript_yaehf"]
+
+[node name="Main" type="Node2D" unique_id=1411518559]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=426550629]
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=1837865429]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -960.0
+offset_top = -540.0
+offset_right = -960.0
+offset_bottom = -540.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control" unique_id=1836953966]
+layout_mode = 0
+offset_right = 340.0
+offset_bottom = 123.0
+scale = Vector2(1.0540092, 1.049313)
+texture = ExtResource("15_vivmo")
+
+[node name="Label" type="Label" parent="CanvasLayer/Control" unique_id=1724756005]
+layout_mode = 0
+offset_left = 139.0
+offset_top = 48.0
+offset_right = 229.0
+offset_bottom = 83.0
+scale = Vector2(1.0540092, 1.049313)
+text = "100"
+label_settings = SubResource("LabelSettings_cean3")
+
+[node name="camera blocks" type="Node2D" parent="." unique_id=71190643]
+z_index = -1
+metadata/_edit_lock_ = true
+
+[node name="Camera2D" type="Camera2D" parent="camera blocks" unique_id=1894017348]
+script = ExtResource("4_lquwl")
+metadata/_edit_lock_ = true
+
+[node name="Area2D" type="Area2D" parent="camera blocks" unique_id=630119099 groups=["camera block"]]
+z_index = -1
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="camera blocks/Area2D" unique_id=1334332821]
+z_index = -1
+position = Vector2(-3.5, 317.25)
+shape = SubResource("RectangleShape2D_hhp3w")
+debug_color = Color(1.0588765e-06, 0.6421063, 0.3285173, 0.41960785)
+metadata/_edit_lock_ = true
+
+[node name="Area2D2" type="Area2D" parent="camera blocks" unique_id=1815827043 groups=["camera block"]]
+z_index = -1
+position = Vector2(0, -297)
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="camera blocks/Area2D2" unique_id=2003664540]
+z_index = -1
+position = Vector2(23, -80)
+shape = SubResource("RectangleShape2D_hhp3w")
+debug_color = Color(1.0588765e-06, 0.6421063, 0.3285173, 0.41960785)
+metadata/_edit_lock_ = true
+
+[node name="Area2D2" type="Area2D" parent="camera blocks/Area2D2" unique_id=1203798265 groups=["camera block"]]
+z_index = -1
+position = Vector2(0, -297)
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="camera blocks/Area2D2/Area2D2" unique_id=815906146]
+z_index = -1
+position = Vector2(46, -142)
+shape = SubResource("RectangleShape2D_hhp3w")
+debug_color = Color(1.0588765e-06, 0.6421063, 0.3285173, 0.41960785)
+metadata/_edit_lock_ = true
+
+[node name="platforms" type="Node2D" parent="." unique_id=450640308]
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="platforms" unique_id=880332345]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="platforms/StaticBody2D2" unique_id=962951742]
+position = Vector2(545, 260.5)
+shape = SubResource("RectangleShape2D_cean3")
+
+[node name="Sprite2D" type="Sprite2D" parent="platforms/StaticBody2D2" unique_id=81571213]
+position = Vector2(545, 260.5)
+scale = Vector2(4.65625, 1.8281251)
+texture = ExtResource("5_272bh")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="platforms" unique_id=368813554]
+position = Vector2(-850, -313)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="platforms/StaticBody2D" unique_id=1696353113]
+position = Vector2(789.50006, 799.5)
+shape = SubResource("RectangleShape2D_ao2f3")
+
+[node name="Sprite2D" type="Sprite2D" parent="platforms/StaticBody2D" unique_id=2029642150]
+position = Vector2(789.5001, 799)
+scale = Vector2(26.765625, 1.5000004)
+texture = ExtResource("5_272bh")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="platforms" unique_id=191720408]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="platforms/StaticBody2D3" unique_id=1045916827]
+position = Vector2(-153.5001, -194.50003)
+shape = SubResource("RectangleShape2D_cean3")
+
+[node name="Sprite2D" type="Sprite2D" parent="platforms/StaticBody2D3" unique_id=935574856]
+position = Vector2(-153.5, -194.5)
+scale = Vector2(4.640625, 1.8281249)
+texture = ExtResource("5_272bh")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="platforms" unique_id=1515360190]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="platforms/StaticBody2D4" unique_id=1512813109]
+position = Vector2(538, -545)
+shape = SubResource("RectangleShape2D_cean3")
+
+[node name="Sprite2D" type="Sprite2D" parent="platforms/StaticBody2D4" unique_id=533567728]
+position = Vector2(539, -544)
+scale = Vector2(4.640625, 1.8281249)
+texture = ExtResource("5_272bh")
+
+[node name="Jumping Block" type="Area2D" parent="platforms" unique_id=145948627 groups=["jumping blocks"]]
+script = ExtResource("6_272bh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="platforms/Jumping Block" unique_id=944196181]
+position = Vector2(240.5, 24)
+shape = SubResource("RectangleShape2D_5bs5c")
+
+[node name="Timer" type="Timer" parent="platforms/Jumping Block" unique_id=1005095074]
+wait_time = 3.55
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="platforms/Jumping Block" unique_id=272307913]
+position = Vector2(240.00002, 24)
+scale = Vector2(1.597, 1.5)
+sprite_frames = SubResource("SpriteFrames_gdyli")
+animation = &"jump_block_enabled_anim"
+autoplay = "jump_block_enabled_anim"
+frame_progress = 0.47129643
+
+[node name="Jumping Block2" type="Area2D" parent="platforms" unique_id=651047538 groups=["jumping blocks"]]
+z_index = 1
+script = ExtResource("6_272bh")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="platforms/Jumping Block2" unique_id=395668377]
+position = Vector2(191.854, -481.5)
+shape = SubResource("RectangleShape2D_5bs5c")
+
+[node name="Timer" type="Timer" parent="platforms/Jumping Block2" unique_id=168456631]
+wait_time = 3.55
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="platforms/Jumping Block2" unique_id=1068103674]
+position = Vector2(192.104, -482)
+scale = Vector2(1.597, 1.5)
+sprite_frames = SubResource("SpriteFrames_gdyli")
+animation = &"jump_block_enabled_anim"
+autoplay = "jump_block_enabled_anim"
+frame_progress = 0.23896669
+
+[node name="obstacles" type="Node2D" parent="." unique_id=294263202]
+
+[node name="spikes" type="StaticBody2D" parent="obstacles" unique_id=1887860679]
+
+[node name="spikes hit zone" type="Area2D" parent="obstacles/spikes" unique_id=308944291 groups=["obstacle"]]
+script = ExtResource("13_074og")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="obstacles/spikes/spikes hit zone" unique_id=1188754471]
+position = Vector2(-636, 407)
+shape = SubResource("RectangleShape2D_yaehf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="obstacles/spikes" unique_id=627572140]
+position = Vector2(-636, 407.25)
+shape = SubResource("RectangleShape2D_cegan")
+
+[node name="Sprite2D" type="Sprite2D" parent="obstacles/spikes" unique_id=1521986110]
+position = Vector2(-636, 407.99997)
+scale = Vector2(3.527778, 3.9499993)
+texture = ExtResource("12_074og")
+
+[node name="player_invincible" type="Node2D" parent="obstacles" unique_id=242072449]
+script = ExtResource("15_cegan")
+
+[node name="invincible timer" type="Timer" parent="obstacles/player_invincible" unique_id=311889127]
+wait_time = 2.0
+
+[node name="Character" type="Node2D" parent="." unique_id=1504031467]
+
+[node name="player_hp_popup" type="Node2D" parent="Character" unique_id=2011442533]
+script = ExtResource("14_074og")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="Character" unique_id=1742410234 groups=["player"]]
+visibility_layer = 513
+script = ExtResource("1_h2yge")
+
+[node name="invincible animation" type="Timer" parent="Character/CharacterBody2D" unique_id=820729606]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Character/CharacterBody2D" unique_id=444172530]
+visibility_layer = 513
+position = Vector2(4, 359.75)
+scale = Vector2(2.453, 2.453)
+shape = SubResource("RectangleShape2D_1bvp3")
+
+[node name="Area2D" type="Area2D" parent="Character/CharacterBody2D" unique_id=2087670218 groups=["player"]]
+script = ExtResource("3_7mycd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Character/CharacterBody2D/Area2D" unique_id=445472722]
+position = Vector2(3.5, 361.5)
+shape = SubResource("RectangleShape2D_of8pq")
+
+[node name="sprite idle" type="Sprite2D" parent="Character/CharacterBody2D" unique_id=868892443]
+light_mask = 513
+visibility_layer = 512
+position = Vector2(3.75, 362.49997)
+scale = Vector2(2.6796875, 2.453124)
+texture = ExtResource("1_0xm2m")
+
+[node name="Scripts" type="Node2D" parent="." unique_id=741344311]
+script = SubResource("GDScript_yaehf")
+
+[connection signal="area_entered" from="platforms/Jumping Block" to="platforms/Jumping Block" method="_on_area_entered"]
+[connection signal="area_exited" from="platforms/Jumping Block" to="platforms/Jumping Block" method="_on_area_exited"]
+[connection signal="timeout" from="platforms/Jumping Block/Timer" to="platforms/Jumping Block" method="_on_timer_timeout"]
+[connection signal="area_entered" from="platforms/Jumping Block2" to="platforms/Jumping Block2" method="_on_area_entered"]
+[connection signal="area_exited" from="platforms/Jumping Block2" to="platforms/Jumping Block2" method="_on_area_exited"]
+[connection signal="timeout" from="platforms/Jumping Block2/Timer" to="platforms/Jumping Block2" method="_on_timer_timeout"]
+[connection signal="area_entered" from="obstacles/spikes/spikes hit zone" to="obstacles/spikes/spikes hit zone" method="_on_area_entered"]
+[connection signal="timeout" from="obstacles/player_invincible/invincible timer" to="obstacles/player_invincible" method="_on_invincible_timer_timeout"]
+[connection signal="timeout" from="Character/CharacterBody2D/invincible animation" to="Character/CharacterBody2D" method="_on_invincible_animation_timeout"]
+[connection signal="area_entered" from="Character/CharacterBody2D/Area2D" to="Character/CharacterBody2D/Area2D" method="_on_area_entered"]
+[connection signal="area_exited" from="Character/CharacterBody2D/Area2D" to="Character/CharacterBody2D/Area2D" method="_on_area_exited"]

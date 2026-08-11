@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://cjitsxntk71j0"]
+
+[ext_resource type="Texture2D" uid="uid://blq21d7bao3ek" path="res://resources/images/gun_bullet.png" id="1_8sn4g"]
+[ext_resource type="Script" uid="uid://dax172aycscq3" path="res://scripts/player/gun_bullet.gd" id="2_gpgfc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gdyli"]
+size = Vector2(64, 32)
+
+[node name="gun bullet" type="Sprite2D" unique_id=1533134189 groups=["gun bullet"]]
+scale = Vector2(2, 1.3125)
+texture = ExtResource("1_8sn4g")
+script = ExtResource("2_gpgfc")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=567076914]
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1251516681 groups=["gun bullet"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=438225373]
+position = Vector2(0, -3.633045e-07)
+shape = SubResource("RectangleShape2D_gdyli")
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

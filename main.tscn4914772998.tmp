@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://d32vlgw68dqe2"]
+
+[ext_resource type="Texture2D" uid="uid://ca1w5f68uno15" path="res://test block.png" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://dd333vhcne13e" path="res://movement.gd" id="2_h2yge"]
+
+[node name="Main" type="Node2D" unique_id=1411518559]
+
+[node name="moveable_block" type="Sprite2D" parent="." unique_id=868892443]
+position = Vector2(-10.9999695, -17.000015)
+scale = Vector2(5.921875, 5.84375)
+texture = ExtResource("1_0xm2m")
+script = ExtResource("2_h2yge")
