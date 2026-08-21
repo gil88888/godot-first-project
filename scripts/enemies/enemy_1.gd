@@ -9,6 +9,7 @@ var random_num: int = 0
 var enemy_hp: int = 100
 @onready var invincible_time_func = $"../../obstacles/player_invincible"
 var enemy_hit_animation_flag: bool = true
+
 func _process(delta: float) -> void:
 	# check if the enemy is dead
 	if enemy_hp <= 0:
@@ -52,15 +53,12 @@ func _on_area_entered(area: Area2D) -> void:
 		invincible_time_func.player_invincible(2)
 		print(GlobalVariables.player_hp)
 	if area.is_in_group("gun bullet"):
-		print("bruh")
 		enemy_hp -= 10
 		if enemy_hit_animation_flag:
 			self.get_node("Sprite2D").modulate = Color(90, 90, 0)
 			enemy_hit_animation_flag = false
 			$"hit animation".start()
 			
-
-
 
 func _on_hit_animation_timeout() -> void:
 		enemy_hit_animation_flag = true

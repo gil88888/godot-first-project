@@ -1,6 +1,5 @@
 --draw player pixel art
 --add more parkour and complete all the tiles map
-fix the enemy scene
 add more enemy spawn location
 add stronger enemy
 add grapler

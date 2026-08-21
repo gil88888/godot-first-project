@@ -10,13 +10,13 @@ size = Vector2(166.5, 124)
 [node name="enemy_1" type="Area2D" unique_id=597861740]
 script = ExtResource("1_a1412")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=973685410]
-shape = SubResource("RectangleShape2D_gdyli")
-
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2131356840]
 modulate = Color(0.99215686, 0, 0, 1)
 scale = Vector2(2.6093752, 1.9374999)
 texture = ExtResource("2_ejytf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=973685410]
+shape = SubResource("RectangleShape2D_gdyli")
 
 [node name="movement cooldown" type="Timer" parent="." unique_id=1380922145]
 
