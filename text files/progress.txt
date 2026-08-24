@@ -17,5 +17,7 @@ day 10 8/9:
 day 11 8/10:
 	fixed enemy spawn location
 	make the spawn location summon the enemy again if the enemy or the spawn location is not on screen
-day 12 8/11
+day 12 8/11:
 	fixed delete enemy/respawn out of screen now with timer
+day 13 8/24:
+	rewok the enemy to spawn randomly on the map

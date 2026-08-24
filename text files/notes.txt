@@ -1,7 +1,4 @@
---draw player pixel art
---add more parkour and complete all the tiles map
-add more enemy spawn location
-add stronger enemy
-add grapler
-add pop up of you hp
---add death screen
+add smooth platforming
+add full map
+add enemy spawning 
+add actually enemy attacks
