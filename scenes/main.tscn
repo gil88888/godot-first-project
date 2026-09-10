@@ -189,31 +189,34 @@ metadata/_edit_lock_ = true
 
 [node name="platforms" type="Node2D" parent="." unique_id=450640308]
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="platforms" unique_id=880332345 groups=["block bullet"]]
+[node name="StaticBody2D2" type="StaticBody2D" parent="platforms" unique_id=880332345 groups=["block bullet", "obstacle"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="platforms/StaticBody2D2" unique_id=962951742]
 position = Vector2(840.24994, 151.75)
 scale = Vector2(0.9986972, 1.0236975)
 shape = SubResource("RectangleShape2D_getpj")
+one_way_collision = true
 
-[node name="StaticBody2D" type="StaticBody2D" parent="platforms" unique_id=368813554 groups=["block bullet"]]
+[node name="StaticBody2D" type="StaticBody2D" parent="platforms" unique_id=368813554 groups=["block bullet", "obstacle"]]
 position = Vector2(-850, -313)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="platforms/StaticBody2D" unique_id=1696353113]
 position = Vector2(1242.5, 1095)
 shape = SubResource("RectangleShape2D_ao2f3")
 
-[node name="StaticBody2D3" type="StaticBody2D" parent="platforms" unique_id=191720408 groups=["block bullet"]]
+[node name="StaticBody2D3" type="StaticBody2D" parent="platforms" unique_id=191720408 groups=["block bullet", "obstacle"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="platforms/StaticBody2D3" unique_id=1045916827]
 position = Vector2(-599.5, -160)
 shape = SubResource("RectangleShape2D_cean3")
+one_way_collision = true
 
-[node name="StaticBody2D4" type="StaticBody2D" parent="platforms" unique_id=1515360190 groups=["block bullet"]]
+[node name="StaticBody2D4" type="StaticBody2D" parent="platforms" unique_id=1515360190 groups=["block bullet", "obstacle"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="platforms/StaticBody2D4" unique_id=1512813109]
 position = Vector2(536, -544.5)
 shape = SubResource("RectangleShape2D_ryguw")
+one_way_collision = true
 
 [node name="Jumping Block" type="Area2D" parent="platforms" unique_id=145948627 groups=["jumping blocks"]]
 script = ExtResource("3_pm3ni")
@@ -311,6 +314,7 @@ scale = Vector2(2.6796875, 2.453124)
 texture = ExtResource("18_pibwh")
 
 [node name="gun" type="Sprite2D" parent="Character/CharacterBody2D" unique_id=1504312184]
+visible = false
 position = Vector2(122, 370)
 scale = Vector2(1, 0.65625)
 texture = ExtResource("19_c6pm6")

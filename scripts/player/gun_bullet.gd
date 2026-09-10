@@ -1,12 +1,11 @@
 extends Sprite2D
 
-var direction := Vector2.ZERO
-var speed := 3000
-
+var bullet_direction := Vector2.ZERO
+var bullet_speed := 3000
+var bullet_rotation := 0
 func _process(delta):
-	position += direction * speed * delta
-
-
+	self.position += (bullet_direction * bullet_speed * delta) 
+	self.rotation = bullet_direction.angle()
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("block bullet"):
 		self.queue_free()

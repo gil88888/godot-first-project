@@ -11,7 +11,7 @@ func _ready() -> void:
 
 	
 func spawning_enemy() -> void:
-	var random_x = randi_range(-2714.0, 3425.0)
+	var random_x = randi_range(-2714, 3425)
 	self.global_position.y = 385
 	self.global_position.x = random_x
 	spawn_animation.play()
@@ -20,9 +20,9 @@ func spawn_enemy() -> void:
 	enemy_1 = enemy_1_scene.instantiate() # copy the scene(the enemy) into a var called enemy_1
 	get_parent().add_child(enemy_1) # add the enemy_1 to the enemies node
 	enemy_1.global_position = self.global_position # make the enemy_1 position the marker position
-	print("created")
+	print("enemy_1 created in " , enemy_1.global_position)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if animation_finished_counter == 3:
 		spawn_animation.stop()
 		animation_finished_counter = 0

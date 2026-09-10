@@ -20,4 +20,6 @@ day 11 8/10:
 day 12 8/11:
 	fixed delete enemy/respawn out of screen now with timer
 day 13 8/24:
-	rewok the enemy to spawn randomly on the map
+	rework the enemy to spawn randomly on the map
+	added jump buffer and jumping on a ledge
+	rework the gun to being able to shoot anywhere with the mouse

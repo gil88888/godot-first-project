@@ -20,18 +20,19 @@ func _process(_delta: float) -> void:
 		var gun_bullet = gun_bullet_scene.instantiate()
 		get_tree().current_scene.add_child(gun_bullet)
 		gun_bullet.global_position = self.global_position
-		
+		gun_bullet.bullet_direction = global_position.direction_to(get_global_mouse_position())
+		gun_bullet.bullet_rotation = gun_bullet.bullet_direction.angle()
 		# check where is your mouse pointing to
-		if get_global_mouse_position().x > player.global_position.x:
-			gun_bullet.direction = Vector2.RIGHT
-			for child in player.get_children():
-				if child is Sprite2D:	
-					child.flip_h = false
-		else:
-			gun_bullet.direction = Vector2.LEFT
-			for child in player.get_children():
-				if child is Sprite2D:	
-					child.flip_h = true
+		#if get_global_mouse_position().x > player.global_position.x:
+			#gun_bullet.direction = Vector2.RIGHT
+			#for child in player.get_children():
+				#if child is Sprite2D:	
+					#child.flip_h = false
+		#else:
+			#gun_bullet.direction = Vector2.LEFT
+			#for child in player.get_children():
+				#if child is Sprite2D:	
+					#child.flip_h = true
 					
 # make the reload flag true again 
 func _on_reload_time_timeout() -> void:

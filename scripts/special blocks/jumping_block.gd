@@ -5,7 +5,7 @@ var can_jump: bool = false
 @onready var timer = $Timer
 var timer_flag: bool = true
 @onready var animation = $AnimatedSprite2D
-var velocity_y: int = -1200
+var velocity_y: int = -1500
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.

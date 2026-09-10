@@ -7,6 +7,12 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gdyli"]
 size = Vector2(166.5, 124)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ao2f3"]
+size = Vector2(666, 124)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cean3"]
+size = Vector2(101, 128)
+
 [node name="enemy_1" type="Area2D" unique_id=597861740]
 script = ExtResource("1_a1412")
 
@@ -27,8 +33,25 @@ wait_time = 0.1
 rect = Rect2(-83, -62, 166, 124)
 script = ExtResource("3_ejytf")
 
+[node name="dashing place" type="Area2D" parent="." unique_id=758459286]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="dashing place" unique_id=836310445]
+position = Vector2(516, 0)
+shape = SubResource("RectangleShape2D_ao2f3")
+debug_color = Color(0.99818224, 0, 0.10465302, 0.41960785)
+
+[node name="obstacle detector" type="Area2D" parent="." unique_id=890499425]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="obstacle detector" unique_id=1238886854]
+position = Vector2(135, 0)
+shape = SubResource("RectangleShape2D_cean3")
+debug_color = Color(0.7882353, 0.7882353, 0.019607844, 0.41960785)
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="timeout" from="movement cooldown" to="." method="_on_movement_cooldown_timeout"]
 [connection signal="timeout" from="hit animation" to="." method="_on_hit_animation_timeout"]
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="VisibleOnScreenNotifier2D" method="_on_screen_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="VisibleOnScreenNotifier2D" method="_on_screen_exited"]
+[connection signal="area_entered" from="dashing place" to="." method="_on_dashing_place_area_entered"]
+[connection signal="area_exited" from="dashing place" to="." method="_on_dashing_place_area_exited"]
+[connection signal="area_entered" from="obstacle detector" to="." method="_on_obstacle_detector_area_entered"]
