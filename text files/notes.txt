@@ -1,4 +1,3 @@
-add smooth platforming
-add full map
-add enemy spawning 
-add actually enemy attacks
+add enemy_1 gravity
+make the hp bar work
+add dash to the player

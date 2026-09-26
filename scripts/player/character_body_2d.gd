@@ -1,9 +1,9 @@
 extends CharacterBody2D
-var speed: int = 600 # 200
-var running_speed: int = 1000
+var speed: int = 1000 # 200
+var running_speed: int = 1200
 var current_speed: int = speed
-var gravity: int = 2000 # 1500
-var jump_power: int = 2000 # 1300
+var gravity: int = 1500 # 1500
+var jump_power: int = 1700 # 1300
 var running_flag: bool = true
 var jump_buffer_time: float = 0.10
 var jump_buffer_timer: float = 0.0
@@ -13,10 +13,11 @@ var invinicible_animation_flag: bool = true
 var can_jump = false
 @onready var animation_timer: Timer = $"invincible animation"
 @onready var player_area: Area2D = $Area2D
+@onready var spring_block = $"../../platforms/spring block"
 
 func _physics_process(delta):
 	if not self.is_on_floor():
-		velocity.y += gravity * delta * 1.5
+		velocity.y += gravity * delta * 2
 
 	# movement
 	if Input.is_action_pressed("move_right"):
@@ -49,7 +50,12 @@ func _physics_process(delta):
 		current_speed -= (running_speed - speed)
 		running_flag = true
 	if Input.is_action_just_pressed("jump") and player_area.in_jump_block and player_area.jump_block.jump_block_disabled == false:
-		velocity.y = player_area.jump_block.velocity_y
+		self.velocity.y = player_area.jump_block.velocity_y
+	if spring_block.spring_ready and Input.is_action_just_pressed("jump"):
+		self.velocity.y -= 4000
+	elif spring_block.spring_ready:
+		self.velocity.y -= 3000
+	
 		
 	move_and_slide()
 func _process(_delta: float) -> void:
@@ -58,6 +64,7 @@ func _process(_delta: float) -> void:
 		if invinicible_animation_flag == true:
 			invinicible_animation_flag = false
 			animation_timer.start()
+	
 	
 
 		

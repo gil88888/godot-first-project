@@ -1,19 +1,22 @@
 [gd_scene format=3 uid="uid://beyjm4ks1an8c"]
 
 [ext_resource type="Script" uid="uid://j5ag7wihvup8" path="res://scripts/enemies/enemy_1.gd" id="1_a1412"]
-[ext_resource type="Texture2D" uid="uid://drypg5835omc0" path="res://resources/images/enemy.png" id="2_ejytf"]
+[ext_resource type="Texture2D" uid="uid://drypg5835omc0" path="res://resources/sprites/enemy.png" id="2_ejytf"]
 [ext_resource type="Script" uid="uid://6chogyjv3t36" path="res://scenes/visible_on_screen_notifier_2d.gd" id="3_ejytf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gdyli"]
 size = Vector2(166.5, 124)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ao2f3"]
-size = Vector2(666, 124)
+size = Vector2(1418, 421)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cean3"]
 size = Vector2(101, 128)
 
-[node name="enemy_1" type="Area2D" unique_id=597861740]
+[sub_resource type="CircleShape2D" id="CircleShape2D_ao2f3"]
+radius = 859.5592
+
+[node name="enemy_1" type="Area2D" unique_id=597861740 groups=["block bullet"]]
 script = ExtResource("1_a1412")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2131356840]
@@ -36,7 +39,7 @@ script = ExtResource("3_ejytf")
 [node name="dashing place" type="Area2D" parent="." unique_id=758459286]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="dashing place" unique_id=836310445]
-position = Vector2(516, 0)
+position = Vector2(892, -0.5)
 shape = SubResource("RectangleShape2D_ao2f3")
 debug_color = Color(0.99818224, 0, 0.10465302, 0.41960785)
 
@@ -47,6 +50,14 @@ position = Vector2(135, 0)
 shape = SubResource("RectangleShape2D_cean3")
 debug_color = Color(0.7882353, 0.7882353, 0.019607844, 0.41960785)
 
+[node name="area attack view" type="Area2D" parent="." unique_id=1816292785]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="area attack view" unique_id=491755165]
+shape = SubResource("CircleShape2D_ao2f3")
+debug_color = Color(0.34218052, 0.610821, 0.33228222, 0.41960785)
+
+[node name="attack_cooldown" type="Timer" parent="area attack view" unique_id=1367490728]
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="timeout" from="movement cooldown" to="." method="_on_movement_cooldown_timeout"]
 [connection signal="timeout" from="hit animation" to="." method="_on_hit_animation_timeout"]
@@ -55,3 +66,7 @@ debug_color = Color(0.7882353, 0.7882353, 0.019607844, 0.41960785)
 [connection signal="area_entered" from="dashing place" to="." method="_on_dashing_place_area_entered"]
 [connection signal="area_exited" from="dashing place" to="." method="_on_dashing_place_area_exited"]
 [connection signal="area_entered" from="obstacle detector" to="." method="_on_obstacle_detector_area_entered"]
+[connection signal="area_exited" from="obstacle detector" to="." method="_on_obstacle_detector_area_exited"]
+[connection signal="area_entered" from="area attack view" to="." method="_on_area_attack_view_area_entered"]
+[connection signal="area_exited" from="area attack view" to="." method="_on_area_attack_view_area_exited"]
+[connection signal="timeout" from="area attack view/attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
