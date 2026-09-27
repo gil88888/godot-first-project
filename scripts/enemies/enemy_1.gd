@@ -1,9 +1,6 @@
 extends Area2D
 
 var speed: int = 100
-var enemy_gravity: float = 1500.0
-var jump_power: float = 600.0
-var velocity_y: float = 0.0
 @onready var movement_cooldown_timer: Timer = $"movement cooldown"
 var movement_cooldown_flag: bool = false
 var movement_cooldown_wait_time: float = 0.0
@@ -21,16 +18,11 @@ var bullet_1_scene := preload("res://scenes/bullet_1.tscn")
 
 func attack() -> void:
 	var bullet_1 = bullet_1_scene.instantiate()
-	
 	var bullet_x = self.global_position.x + randi_range(-500, 500)
 	var bullet_y = player.global_position.y - 300
-	attack_class.attack_pattern(Vector2(bullet_x, bullet_y), player.global_position , bullet_1, 1500)
+	attack_class.attack_pattern(Vector2(bullet_x, bullet_y), player.global_position , bullet_1, 1500, 0.5)
 
-#func _physics_process(delta: float) -> void:
-	#velocity_y += gravity * delta
-	#position.y += velocity_y * delta
-	#if enemy_ready_to_jump:
-		#velocity_y = -jump_power
+
 		
 func _process(delta: float) -> void:
 	#attack()
@@ -44,6 +36,8 @@ func _process(delta: float) -> void:
 		$"obstacle detector/CollisionShape2D".position.x = 135
 	# check if the enemy is dead
 	if enemy_hp <= 0:
+		GlobalVariables.score_label.add_score(randi_range(100, 200))
+		print(GlobalVariables.score)
 		self.queue_free()
 		
 	# enemy movement
@@ -100,6 +94,7 @@ func _on_area_entered(area: Area2D) -> void:
 		print(GlobalVariables.player_hp)
 	if area.is_in_group("gun bullet"):
 		enemy_hp -= 10
+		GlobalVariables.score_label.add_score(randi_range(5, 15))
 		if enemy_hit_animation_flag:
 			self.get_node("Sprite2D").modulate = Color(90, 90, 0)
 			enemy_hit_animation_flag = false
@@ -119,14 +114,7 @@ func _on_dashing_place_area_exited(area: Area2D) -> void:
 	if area.is_in_group("player"):
 		enemy_ready_to_dash = false
 		
-# check if there are obstacle infront the enemy
-func _on_obstacle_detector_area_entered(area: Area2D) -> void:
-	if area.is_in_group("obstacle"):
-		enemy_ready_to_jump = true
 
-func _on_obstacle_detector_area_exited(area: Area2D) -> void:
-	if area.is_in_group("obstacle"):
-		enemy_ready_to_jump = false
 		
 # check if the player is in the attack range
 func _on_area_attack_view_area_entered(area: Area2D) -> void:

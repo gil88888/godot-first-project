@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://ptlhrljasv14"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_j8jky"]
+font_size = 24
+font_color = Color(1, 1, 0.23921569, 1)
+shadow_color = Color(0.6490554, 0.5191423, 1.92523e-07, 0)
+stacked_outline_count = 1
+stacked_shadow_count = 1
+stacked_outline_0/size = 1
+stacked_outline_0/color = Color(0.93, 0.7347, 0.14880003, 1)
+stacked_shadow_0/color = Color(0.87, 0.79344004, 0.1044, 1)
+
+[node name="Label" type="Label" unique_id=755187033]
+anchors_preset = -1
+anchor_right = 0.022000002
+anchor_bottom = 0.031000001
+offset_right = -0.24000168
+offset_bottom = 0.51999664
+text = "+50"
+label_settings = SubResource("LabelSettings_j8jky")

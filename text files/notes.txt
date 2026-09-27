@@ -1,3 +1,8 @@
+
 add enemy_1 gravity
-make the hp bar work
-add dash to the player
+fix the bullet staying after the enemy dead
+add new flying enemy
+added hp bar and make the damage more random 
+add healing poitions spawns
+add borders to the map
+make the score animation look better
