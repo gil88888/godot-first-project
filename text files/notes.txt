@@ -1,8 +1,6 @@
-
-add enemy_1 gravity
-fix the bullet staying after the enemy dead
-add new flying enemy
-added hp bar and make the damage more random 
+*fix the bullet staying after the enemy dead by using id
 add healing poitions spawns
 add borders to the map
+added hp bar and make the damage more random
+add new flying enemy
 make the score animation look better

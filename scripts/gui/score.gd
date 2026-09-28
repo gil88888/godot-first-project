@@ -19,7 +19,6 @@ func add_score(score) -> void:
 	score_adder.text = "+" + str(score)
 	score_adder.scale = Vector2(2, 2)
 	score_adder.rotation = -45
-	
 	# change the color according to the amount of score:
 
 	if 0 < score and score < 4:

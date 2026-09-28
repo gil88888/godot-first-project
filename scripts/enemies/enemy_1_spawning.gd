@@ -5,13 +5,21 @@ var enemy_1 = null
 var animation_finished_counter: int = 0
 @onready var spawn_animation: AnimatedSprite2D = $AnimatedSprite2D
 @onready var respawn_timer: Timer = $respawn_timer
+@onready var enemy_spawn_location_node: Node2D = $"../spawning location" # the node that contain all the locations that the enemy can spawn
+var spawn_locations_list: Array = [] # a list to contain all the areas that the enemy can spawn in
+var spawn_location # the location that got chosen
 func _ready() -> void:
 	spawning_enemy()
 
 	
 func spawning_enemy() -> void:
-	var random_x = randi_range(-2714, 3425)
-	self.global_position.y = 385
+	for location in enemy_spawn_location_node.get_children():
+		spawn_locations_list.append(location)
+	spawn_location = spawn_locations_list.pick_random().get_node("CollisionShape2D")
+	var size = (spawn_location.shape as RectangleShape2D).size
+	var random_x = randi_range(spawn_location.global_position.x, spawn_location.global_position.x - size.x)
+	print("spawn location: " + str(spawn_location))
+	self.global_position.y = spawn_location.global_position.y
 	self.global_position.x = random_x
 	spawn_animation.visible = true
 	spawn_animation.play()

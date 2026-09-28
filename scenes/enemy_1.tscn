@@ -6,10 +6,13 @@
 [ext_resource type="Script" uid="uid://b7priogbpsr08" path="res://scripts/enemies/enemy_physic_body.gd" id="4_dq62l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5bs5c"]
-size = Vector2(167, 124)
+size = Vector2(166, 124)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gdyli"]
 size = Vector2(166.25, 124)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ao2f3"]
+radius = 859.5592
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ao2f3"]
 size = Vector2(1418, 421)
@@ -17,14 +20,13 @@ size = Vector2(1418, 421)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cean3"]
 size = Vector2(101, 128)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ao2f3"]
-radius = 859.5592
-
 [node name="enemy_physic_body" type="CharacterBody2D" unique_id=762459054]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("4_dq62l")
+metadata/id = 0
 
 [node name="enemy body physics" type="CollisionShape2D" parent="." unique_id=1112049984]
-position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_5bs5c")
 debug_color = Color(0, 0.6, 0.7019608, 0.41960785)
 
@@ -49,20 +51,6 @@ wait_time = 0.1
 rect = Rect2(-83, -62, 166, 124)
 script = ExtResource("3_ejytf")
 
-[node name="dashing place" type="Area2D" parent="enemy_1" unique_id=758459286]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy_1/dashing place" unique_id=836310445]
-position = Vector2(892, -0.5)
-shape = SubResource("RectangleShape2D_ao2f3")
-debug_color = Color(0.99818224, 0, 0.10465302, 0.41960785)
-
-[node name="obstacle detector" type="Area2D" parent="enemy_1" unique_id=890499425]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy_1/obstacle detector" unique_id=1238886854]
-position = Vector2(135, 0)
-shape = SubResource("RectangleShape2D_cean3")
-debug_color = Color(0.7882353, 0.7882353, 0.019607844, 0.41960785)
-
 [node name="area attack view" type="Area2D" parent="enemy_1" unique_id=1816292785]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="enemy_1/area attack view" unique_id=491755165]
@@ -71,15 +59,27 @@ debug_color = Color(0.34218052, 0.610821, 0.33228222, 0.41960785)
 
 [node name="attack_cooldown" type="Timer" parent="enemy_1/area attack view" unique_id=1367490728]
 
+[node name="dashing place" type="Area2D" parent="enemy_1" unique_id=758459286]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy_1/dashing place" unique_id=836310445]
+shape = SubResource("RectangleShape2D_ao2f3")
+debug_color = Color(0.99818224, 0, 0.10465302, 0.41960785)
+
+[node name="obstacle detector" type="Area2D" parent="enemy_1" unique_id=890499425]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy_1/obstacle detector" unique_id=1238886854]
+shape = SubResource("RectangleShape2D_cean3")
+debug_color = Color(0.7882353, 0.7882353, 0.019607844, 0.41960785)
+
 [connection signal="area_entered" from="enemy_1" to="enemy_1" method="_on_area_entered"]
-[connection signal="timeout" from="enemy_1/movement cooldown" to="enemy_1" method="_on_movement_cooldown_timeout"]
+[connection signal="timeout" from="enemy_1/movement cooldown" to="." method="_on_movement_cooldown_timeout"]
 [connection signal="timeout" from="enemy_1/hit animation" to="enemy_1" method="_on_hit_animation_timeout"]
 [connection signal="screen_entered" from="enemy_1/VisibleOnScreenNotifier2D" to="enemy_1/VisibleOnScreenNotifier2D" method="_on_screen_entered"]
 [connection signal="screen_exited" from="enemy_1/VisibleOnScreenNotifier2D" to="enemy_1/VisibleOnScreenNotifier2D" method="_on_screen_exited"]
-[connection signal="area_entered" from="enemy_1/dashing place" to="enemy_1" method="_on_dashing_place_area_entered"]
-[connection signal="area_exited" from="enemy_1/dashing place" to="enemy_1" method="_on_dashing_place_area_exited"]
-[connection signal="area_entered" from="enemy_1/obstacle detector" to="." method="_on_obstacle_detector_area_entered"]
-[connection signal="area_exited" from="enemy_1/obstacle detector" to="." method="_on_obstacle_detector_area_exited"]
 [connection signal="area_entered" from="enemy_1/area attack view" to="enemy_1" method="_on_area_attack_view_area_entered"]
 [connection signal="area_exited" from="enemy_1/area attack view" to="enemy_1" method="_on_area_attack_view_area_exited"]
 [connection signal="timeout" from="enemy_1/area attack view/attack_cooldown" to="enemy_1" method="_on_attack_cooldown_timeout"]
+[connection signal="area_entered" from="enemy_1/dashing place" to="." method="_on_dashing_place_area_entered"]
+[connection signal="area_exited" from="enemy_1/dashing place" to="." method="_on_dashing_place_area_exited"]
+[connection signal="area_entered" from="enemy_1/obstacle detector" to="." method="_on_obstacle_detector_area_entered"]
+[connection signal="area_exited" from="enemy_1/obstacle detector" to="." method="_on_obstacle_detector_area_exited"]

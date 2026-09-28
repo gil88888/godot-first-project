@@ -96,7 +96,6 @@ func _on_invincible_animation_timeout() -> void:
 			self.visible = true
 			return
 func dash() -> void:
-	print("dash")
 	player_dashing = true
 	await self.get_tree().create_timer(0.1).timeout
 	player_dashing = false

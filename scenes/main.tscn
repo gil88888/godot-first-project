@@ -28,7 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://cuei5tcd04uv4" path="res://resources/sprites/gun.png" id="19_c6pm6"]
 [ext_resource type="Script" uid="uid://dkt0nrhlicwah" path="res://scripts/player/gun.gd" id="20_5he1u"]
 [ext_resource type="Texture2D" uid="uid://ciok17ihl1lyi" path="res://resources/sprites/floor.png" id="21_5poiv"]
-[ext_resource type="Script" uid="uid://bm10kw3dftoa3" path="res://scripts/enemies/enemy_1_spawn_location.gd" id="21_jscy8"]
+[ext_resource type="Script" uid="uid://bm10kw3dftoa3" path="res://scripts/enemies/enemy_1_spawning.gd" id="21_jscy8"]
 [ext_resource type="Texture2D" uid="uid://be7w2idvuef7x" path="res://resources/sprites/enemy_spawn_location/enemy_spawn_location_0001.png" id="22_2f3dj"]
 [ext_resource type="Texture2D" uid="uid://bvj6dxlkbumx1" path="res://resources/sprites/enemy_spawn_location/enemy_spawn_location_0002.png" id="23_yq6so"]
 [ext_resource type="Texture2D" uid="uid://kkkhmvdxylpp" path="res://resources/sprites/enemy_spawn_location/enemy_spawn_location_0003.png" id="24_fv21b"]
@@ -44,8 +44,40 @@ font_color = Color(0.99999994, 0.24939993, 0.04049562, 1)
 font_size = 64
 font_color = Color(0.28235295, 0.13725491, 1, 1)
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_ao2f3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("22_2f3dj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_yq6so")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_fv21b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_tel4y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_qkpxi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_5q0nq")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j8jky"]
+size = Vector2(6007, 137)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gdyli"]
+size = Vector2(1393, 137)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ao2f3"]
-size = Vector2(6338.375, 667)
+size = Vector2(6336, 667)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_getpj"]
 size = Vector2(1660.9138, 173.39105)
@@ -126,39 +158,13 @@ size = Vector2(20400030, 7224999.5)
 size = Vector2(168, 60)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cegan"]
-size = Vector2(168, 60.5)
+size = Vector2(167, 59.25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1bvp3"]
 size = Vector2(69.71056, 62.168777)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_of8pq"]
 size = Vector2(171, 157)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_ao2f3"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("22_2f3dj")
-}, {
-"duration": 1.0,
-"texture": ExtResource("23_yq6so")
-}, {
-"duration": 1.0,
-"texture": ExtResource("24_fv21b")
-}, {
-"duration": 1.0,
-"texture": ExtResource("25_tel4y")
-}, {
-"duration": 1.0,
-"texture": ExtResource("26_qkpxi")
-}, {
-"duration": 1.0,
-"texture": ExtResource("27_5q0nq")
-}],
-"loop": 1,
-"name": &"default",
-"speed": 10.0
-}]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_getpj"]
 resource_name = "grass"
@@ -186,6 +192,11 @@ sources/0 = SubResource("TileSetAtlasSource_getpj")
 
 [node name="Main" type="Node2D" unique_id=1411518559]
 
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1894017348]
+zoom = Vector2(0.7, 0.7)
+script = ExtResource("2_jscy8")
+metadata/_edit_lock_ = true
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1113724147]
 
 [node name="Control" type="Control" parent="CanvasLayer" unique_id=1459811577]
@@ -212,6 +223,7 @@ text = "hp:"
 label_settings = SubResource("LabelSettings_ao2f3")
 vertical_alignment = 1
 script = ExtResource("1_5q0nq")
+metadata/_edit_use_anchors_ = true
 
 [node name="score" type="Label" parent="CanvasLayer/Control" unique_id=301515035]
 layout_mode = 1
@@ -219,34 +231,72 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_bottom = -992.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "score:"
 label_settings = SubResource("LabelSettings_cean3")
 horizontal_alignment = 1
 script = ExtResource("2_dgi5k")
+metadata/_edit_use_anchors_ = true
 
 [node name="score adder timer" type="Timer" parent="CanvasLayer/Control/score" unique_id=1379183274]
 autostart = true
 script = ExtResource("3_j8jky")
 
-[node name="camera blocks" type="Node2D" parent="." unique_id=71190643]
-z_index = -1
+[node name="enemies" type="Node2D" parent="." unique_id=466193919]
+
+[node name="enemy_1_spawning" type="Marker2D" parent="enemies" unique_id=506649431]
+position = Vector2(-1290, 386)
+scale = Vector2(2.609, 1.937)
+script = ExtResource("21_jscy8")
+
+[node name="spawn_timer" type="Timer" parent="enemies/enemy_1_spawning" unique_id=1924742611]
+wait_time = 3.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="enemies/enemy_1_spawning" unique_id=905585029]
+position = Vector2(2.1725893e-05, 5.90086e-06)
+scale = Vector2(3.1111546, 4.1783686)
+sprite_frames = SubResource("SpriteFrames_ao2f3")
 metadata/_edit_lock_ = true
 
-[node name="Camera2D" type="Camera2D" parent="camera blocks" unique_id=1894017348]
-zoom = Vector2(0.7, 0.7)
-script = ExtResource("2_jscy8")
-metadata/_edit_lock_ = true
+[node name="respawn_timer" type="Timer" parent="enemies/enemy_1_spawning" unique_id=1860301428]
+wait_time = 10.0
+
+[node name="spawning location" type="Node2D" parent="enemies" unique_id=643152732]
+
+[node name="enemy_1_spawn_locations" type="Area2D" parent="enemies/spawning location" unique_id=383905957]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemies/spawning location/enemy_1_spawn_locations" unique_id=710490985]
+position = Vector2(48.5, 380)
+shape = SubResource("RectangleShape2D_j8jky")
+debug_color = Color(0.6643857, 0.31596887, 1, 0.41960785)
+
+[node name="enemy_1_spawn_locations2" type="Area2D" parent="enemies/spawning location" unique_id=861819950]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemies/spawning location/enemy_1_spawn_locations2" unique_id=1581209244]
+position = Vector2(-1495.5, -164)
+shape = SubResource("RectangleShape2D_gdyli")
+debug_color = Color(0.6643857, 0.31596887, 1, 0.41960785)
+
+[node name="enemy_1_spawn_locations3" type="Area2D" parent="enemies/spawning location" unique_id=164382674]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemies/spawning location/enemy_1_spawn_locations3" unique_id=1860255855]
+position = Vector2(1488, -168)
+shape = SubResource("RectangleShape2D_gdyli")
+debug_color = Color(0.6643857, 0.31596887, 1, 0.41960785)
 
 [node name="platforms" type="Node2D" parent="." unique_id=450640308]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="platforms" unique_id=368813554 groups=["block bullet", "obstacle"]]
 position = Vector2(0, -313)
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="platforms/StaticBody2D" unique_id=1696353113]
-position = Vector2(-1.1875, 1095.5)
+position = Vector2(0, 1095.5)
 shape = SubResource("RectangleShape2D_ao2f3")
 
 [node name="StaticBody2D5" type="StaticBody2D" parent="platforms" unique_id=1623405801 groups=["obstacle"]]
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="platforms/StaticBody2D5" unique_id=1793736444]
 position = Vector2(1500, 0)
@@ -255,6 +305,7 @@ shape = SubResource("RectangleShape2D_getpj")
 one_way_collision = true
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="platforms" unique_id=880332345 groups=["obstacle"]]
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="platforms/StaticBody2D2" unique_id=962951742]
 position = Vector2(-1500, 0)
@@ -263,6 +314,7 @@ shape = SubResource("RectangleShape2D_getpj")
 one_way_collision = true
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="platforms" unique_id=1515360190 groups=["obstacle"]]
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="platforms/StaticBody2D4" unique_id=1512813109]
 position = Vector2(536, -544.5)
@@ -304,9 +356,10 @@ animation = &"jump_block_enabled_anim"
 autoplay = "jump_block_enabled_anim"
 frame_progress = 0.23896669
 
-[node name="spring block" type="StaticBody2D" parent="platforms" unique_id=270477515]
+[node name="spring block" type="StaticBody2D" parent="platforms" unique_id=270477515 groups=["obstacle"]]
 position = Vector2(2718, 349)
 scale = Vector2(1e-05, 1e-05)
+collision_layer = 3
 script = ExtResource("11_5q0nq")
 
 [node name="spring animation sprites" type="AnimatedSprite2D" parent="platforms/spring block" unique_id=416690256]
@@ -316,11 +369,11 @@ sprite_frames = SubResource("SpriteFrames_cean3")
 frame = 2
 frame_progress = 0.16230139
 
-[node name="hitbox" type="CollisionShape2D" parent="platforms/spring block" unique_id=1271575683]
+[node name="hitbox" type="CollisionShape2D" parent="platforms/spring block" unique_id=1271575683 groups=["obstacle"]]
 position = Vector2(100000, 3100000)
 shape = SubResource("RectangleShape2D_cean3")
 
-[node name="jumping place hitbox" type="Area2D" parent="platforms/spring block" unique_id=2007805015]
+[node name="jumping place hitbox" type="Area2D" parent="platforms/spring block" unique_id=2007805015 groups=["obstacle"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="platforms/spring block/jumping place hitbox" unique_id=1749417633]
 position = Vector2(99968, -1287504)
@@ -330,6 +383,8 @@ debug_color = Color(0.07415242, 0.6469272, 0.17412964, 0.41960785)
 [node name="obstacles" type="Node2D" parent="." unique_id=294263202]
 
 [node name="spikes" type="StaticBody2D" parent="obstacles" unique_id=1887860679]
+position = Vector2(-151, -4)
+collision_layer = 3
 
 [node name="spikes hit zone" type="Area2D" parent="obstacles/spikes" unique_id=308944291 groups=["obstacle"]]
 script = ExtResource("12_qkpxi")
@@ -339,7 +394,7 @@ position = Vector2(-635, 418)
 shape = SubResource("RectangleShape2D_yaehf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="obstacles/spikes" unique_id=627572140]
-position = Vector2(-635, 418)
+position = Vector2(-635.5, 418.625)
 shape = SubResource("RectangleShape2D_cegan")
 
 [node name="Sprite2D" type="Sprite2D" parent="obstacles/spikes" unique_id=1521986110]
@@ -356,7 +411,6 @@ wait_time = 2.0
 [node name="Character" type="Node2D" parent="." unique_id=1504031467]
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="Character" unique_id=1742410234 groups=["player"]]
-visibility_layer = 513
 script = ExtResource("16_kmb1v")
 
 [node name="invincible animation" type="Timer" parent="Character/CharacterBody2D" unique_id=820729606]
@@ -376,8 +430,6 @@ position = Vector2(6.5, 367.5)
 shape = SubResource("RectangleShape2D_of8pq")
 
 [node name="sprite idle" type="Sprite2D" parent="Character/CharacterBody2D" unique_id=868892443]
-light_mask = 513
-visibility_layer = 512
 position = Vector2(6.75, 368.49997)
 scale = Vector2(2.6796875, 2.453124)
 texture = ExtResource("18_pibwh")
@@ -395,25 +447,6 @@ wait_time = 0.3
 [node name="dashing timer" type="Timer" parent="Character/CharacterBody2D" unique_id=906221348]
 wait_time = 5.0
 
-[node name="enemies" type="Node2D" parent="." unique_id=466193919]
-
-[node name="enemy_1_spawn_location" type="Marker2D" parent="enemies" unique_id=506649431]
-position = Vector2(-1290, 386)
-scale = Vector2(2.609, 1.937)
-script = ExtResource("21_jscy8")
-
-[node name="spawn_timer" type="Timer" parent="enemies/enemy_1_spawn_location" unique_id=1924742611]
-wait_time = 3.0
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="enemies/enemy_1_spawn_location" unique_id=905585029]
-position = Vector2(2.1725893e-05, 5.90086e-06)
-scale = Vector2(3.1111546, 4.1783686)
-sprite_frames = SubResource("SpriteFrames_ao2f3")
-metadata/_edit_lock_ = true
-
-[node name="respawn_timer" type="Timer" parent="enemies/enemy_1_spawn_location" unique_id=1860301428]
-wait_time = 10.0
-
 [node name="EnemyAttacks" type="Node2D" parent="." unique_id=506525120]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=905149302]
@@ -422,6 +455,10 @@ tile_map_data = PackedByteArray("AACq/xwAAAAAAAAAAACq/x0AAAAAAAAAAACq/x4AAAAAAAA
 tile_set = SubResource("TileSet_getpj")
 
 [connection signal="timeout" from="CanvasLayer/Control/score/score adder timer" to="CanvasLayer/Control/score/score adder timer" method="_on_timeout"]
+[connection signal="timeout" from="enemies/enemy_1_spawning/spawn_timer" to="enemies/enemy_1_spawning" method="_on_respawn_time_timeout"]
+[connection signal="animation_finished" from="enemies/enemy_1_spawning/AnimatedSprite2D" to="enemies/enemy_1_spawning" method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="animation_looped" from="enemies/enemy_1_spawning/AnimatedSprite2D" to="enemies/enemy_1_spawning" method="_on_animated_sprite_2d_animation_looped"]
+[connection signal="timeout" from="enemies/enemy_1_spawning/respawn_timer" to="enemies/enemy_1_spawning" method="_on_respawn_timer_timeout"]
 [connection signal="area_entered" from="platforms/Jumping Block" to="platforms/Jumping Block" method="_on_area_entered"]
 [connection signal="area_exited" from="platforms/Jumping Block" to="platforms/Jumping Block" method="_on_area_exited"]
 [connection signal="timeout" from="platforms/Jumping Block/Timer" to="platforms/Jumping Block" method="_on_timer_timeout"]
@@ -437,7 +474,3 @@ tile_set = SubResource("TileSet_getpj")
 [connection signal="area_entered" from="Character/CharacterBody2D/Area2D" to="Character/CharacterBody2D/Area2D" method="_on_area_entered"]
 [connection signal="area_exited" from="Character/CharacterBody2D/Area2D" to="Character/CharacterBody2D/Area2D" method="_on_area_exited"]
 [connection signal="timeout" from="Character/CharacterBody2D/gun/reload_time" to="Character/CharacterBody2D/gun" method="_on_reload_time_timeout"]
-[connection signal="timeout" from="enemies/enemy_1_spawn_location/spawn_timer" to="enemies/enemy_1_spawn_location" method="_on_respawn_time_timeout"]
-[connection signal="animation_finished" from="enemies/enemy_1_spawn_location/AnimatedSprite2D" to="enemies/enemy_1_spawn_location" method="_on_animated_sprite_2d_animation_finished"]
-[connection signal="animation_looped" from="enemies/enemy_1_spawn_location/AnimatedSprite2D" to="enemies/enemy_1_spawn_location" method="_on_animated_sprite_2d_animation_looped"]
-[connection signal="timeout" from="enemies/enemy_1_spawn_location/respawn_timer" to="enemies/enemy_1_spawn_location" method="_on_respawn_timer_timeout"]
