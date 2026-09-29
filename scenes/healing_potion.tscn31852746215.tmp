@@ -1,0 +1,131 @@
+[gd_scene format=3 uid="uid://c36bw2w81oqlc"]
+
+[ext_resource type="Texture2D" uid="uid://3700ghav3aio" path="res://resources/sprites/healing potion/healing poition_0001.png" id="1_7otv1"]
+[ext_resource type="Texture2D" uid="uid://qkssj2g68ceb" path="res://resources/sprites/healing potion/healing poition.png" id="1_tsuxo"]
+[ext_resource type="Texture2D" uid="uid://qk44c4b0lxgp" path="res://resources/sprites/healing potion/healing poition_0002.png" id="2_lg61p"]
+[ext_resource type="Texture2D" uid="uid://c7ky0q74bxafs" path="res://resources/sprites/healing potion/healing poition_0003.png" id="3_tsuxo"]
+[ext_resource type="Texture2D" uid="uid://bb6i8ja7ln66t" path="res://resources/sprites/healing potion/healing poition_0004.png" id="4_7wx6w"]
+[ext_resource type="Texture2D" uid="uid://yr3edste71ky" path="res://resources/sprites/healing potion/healing poition_0005.png" id="5_ixnie"]
+[ext_resource type="Texture2D" uid="uid://eu0cqfm8qjpu" path="res://resources/sprites/healing potion/healing poition_0006.png" id="6_65q3t"]
+[ext_resource type="Texture2D" uid="uid://bm5n2r8130ahd" path="res://resources/sprites/healing potion/healing poition_0007.png" id="7_nws2a"]
+[ext_resource type="Texture2D" uid="uid://dv34ip5tc2phd" path="res://resources/sprites/healing potion/healing poition_0008.png" id="8_kkm3q"]
+[ext_resource type="Texture2D" uid="uid://bkftiyeuqsq85" path="res://resources/sprites/healing potion/healing poition_0009.png" id="9_7bhek"]
+[ext_resource type="Texture2D" uid="uid://bnwedhxk6e0mc" path="res://resources/sprites/healing potion/healing poition_0010.png" id="10_8dste"]
+[ext_resource type="Texture2D" uid="uid://5n2bvsm0farx" path="res://resources/sprites/healing potion/healing poition_0011.png" id="11_m2mt7"]
+[ext_resource type="Texture2D" uid="uid://3dp7guc2ka37" path="res://resources/sprites/healing potion/healing poition_0012.png" id="12_6ayn2"]
+[ext_resource type="Texture2D" uid="uid://64bf2dfc36ki" path="res://resources/sprites/healing potion/healing poition_0013.png" id="13_7sesb"]
+[ext_resource type="Texture2D" uid="uid://ch5e7s5ghkw76" path="res://resources/sprites/healing potion/healing poition_0014.png" id="14_rqpbp"]
+[ext_resource type="Texture2D" uid="uid://b0qrrv46k4n12" path="res://resources/sprites/healing potion/healing poition_0015.png" id="15_cjyfp"]
+[ext_resource type="Texture2D" uid="uid://5ihk20nqwo20" path="res://resources/sprites/healing potion/healing poition_0016.png" id="16_hek2n"]
+[ext_resource type="Texture2D" uid="uid://bcpwnref13euo" path="res://resources/sprites/healing potion/healing poition_0017.png" id="17_52mhe"]
+[ext_resource type="Texture2D" uid="uid://bnnptwwfo7cm2" path="res://resources/sprites/healing potion/healing poition_0018.png" id="18_ss8rx"]
+[ext_resource type="Texture2D" uid="uid://c3po3gxy1pahk" path="res://resources/sprites/healing potion/healing poition_0019.png" id="19_qv11f"]
+[ext_resource type="Texture2D" uid="uid://d10uxh31jb8e5" path="res://resources/sprites/healing potion/healing poition_0020.png" id="20_pinp0"]
+[ext_resource type="Texture2D" uid="uid://bc1vpxe6lliq8" path="res://resources/sprites/healing potion/healing poition_0021.png" id="21_df8aq"]
+[ext_resource type="Texture2D" uid="uid://dcwckq7slde2k" path="res://resources/sprites/healing potion/healing poition_0022.png" id="22_indn2"]
+[ext_resource type="Texture2D" uid="uid://ckhfaeq06le23" path="res://resources/sprites/healing potion/healing poition_0023.png" id="23_1as32"]
+[ext_resource type="Texture2D" uid="uid://djft2n30i7iyb" path="res://resources/sprites/healing potion/healing poition_0024.png" id="24_8i7p6"]
+[ext_resource type="Script" uid="uid://cdqfde0df5u1g" path="res://scenes/animated_sprite_2d.gd" id="25_lg61p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cean3"]
+size = Vector2(8, 26)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ao2f3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_7otv1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_lg61p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_tsuxo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_7wx6w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ixnie")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_65q3t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_nws2a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_kkm3q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_7bhek")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_8dste")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_m2mt7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_6ayn2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_7sesb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_rqpbp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_cjyfp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_hek2n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_52mhe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_ss8rx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_qv11f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_pinp0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_df8aq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_indn2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_1as32")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_8i7p6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_tsuxo")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 30.0
+}]
+
+[node name="healing potion" type="Area2D" unique_id=629542006]
+scale = Vector2(5, 5)
+metadata/heal = 30
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2082960179]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_cean3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1070154928]
+sprite_frames = SubResource("SpriteFrames_ao2f3")
+autoplay = "default"
+frame = 24
+frame_progress = 1.0
+script = ExtResource("25_lg61p")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="AnimatedSprite2D" method="_on_animation_finished"]

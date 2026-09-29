@@ -25,12 +25,15 @@ func attack() -> void:
 	var bullet_1 = bullet_1_scene.instantiate()
 	var bullet_x = self.global_position.x + randi_range(-500, 500)
 	var bullet_y = player.global_position.y - 300
-	attack_class.attack_pattern(Vector2(bullet_x, bullet_y), player.global_position , bullet_1, 1500, 0.5, self.get_meta("id"))
+	attack_class.attack_pattern(Vector2(bullet_x, bullet_y), player.global_position , bullet_1, 1500, 0.5)
 		
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# check if the enemy is dead
 	if enemy_hp <= 0:
 		GlobalVariables.score_label.add_score(randi_range(100, 200))
+		self.get_parent().global_position = Vector2(23234234, 234234234)
+		enemy_hp = 100
+		await self.get_tree().create_timer(2).timeout
 		self.get_parent().queue_free()
 
 func _on_area_entered(area: Area2D) -> void:

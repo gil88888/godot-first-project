@@ -16,7 +16,7 @@ var can_dash: bool = true
 var last_place_moved: String = "right"
 var player_dashing: bool = false
 @onready var animation_timer: Timer = $"invincible animation"
-@onready var player_area: Area2D = $Area2D
+@onready var player_area: Area2D = $"Player area2d collision"
 @onready var spring_block = $"../../platforms/spring block"
 @onready var dashing_timer: Timer = $"dashing timer"
 func _physics_process(delta):

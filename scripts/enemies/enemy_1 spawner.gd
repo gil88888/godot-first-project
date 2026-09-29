@@ -17,8 +17,8 @@ func spawning_enemy() -> void:
 		spawn_locations_list.append(location)
 	spawn_location = spawn_locations_list.pick_random().get_node("CollisionShape2D")
 	var size = (spawn_location.shape as RectangleShape2D).size
-	var random_x = randi_range(spawn_location.global_position.x, spawn_location.global_position.x - size.x)
-	print("spawn location: " + str(spawn_location))
+	var random_x = randf_range(spawn_location.global_position.x - size.x / 2,spawn_location.global_position.x + size.x / 2)
+	print("spawn location(enemy): " + str(spawn_location))
 	self.global_position.y = spawn_location.global_position.y
 	self.global_position.x = random_x
 	spawn_animation.visible = true

@@ -9,7 +9,7 @@ func _init(enemy_ref: Node2D) -> void:
 	tree = enemy.get_tree()
 
 
-func attack_pattern(starting_place: Vector2, ending_place: Vector2, bullet: Node2D, bullet_speed: int, stop_in_the_air_time: float, id) -> void:
+func attack_pattern(starting_place: Vector2, ending_place: Vector2, bullet: Node2D, bullet_speed: int, stop_in_the_air_time: float) -> void:
 	tree.current_scene.add_child(bullet)
 	bullet.global_position = starting_place
 	var target_place = null
@@ -23,7 +23,7 @@ func attack_pattern(starting_place: Vector2, ending_place: Vector2, bullet: Node
 	var duration_x = distance_x / bullet_speed
 	bullet.get_node("Sprite2D").rotation = bullet.global_position.angle_to_point(target_place)
 	await tree.create_timer(stop_in_the_air_time).timeout
-	if bullet != null:
+	if is_instance_valid(bullet):
 		var tween = bullet.create_tween()
 		tween.tween_property(bullet, "global_position:y", target_place.y, duration_y)
 		tween.parallel().tween_property(bullet, "global_position:x", target_place.x, duration_x)

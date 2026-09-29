@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bq8gopv6ov4h1"
-path="res://.godot/imported/enemy_spawn_location_0005.png-3340998bd5b9f7203c29657af715b284.ctex"
+uid="uid://dtuj4icbksm7y"
+path="res://.godot/imported/healing poition_0023.png-d21c01ca3629bcbfa3861180b28ee17c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/sprites/enemy_spawn_location/enemy_spawn_location_0005.png"
-dest_files=["res://.godot/imported/enemy_spawn_location_0005.png-3340998bd5b9f7203c29657af715b284.ctex"]
+source_file="res://resources/sprites/healing potion/healing poition_0023.png"
+dest_files=["res://.godot/imported/healing poition_0023.png-d21c01ca3629bcbfa3861180b28ee17c.ctex"]
 
 [params]
 

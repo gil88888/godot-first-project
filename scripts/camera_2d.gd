@@ -1,6 +1,6 @@
 extends Camera2D
 
-@onready var player = $"../Character/CharacterBody2D"
+@onready var player = $"../Character/Player body"
 var camera_speed = 1
 
 

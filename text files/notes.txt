@@ -1,6 +1,5 @@
-*fix the bullet staying after the enemy dead by using id
-add healing poitions spawns
 add borders to the map
 added hp bar and make the damage more random
 add new flying enemy
 make the score animation look better
+add a sword as a melee weapon

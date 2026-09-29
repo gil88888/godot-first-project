@@ -41,6 +41,7 @@ folder_colors={
 
 "block bullet"=""
 "gun bullet"=""
+healing="group for all the healing potion and stuff in the game"
 
 [input]
 

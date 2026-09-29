@@ -9,3 +9,5 @@ func _process(_delta: float) -> void:
 	if last_player_hp != GlobalVariables.player_hp:
 		last_player_hp = GlobalVariables.player_hp
 		text = "hp: " + str(GlobalVariables.player_hp)
+	if GlobalVariables.player_hp > GlobalVariables.player_max_hp:
+		GlobalVariables.player_hp = GlobalVariables.player_max_hp
