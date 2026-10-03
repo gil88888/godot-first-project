@@ -5,7 +5,7 @@ var enemy_1 = null
 var animation_finished_counter: int = 0
 @onready var spawn_animation: AnimatedSprite2D = $AnimatedSprite2D
 @onready var respawn_timer: Timer = $respawn_timer
-@onready var enemy_spawn_location_node: Node2D = $"../spawning location" # the node that contain all the locations that the enemy can spawn
+@onready var enemy_spawn_location_node: Node2D = $"../spawn locations" # the node that contain all the locations that the enemy can spawn
 var spawn_locations_list: Array = [] # a list to contain all the areas that the enemy can spawn in
 var spawn_location # the location that got chosen
 func _ready() -> void:

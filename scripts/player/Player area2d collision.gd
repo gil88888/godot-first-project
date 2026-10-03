@@ -7,8 +7,11 @@ func _on_area_entered(area: Area2D) -> void:
 		in_jump_block = true
 		jump_block = area
 	if area.is_in_group("healing"):
-		GlobalVariables.player_hp += area.get_meta("heal")
-		area.queue_free()
+		print("heal detected")
+		if GlobalVariables.player_hp != GlobalVariables.player_max_hp:
+			print("healed")
+			GlobalVariables.player_hp += area.get_meta("heal")
+			area.queue_free()
 	
 func _on_area_exited(area: Area2D) -> void:	
 	if area.is_in_group("jumping blocks"):

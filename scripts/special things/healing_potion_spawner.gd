@@ -2,16 +2,13 @@ extends Node2D
 
 var healing_potion_scene = preload("res://scenes/healing_potion.tscn")
 var healing_potion = null
-#@onready var spawn_animation: AnimatedSprite2D = $AnimatedSprite2D
-#@onready var potion_spawn_location_node: Node2D = $"../spawning location" # the node that contain all the locations that the potion can spawn
 var spawn_locations_list: Array = [] # a list to contain all the areas that the potion can spawn in
 var spawn_location # the location that got chosen
-#@onready var respawn_timer: Timer = $respawn_timer
 var animation_finished_counter: int = 0 # for the animation
 
 
 func spawning_potion() -> void:
-	for location in $"../spawning location".get_children():
+	for location in $"../spawn locations".get_children():
 		spawn_locations_list.append(location)
 	spawn_location = spawn_locations_list.pick_random().get_node("CollisionShape2D")
 	var size = (spawn_location.shape as RectangleShape2D).size

@@ -23,6 +23,7 @@ size = Vector2(101, 128)
 size = Vector2(167.25, 684)
 
 [node name="enemy_physic_body" type="CharacterBody2D" unique_id=762459054]
+z_index = 1
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("4_dq62l")

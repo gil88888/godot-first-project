@@ -95,7 +95,6 @@ func _physics_process(delta: float) -> void:
 				enemy_ready_to_jump_to_player = false
 				$"enemy_1/jump to player cooldown".start()
 		elif enemy_ready_to_slide and player_in_enemy_ground_sky_detector and player_placement == "below":
-			print("down")
 			enemy_ready_to_slide = false
 			set_collision_mask_value(2, false)
 			await get_tree().create_timer(0.2).timeout
@@ -131,12 +130,11 @@ func _on_movement_cooldown_timeout() -> void:
 
 func _on_sky_and_ground_detector_area_entered(area: Area2D) -> void:
 	if area.is_in_group("player"):
-		print("player_detected")
 		player_in_enemy_ground_sky_detector = true
 		if player_placement == "below":
 			enemy_ready_to_slide = true
-		elif player_placement == "above":
-			print("jump")
+		#elif player_placement == "above":
+			#print("jump")
 			
 			
 

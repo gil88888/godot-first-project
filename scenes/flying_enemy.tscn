@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://b5a0q4yh3jd8v"]
+
+[ext_resource type="Script" uid="uid://c4efjwem4r1jg" path="res://scripts/enemies/flying_enemy.gd" id="1_fgwew"]
+[ext_resource type="Texture2D" uid="uid://drypg5835omc0" path="res://resources/sprites/enemy.png" id="1_vbcm2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ao2f3"]
+size = Vector2(191.99973, 191.99974)
+
+[node name="flying enemy" type="Area2D" unique_id=384748481 groups=["block bullet", "flying enemy"]]
+rotation = 3.140361
+script = ExtResource("1_fgwew")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2113484709]
+scale = Vector2(3, 3)
+texture = ExtResource("1_vbcm2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=351247947]
+position = Vector2(-7.6208903e-06, -2.2899454e-05)
+scale = Vector2(1.0000008, 1.0000008)
+shape = SubResource("RectangleShape2D_ao2f3")
+
+[node name="hit animation" type="Timer" parent="." unique_id=1085022491]
+wait_time = 0.1
+
+[node name="attack cooldown" type="Timer" parent="." unique_id=566113587]
+wait_time = 5.0
+autostart = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="hit animation" to="." method="_on_hit_animation_timeout"]
+[connection signal="timeout" from="attack cooldown" to="." method="_on_attack_cooldown_timeout"]

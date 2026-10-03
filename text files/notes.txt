@@ -1,5 +1,3 @@
-add borders to the map
-added hp bar and make the damage more random
-add new flying enemy
-make the score animation look better
+*added hp bar and make the damage more random
+*make the score animation look better
 add a sword as a melee weapon

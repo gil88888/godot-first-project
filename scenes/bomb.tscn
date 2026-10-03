@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://d1xmt14jbgy6w"]
+
+[ext_resource type="Texture2D" uid="uid://cia616qpwm77b" path="res://resources/sprites/bomb.png" id="1_4kkau"]
+[ext_resource type="Script" uid="uid://8umdcunpkjfe" path="res://scripts/enemies/bullets_pattern/bomb.gd" id="1_vpdcx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ao2f3"]
+size = Vector2(8.000002, 8.000001)
+
+[node name="bomb" type="Node2D" unique_id=253712996]
+scale = Vector2(5, 5)
+script = ExtResource("1_vpdcx")
+metadata/delete_tween = false
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1385825229]
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("1_4kkau")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=263196435]
+scale = Vector2(0.9999998, 0.9999998)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=604751730]
+position = Vector2(6.675719e-07, 3.8146968e-07)
+scale = Vector2(1.9999996, 1.9999996)
+shape = SubResource("RectangleShape2D_ao2f3")
+
+[node name="explosion delay" type="Timer" parent="." unique_id=1529163971]
+wait_time = 0.1
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="explosion delay" to="." method="_on_explosion_delay_timeout"]
