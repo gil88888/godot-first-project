@@ -44,7 +44,7 @@
 [ext_resource type="Texture2D" uid="uid://cptcqj1gvx27o" path="res://resources/sprites/enemy spawn location/enemy_spawn_location_0006.png" id="27_5q0nq"]
 [ext_resource type="Script" uid="uid://xr6xuaceknfr" path="res://scripts/special blocks/map borders.gd" id="33_chjal"]
 [ext_resource type="Script" uid="uid://bf6eg53be2bo2" path="res://scripts/special things/healing_potion_spawner.gd" id="36_kmb1v"]
-[ext_resource type="Script" uid="uid://bb1jig74cywy8" path="res://scenes/sword.gd" id="43_txyw0"]
+[ext_resource type="Script" uid="uid://bb1jig74cywy8" path="res://scripts/player/sword.gd" id="43_txyw0"]
 [ext_resource type="Texture2D" uid="uid://bvpo4nksnp4ut" path="res://resources/sprites/sword_placeholder.png" id="43_vc5cj"]
 [ext_resource type="Texture2D" uid="uid://c3k20pxbbxa22" path="res://resources/sprites/new floor.png" id="45_vc5cj"]
 
@@ -679,6 +679,9 @@ disabled = true
 
 [node name="reload timer" type="Timer" parent="Character/Player body/sword" unique_id=505193954 groups=["sword"]]
 wait_time = 0.5
+one_shot = true
+
+[node name="velocity_stop_timer" type="Timer" parent="Character/Player body" unique_id=852849334]
 
 [node name="EnemyAttacks" type="Node2D" parent="." unique_id=506525120 groups=["healing"]]
 
@@ -729,3 +732,4 @@ metadata/_edit_lock_ = true
 [connection signal="area_exited" from="Character/Player body/Player area2d collision" to="Character/Player body/Player area2d collision" method="_on_area_exited"]
 [connection signal="timeout" from="Character/Player body/gun/reload_time" to="Character/Player body/gun" method="_on_reload_time_timeout"]
 [connection signal="timeout" from="Character/Player body/sword/reload timer" to="Character/Player body/sword" method="_on_reload_timer_timeout"]
+[connection signal="timeout" from="Character/Player body/velocity_stop_timer" to="Character/Player body" method="_on_velocity_stop_timer_timeout"]

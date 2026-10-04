@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://ckgkgvmg4xjjd"]
+
+[ext_resource type="Script" uid="uid://jglteuasj58i" path="res://scripts/gui/death_screen.gd" id="1_lbba5"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_lbba5"]
+font_size = 128
+
+[sub_resource type="LabelSettings" id="LabelSettings_ao2f3"]
+font_size = 128
+
+[node name="Control" type="Control" unique_id=896590552]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lbba5")
+
+[node name="best score text" type="Label" parent="." unique_id=1811691612]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.37300003
+anchor_top = 0.48100004
+anchor_right = 0.859
+anchor_bottom = 0.625
+offset_left = -0.16003418
+offset_top = -19.480042
+offset_right = -0.2800293
+text = "best score: 0"
+label_settings = SubResource("LabelSettings_lbba5")
+
+[node name="you lose text" type="Label" parent="." unique_id=816218283]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.37300003
+anchor_top = -2.778
+anchor_right = 0.62700003
+anchor_bottom = -2.6160002
+offset_left = -0.16003418
+offset_top = 0.24023438
+offset_right = 0.15991211
+offset_bottom = 0.28027344
+text = "loser lol"
+label_settings = SubResource("LabelSettings_ao2f3")
+horizontal_alignment = 1
+
+[node name="score text" type="Label" parent="." unique_id=518930359]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.042
+anchor_top = 0.46300003
+anchor_right = -0.78700006
+anchor_bottom = 0.625
+offset_left = 0.64001465
+offset_top = -0.040039063
+offset_right = -0.9595947
+text = "you got 0 score"
+label_settings = SubResource("LabelSettings_ao2f3")

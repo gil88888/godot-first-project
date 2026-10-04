@@ -1,7 +1,7 @@
 extends Node2D
 
 var can_attack = true 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if can_attack:
 		self.visible = false
 		$hitbox/CollisionShape2D.disabled = true

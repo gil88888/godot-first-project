@@ -18,24 +18,30 @@ var player_dashing: bool = false
 var player_can_spring_jump: bool = false
 var push_player: String = "no"
 var push_speed: float
+var can_stop_velocity: bool = true
+var velocity_stopped: bool = false
 @onready var animation_timer: Timer = $"invincible animation"
 @onready var player_area: Area2D = $"Player area2d collision"
 @onready var dashing_timer: Timer = $"dashing timer"
 
 func _physics_process(delta):
-	# change the place that the sword is facing to
-	if last_place_moved == "right":
-		$sword/Sprite2D.position.x = 221
-		$sword/Sprite2D.flip_h = false
-		$sword/hitbox.position.x = 221
-	elif last_place_moved == "left":		
-		$sword/Sprite2D.position.x = -221
-		$sword/Sprite2D.flip_h = true
-		$sword/hitbox.position.x = -221
+	# change the place that the sword is facing to if the attack ended
+	if $"sword/reload timer".is_stopped():
+		if last_place_moved == "right":
+			$sword/Sprite2D.position.x = 221
+			$sword/Sprite2D.flip_h = false
+			$sword/hitbox.position.x = 221
+		elif last_place_moved == "left":		
+			$sword/Sprite2D.position.x = -221
+			$sword/Sprite2D.flip_h = true
+			$sword/hitbox.position.x = -221
 		
-	# make the player fall if not on floor
+	# make the player fall if not on floor or stopping velocity
 	if not self.is_on_floor():
-		velocity.y += gravity * delta * 2
+		if not velocity_stopped:
+			velocity.y += gravity * delta * 2
+		else:
+			print("stopped")
 		
 	# check if the player being pushed from the borders
 	if push_player == "minus":
@@ -109,6 +115,21 @@ func _physics_process(delta):
 	# check if the player collide with the borders
 	if GlobalVariables.player_collide_with_borders:
 		push_player_from_borders()
+	# add function to the player to stop velocity_y with the key W
+	if Input.is_action_just_pressed("stop velocity") and can_stop_velocity and not self.is_on_floor():
+		velocity_stopped = true
+		can_stop_velocity = false
+		current_speed = 50
+		# check what is the current velocity y and change the velocity y
+		if self.velocity.y > 0:
+			self.velocity.y = 50
+		elif self.velocity.y < 0:
+			self.velocity.y = -50
+		else:
+			self.velocity.y = 0
+		$velocity_stop_timer.start()
+	
+	
 		
 	move_and_slide()
 func _process(_delta: float) -> void:
@@ -121,7 +142,8 @@ func _process(_delta: float) -> void:
 		for spring_block in $"../../springs".get_children():
 			if spring_block.spring_ready:
 				player_can_spring_jump = true
-	print(speed, " ",  current_speed)
+		# i have a lot of movement bugs so:
+	#print(speed, " ",  current_speed)
 
 
 # start the animation 
@@ -143,18 +165,22 @@ func dash() -> void:
 	await self.get_tree().create_timer(0.1).timeout
 	player_dashing = false
 
-func disable_movement() -> void:
-	GlobalVariables.player_can_move = false
-	await self.get_tree().create_timer(1).timeout
-	GlobalVariables.player_can_move = true
+
 	
 func push_player_from_borders() -> void:
 	if self.global_position.x > 0:
 		push_player = "minus"
 	else:
 		push_player = "plus"
-	
 	push_speed = abs(velocity.x)
-	disable_movement()
-	await self.get_tree().create_timer(0.5).timeout
+	GlobalVariables.player_can_move = false
+	await self.get_tree().create_timer(1.5).timeout
 	push_player = "no"
+	GlobalVariables.player_can_move = true
+
+
+func _on_velocity_stop_timer_timeout() -> void:
+	velocity_stopped = false
+	current_speed = speed
+	await self.get_tree().create_timer(5).timeout
+	can_stop_velocity = true

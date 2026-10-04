@@ -13,6 +13,8 @@ func _process(_delta: float) -> void:
 func add_score(score) -> void:
 	# make the text appear and add the score
 	GlobalVariables.score += score
+	if GlobalVariables.score > GlobalVariables.best_score:
+		GlobalVariables.best_score = GlobalVariables.score
 	var score_adder = score_adder_scene.instantiate()
 	self.get_parent().add_child(score_adder)
 	score_adder.global_position = Vector2(1070, 50)

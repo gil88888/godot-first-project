@@ -1,3 +1,4 @@
 *added hp bar and make the damage more random
 *make the score animation look better
-add a sword as a melee weapon
+*start making the actual sprites of the game
+fix the annoying spring bug 
