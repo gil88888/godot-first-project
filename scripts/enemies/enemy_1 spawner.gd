@@ -57,4 +57,6 @@ func _on_animated_sprite_2d_animation_looped() -> void:
 
 
 func _on_respawn_timer_timeout() -> void:
+	if animation_finished_counter != 3 and spawn_animation.is_visible_in_tree():
+		animation_finished_counter = 3
 	spawning_enemy()

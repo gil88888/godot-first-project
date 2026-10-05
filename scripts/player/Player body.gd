@@ -20,28 +20,17 @@ var push_player: String = "no"
 var push_speed: float
 var can_stop_velocity: bool = true
 var velocity_stopped: bool = false
+var dashing_ProgressBar_animation_flag: bool = true
 @onready var animation_timer: Timer = $"invincible animation"
 @onready var player_area: Area2D = $"Player area2d collision"
 @onready var dashing_timer: Timer = $"dashing timer"
-
+@onready var dash_meter: ProgressBar = $"../../CanvasLayer/Control/dash meter"
 func _physics_process(delta):
-	# change the place that the sword is facing to if the attack ended
-	if $"sword/reload timer".is_stopped():
-		if last_place_moved == "right":
-			$sword/Sprite2D.position.x = 221
-			$sword/Sprite2D.flip_h = false
-			$sword/hitbox.position.x = 221
-		elif last_place_moved == "left":		
-			$sword/Sprite2D.position.x = -221
-			$sword/Sprite2D.flip_h = true
-			$sword/hitbox.position.x = -221
-		
 	# make the player fall if not on floor or stopping velocity
 	if not self.is_on_floor():
 		if not velocity_stopped:
 			velocity.y += gravity * delta * 2
-		else:
-			print("stopped")
+
 		
 	# check if the player being pushed from the borders
 	if push_player == "minus":
@@ -112,7 +101,22 @@ func _physics_process(delta):
 	# check if the player can dash
 	if Input.is_action_just_pressed("dash") and can_dash and GlobalVariables.player_can_move:
 		dash()
-		
+	# if cant because of the loading time make the dashing progress bar red
+	elif Input.is_action_just_pressed("dash") and GlobalVariables.player_can_move and dashing_ProgressBar_animation_flag:
+		dashing_ProgressBar_animation_flag = false
+		var style = dash_meter.get_theme_stylebox("fill").duplicate()
+		for i in range(8):
+			if dash_meter.value == 100:
+				style.bg_color = Color.html("#5ef281")
+				break
+			await self.get_tree().create_timer(0.2).timeout
+			if i % 2 == 0:
+				style.bg_color = Color.html("#f25e5e")
+			else:
+				style.bg_color = Color.html("#5ef281")
+			dash_meter.add_theme_stylebox_override("fill", style)
+		dashing_ProgressBar_animation_flag = true
+			
 	# check if the player collide with the borders
 	if GlobalVariables.player_collide_with_borders:
 		push_player_from_borders()
@@ -136,6 +140,10 @@ func _physics_process(delta):
 		else:
 			self.velocity.x = 0
 		$velocity_stop_timer.start()
+	if Input.is_action_just_released("stop velocity"):
+		print("stoped")
+		$velocity_stop_timer.stop()
+		$velocity_stop_timer.timeout.emit()
 	
 	
 		
@@ -169,9 +177,11 @@ func _on_invincible_animation_timeout() -> void:
 			self.visible = true
 			return
 func dash() -> void:
+	can_dash = false
 	player_dashing = true
 	await self.get_tree().create_timer(0.1).timeout
 	player_dashing = false
+	$"dashing timer".start()
 
 
 	
@@ -192,3 +202,7 @@ func _on_velocity_stop_timer_timeout() -> void:
 	current_speed = speed
 	await self.get_tree().create_timer(5).timeout
 	can_stop_velocity = true
+
+
+func _on_dashing_timer_timeout() -> void:
+	can_dash = true
