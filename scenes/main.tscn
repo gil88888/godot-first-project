@@ -149,6 +149,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cean3"]
 size = Vector2(20400010, 13600005)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u8ctb"]
+size = Vector2(20500016, 3500010)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ao2f3"]
 size = Vector2(6336, 667)
 
@@ -411,57 +414,79 @@ position = Vector2(100000, 3099996)
 shape = SubResource("RectangleShape2D_cean3")
 one_way_collision = true
 
-[node name="spring block2" type="StaticBody2D" parent="springs" unique_id=775769152 groups=["obstacle"]]
-position = Vector2(900, -194.00002)
+[node name="player_position_check" type="Area2D" parent="springs/spring block" unique_id=1196960218]
+position = Vector2(0, -10000002)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="springs/spring block/player_position_check" unique_id=1302565733]
+position = Vector2(-50048, 0)
+shape = SubResource("RectangleShape2D_u8ctb")
+debug_color = Color(0.59812933, 0.38967273, 0.9622646, 0.41960785)
+
+[node name="spring block2" type="StaticBody2D" parent="springs" unique_id=874499250 groups=["obstacle"]]
+position = Vector2(895.00006, -195.00002)
 scale = Vector2(1e-05, 1e-05)
 collision_layer = 3
 script = ExtResource("11_5q0nq")
 
-[node name="jumping place hitbox" type="Area2D" parent="springs/spring block2" unique_id=816984730 groups=["obstacle"]]
-position = Vector2(900, 0)
+[node name="jumping place hitbox" type="Area2D" parent="springs/spring block2" unique_id=1910287943 groups=["obstacle"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="springs/spring block2/jumping place hitbox" unique_id=1435998614]
-position = Vector2(900, -737504)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="springs/spring block2/jumping place hitbox" unique_id=2098913752]
+position = Vector2(99968, -700000)
 shape = SubResource("RectangleShape2D_hhp3w")
 debug_color = Color(0.07415242, 0.6469272, 0.17412964, 0.41960785)
 
-[node name="spring animation sprites" type="AnimatedSprite2D" parent="springs/spring block2" unique_id=1527946831]
-position = Vector2(900, -6916.409)
+[node name="spring animation sprites" type="AnimatedSprite2D" parent="springs/spring block2" unique_id=1538026954]
+position = Vector2(100548.75, -6916.409)
 scale = Vector2(-639864.25, 618453.8)
 sprite_frames = SubResource("SpriteFrames_cean3")
 frame = 2
 frame_progress = 0.16230139
 
-[node name="hitbox" type="CollisionShape2D" parent="springs/spring block2" unique_id=671589588 groups=["obstacle"]]
-position = Vector2(900, 3100000)
+[node name="hitbox" type="CollisionShape2D" parent="springs/spring block2" unique_id=1043140996 groups=["obstacle"]]
+position = Vector2(100000, 3099996)
 shape = SubResource("RectangleShape2D_cean3")
 one_way_collision = true
 
-[node name="spring block3" type="StaticBody2D" parent="springs" unique_id=2026627318 groups=["obstacle"]]
-position = Vector2(-1500, -194.00002)
+[node name="player_position_check" type="Area2D" parent="springs/spring block2" unique_id=1275389527]
+position = Vector2(0, -10000002)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="springs/spring block2/player_position_check" unique_id=388792044]
+position = Vector2(-50048, 0)
+shape = SubResource("RectangleShape2D_u8ctb")
+debug_color = Color(0.59812933, 0.38967273, 0.9622646, 0.41960785)
+
+[node name="spring block3" type="StaticBody2D" parent="springs" unique_id=1197281405 groups=["obstacle"]]
+position = Vector2(-1475, -194.00002)
 scale = Vector2(1e-05, 1e-05)
 collision_layer = 3
 script = ExtResource("11_5q0nq")
 
-[node name="jumping place hitbox" type="Area2D" parent="springs/spring block3" unique_id=780761979 groups=["obstacle"]]
-position = Vector2(-1500, 0)
+[node name="jumping place hitbox" type="Area2D" parent="springs/spring block3" unique_id=928505360 groups=["obstacle"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="springs/spring block3/jumping place hitbox" unique_id=801182148]
-position = Vector2(-1500, -737504)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="springs/spring block3/jumping place hitbox" unique_id=740775752]
+position = Vector2(99968, -700000)
 shape = SubResource("RectangleShape2D_hhp3w")
 debug_color = Color(0.07415242, 0.6469272, 0.17412964, 0.41960785)
 
-[node name="spring animation sprites" type="AnimatedSprite2D" parent="springs/spring block3" unique_id=800969036]
-position = Vector2(-1500, -6916.409)
+[node name="spring animation sprites" type="AnimatedSprite2D" parent="springs/spring block3" unique_id=372557097]
+position = Vector2(100548.75, -6916.409)
 scale = Vector2(-639864.25, 618453.8)
 sprite_frames = SubResource("SpriteFrames_cean3")
 frame = 2
 frame_progress = 0.16230139
 
-[node name="hitbox" type="CollisionShape2D" parent="springs/spring block3" unique_id=607682955 groups=["obstacle"]]
-position = Vector2(-1500, 3100000)
+[node name="hitbox" type="CollisionShape2D" parent="springs/spring block3" unique_id=2031819456 groups=["obstacle"]]
+position = Vector2(100000, 3099996)
 shape = SubResource("RectangleShape2D_cean3")
 one_way_collision = true
+
+[node name="player_position_check" type="Area2D" parent="springs/spring block3" unique_id=2074771233]
+position = Vector2(0, -10000002)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="springs/spring block3/player_position_check" unique_id=764533532]
+position = Vector2(-50048, 0)
+shape = SubResource("RectangleShape2D_u8ctb")
+debug_color = Color(0.59812933, 0.38967273, 0.9622646, 0.41960785)
 
 [node name="platforms" type="Node2D" parent="." unique_id=450640308]
 
@@ -706,12 +731,18 @@ metadata/_edit_lock_ = true
 [connection signal="area_entered" from="springs/spring block/jumping place hitbox" to="springs/spring block" method="_on_jumping_place_hitbox_area_entered"]
 [connection signal="area_exited" from="springs/spring block/jumping place hitbox" to="springs/spring block" method="_on_jumping_place_hitbox_area_exited"]
 [connection signal="frame_changed" from="springs/spring block/spring animation sprites" to="springs/spring block" method="_on_spring_animation_sprites_frame_changed"]
+[connection signal="area_entered" from="springs/spring block/player_position_check" to="springs/spring block" method="_on_player_position_check_area_entered"]
+[connection signal="area_exited" from="springs/spring block/player_position_check" to="springs/spring block" method="_on_player_position_check_area_exited"]
 [connection signal="area_entered" from="springs/spring block2/jumping place hitbox" to="springs/spring block2" method="_on_jumping_place_hitbox_area_entered"]
 [connection signal="area_exited" from="springs/spring block2/jumping place hitbox" to="springs/spring block2" method="_on_jumping_place_hitbox_area_exited"]
 [connection signal="frame_changed" from="springs/spring block2/spring animation sprites" to="springs/spring block2" method="_on_spring_animation_sprites_frame_changed"]
+[connection signal="area_entered" from="springs/spring block2/player_position_check" to="springs/spring block2" method="_on_player_position_check_area_entered"]
+[connection signal="area_exited" from="springs/spring block2/player_position_check" to="springs/spring block2" method="_on_player_position_check_area_exited"]
 [connection signal="area_entered" from="springs/spring block3/jumping place hitbox" to="springs/spring block3" method="_on_jumping_place_hitbox_area_entered"]
 [connection signal="area_exited" from="springs/spring block3/jumping place hitbox" to="springs/spring block3" method="_on_jumping_place_hitbox_area_exited"]
 [connection signal="frame_changed" from="springs/spring block3/spring animation sprites" to="springs/spring block3" method="_on_spring_animation_sprites_frame_changed"]
+[connection signal="area_entered" from="springs/spring block3/player_position_check" to="springs/spring block3" method="_on_player_position_check_area_entered"]
+[connection signal="area_exited" from="springs/spring block3/player_position_check" to="springs/spring block3" method="_on_player_position_check_area_exited"]
 [connection signal="area_entered" from="platforms/Jumping Block" to="platforms/Jumping Block" method="_on_area_entered"]
 [connection signal="area_exited" from="platforms/Jumping Block" to="platforms/Jumping Block" method="_on_area_exited"]
 [connection signal="timeout" from="platforms/Jumping Block/Timer" to="platforms/Jumping Block" method="_on_timer_timeout"]

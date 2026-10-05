@@ -51,6 +51,7 @@ func _physics_process(delta):
 			self.velocity.x = -3000
 	elif push_player == "plus":
 		if abs(-1.2 * push_speed) < 3000:
+			
 			self.velocity.x = +1.2 * push_speed
 		else:
 			self.velocity.x = +3000
@@ -127,6 +128,13 @@ func _physics_process(delta):
 			self.velocity.y = -50
 		else:
 			self.velocity.y = 0
+			
+		if self.velocity.x > 0:
+			self.velocity.y = 50
+		elif self.velocity.y < 0:
+			self.velocity.y = -50
+		else:
+			self.velocity.x = 0
 		$velocity_stop_timer.start()
 	
 	
