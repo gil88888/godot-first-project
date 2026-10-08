@@ -145,8 +145,6 @@ func _physics_process(delta):
 		$velocity_stop_timer.stop()
 		$velocity_stop_timer.timeout.emit()
 	
-	
-		
 	move_and_slide()
 func _process(_delta: float) -> void:
 	# check if the player being invincible

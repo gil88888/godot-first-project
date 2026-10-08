@@ -1,8 +1,7 @@
-*added hp bar and make the damage more random
 *make the score animation look better
 *start making the actual sprites of the game
-#add timer to the dash
-add menu
-add the option to disable gravity while in air
-#passive regenartion
-#make the sword to attack the place of your mouse
+*add menu
+add hp bar and make the damage more random
+#add new enemy that teleport
+#add the new enemy ability to teleport when it about to get hit
+# the dash bar now tweened the value to 0 when the player dash

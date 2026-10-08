@@ -26,7 +26,7 @@ func _process(_delta: float) -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("player") and GlobalVariables.player_invincible == false:
-		Playerhp.hurt_player(30)
+		Playerhp.hurt_player(25)
 	if area.is_in_group("gun bullet"):
 		enemy_hp -= 10
 		GlobalVariables.score_label.add_score(randi_range(5, 15))
@@ -35,7 +35,7 @@ func _on_area_entered(area: Area2D) -> void:
 			enemy_hit_animation_flag = false
 			$"hit animation".start()
 	if area.is_in_group("sword"):
-		enemy_hp -= 30
+		enemy_hp -= 15
 		GlobalVariables.score_label.add_score(randi_range(50, 70))
 		if enemy_hit_animation_flag:
 			self.get_node("Sprite2D").modulate = Color(90, 90, 0)

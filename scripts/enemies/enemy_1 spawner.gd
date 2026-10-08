@@ -1,7 +1,9 @@
 extends Marker2D
 
 var enemy_1_scene = preload("res://scenes/enemy_1.tscn")
+var enemy_2_scene = preload("res://scenes/enemy_2.tscn")
 var enemy_1 = null
+var enemy_2 = null
 var animation_finished_counter: int = 0
 @onready var spawn_animation: AnimatedSprite2D = $AnimatedSprite2D
 @onready var respawn_timer: Timer = $respawn_timer
@@ -25,10 +27,17 @@ func spawning_enemy() -> void:
 	spawn_animation.play()
 
 func spawn_enemy() -> void:
-	enemy_1 = enemy_1_scene.instantiate() # copy the scene(the enemy) into a var called enemy_1
-	get_parent().add_child(enemy_1) # add the enemy_1 to the enemies node
-	enemy_1.global_position = self.global_position # make the enemy_1 position the marker position
-	print("enemy_1 created in " , enemy_1.global_position)
+	if randi_range(1, 8) != 1:
+		enemy_1 = enemy_1_scene.instantiate() # copy the scene(the enemy) into a var called enemy_1
+		get_parent().add_child(enemy_1) # add the enemy_1 to the enemies node
+		enemy_1.global_position = self.global_position # make the enemy_1 position the marker position
+		print("enemy_1 created in " , enemy_1.global_position)
+	else:
+		enemy_2 = enemy_2_scene.instantiate() # copy the scene(the enemy) into a var called enemy_1
+		get_parent().add_child(enemy_2) # add the enemy_1 to the enemies node
+		enemy_2.global_position = self.global_position # make the enemy_1 position the marker position
+		print("enemy_2 created in " , enemy_2.global_position)
+		
 	match GlobalVariables.danger_level:
 		0:
 			respawn_timer.wait_time = randi_range(6, 12)

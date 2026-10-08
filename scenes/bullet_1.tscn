@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://b4nesxh31faeh" path="res://scripts/enemies/bullets_pattern/bullet_1.gd" id="1_v6s6y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ao2f3"]
-size = Vector2(130, 130)
+size = Vector2(130.05383, 129.34673)
 
 [node name="bullet_1" type="Node2D" unique_id=642658861]
 rotation = -2.3561945
@@ -13,11 +13,10 @@ script = ExtResource("1_v6s6y")
 [node name="Area2D" type="Area2D" parent="." unique_id=613928599]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=187248067]
-position = Vector2(-13, 13)
+position = Vector2(-14.822333, 15.175883)
 shape = SubResource("RectangleShape2D_ao2f3")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1674682385]
-position = Vector2(1.9999998, -1.9999998)
 scale = Vector2(10, 10)
 texture = ExtResource("1_j3m4d")
 

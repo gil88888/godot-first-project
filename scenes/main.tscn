@@ -47,7 +47,8 @@
 [ext_resource type="Script" uid="uid://bb1jig74cywy8" path="res://scripts/player/sword.gd" id="43_txyw0"]
 [ext_resource type="Texture2D" uid="uid://bvpo4nksnp4ut" path="res://resources/sprites/sword_placeholder.png" id="43_vc5cj"]
 [ext_resource type="Texture2D" uid="uid://c3k20pxbbxa22" path="res://resources/sprites/new floor.png" id="45_vc5cj"]
-[ext_resource type="Script" uid="uid://b2h0grte28sf3" path="res://scenes/dash_meter.gd" id="48_nvyfr"]
+[ext_resource type="Script" uid="uid://b2h0grte28sf3" path="res://scripts/gui/dash_meter.gd" id="48_nvyfr"]
+[ext_resource type="Script" uid="uid://cvj11amqy8g1d" path="res://scripts/gui/pause button.gd" id="49_ty1g6"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ao2f3"]
 animations = [{
@@ -139,7 +140,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"default",
-"speed": 5.0
+"speed": 10.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cean3"]
@@ -216,7 +217,7 @@ size = Vector2(69.71056, 64.003265)
 size = Vector2(171, 157)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_brx3h"]
-size = Vector2(164.5, 220)
+size = Vector2(180.91667, 220)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_getpj"]
 resource_name = "grass"
@@ -266,97 +267,127 @@ bg_color = Color(0.37049997, 0.95, 0.5057167, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_5bs5c"]
 font_size = 30
 
+[sub_resource type="InputEventKey" id="InputEventKey_ty1g6"]
+device = -1
+keycode = 4194305
+
+[sub_resource type="Shortcut" id="Shortcut_ty1g6"]
+events = [SubResource("InputEventKey_ty1g6")]
+
 [node name="Main" type="Node2D" unique_id=1411518559]
 
-[node name="spawners" type="Node2D" parent="." unique_id=466193919]
+[node name="enemies" type="Node2D" parent="." unique_id=1203003906]
 
-[node name="enemy_1 spawner" type="Marker2D" parent="spawners" unique_id=506649431]
+[node name="spawners" type="Node2D" parent="enemies" unique_id=466193919]
+
+[node name="enemy_1 spawner" type="Marker2D" parent="enemies/spawners" unique_id=506649431]
 position = Vector2(-4656, -9270.999)
 scale = Vector2(2.609, 1.937)
 script = ExtResource("21_jscy8")
 
-[node name="spawn_timer" type="Timer" parent="spawners/enemy_1 spawner" unique_id=1924742611]
+[node name="spawn_timer" type="Timer" parent="enemies/spawners/enemy_1 spawner" unique_id=1924742611]
 wait_time = 3.0
 
-[node name="respawn_timer" type="Timer" parent="spawners/enemy_1 spawner" unique_id=1860301428]
+[node name="respawn_timer" type="Timer" parent="enemies/spawners/enemy_1 spawner" unique_id=1860301428]
 wait_time = 10.0
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="spawners/enemy_1 spawner" unique_id=905585029]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="enemies/spawners/enemy_1 spawner" unique_id=905585029]
 visible = false
 scale = Vector2(3.1111546, 4.1783686)
 sprite_frames = SubResource("SpriteFrames_ao2f3")
 metadata/_edit_lock_ = true
 
-[node name="healing potion spawner" type="Marker2D" parent="spawners" unique_id=1821638675]
+[node name="healing potion spawner" type="Marker2D" parent="enemies/spawners" unique_id=1821638675]
 position = Vector2(-172, -1670)
 scale = Vector2(2.609, 1.937)
 script = ExtResource("36_kmb1v")
 
-[node name="spawn_timer" type="Timer" parent="spawners/healing potion spawner" unique_id=2133252815]
+[node name="spawn_timer" type="Timer" parent="enemies/spawners/healing potion spawner" unique_id=2133252815]
 wait_time = 3.0
 
-[node name="respawn_timer" type="Timer" parent="spawners/healing potion spawner" unique_id=520063444]
+[node name="respawn_timer" type="Timer" parent="enemies/spawners/healing potion spawner" unique_id=520063444]
 wait_time = 10.0
 autostart = true
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="spawners/healing potion spawner" unique_id=1628036984]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="enemies/spawners/healing potion spawner" unique_id=1628036984]
 visible = false
 scale = Vector2(3.111, 4.178)
 sprite_frames = SubResource("SpriteFrames_5bs5c")
 
-[node name="flying enemy spawner" type="Marker2D" parent="spawners" unique_id=1866326973]
+[node name="flying enemy spawner" type="Marker2D" parent="enemies/spawners" unique_id=1866326973]
 script = ExtResource("18_cjqg0")
 
-[node name="respawn timer" type="Timer" parent="spawners/flying enemy spawner" unique_id=703768862]
-wait_time = 20.0
+[node name="respawn timer" type="Timer" parent="enemies/spawners/flying enemy spawner" unique_id=703768862]
+wait_time = 17.0
 one_shot = true
 
-[node name="spawn locations2" type="Node2D" parent="spawners" unique_id=752208993]
+[node name="spawn locations2" type="Node2D" parent="enemies/spawners" unique_id=752208993]
 
-[node name="flying enemy spawn loc" type="Area2D" parent="spawners/spawn locations2" unique_id=1598874041]
+[node name="flying enemy spawn loc" type="Area2D" parent="enemies/spawners/spawn locations2" unique_id=1598874041]
 position = Vector2(0, -1250)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="spawners/spawn locations2/flying enemy spawn loc" unique_id=1405845507]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemies/spawners/spawn locations2/flying enemy spawn loc" unique_id=1405845507 groups=["flying enemy spawn location"]]
 shape = SubResource("RectangleShape2D_bnc7e")
 debug_color = Color(0.79049116, 0.39965725, 0.4251383, 0.41960785)
 
-[node name="spawn locations" type="Node2D" parent="spawners" unique_id=643152732]
+[node name="flying enemy spawn loc2" type="Area2D" parent="enemies/spawners/spawn locations2" unique_id=2143101520]
+position = Vector2(0, -600)
 
-[node name="healing and enemy_1" type="Area2D" parent="spawners/spawn locations" unique_id=383905957]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemies/spawners/spawn locations2/flying enemy spawn loc2" unique_id=859956395 groups=["flying enemy spawn location"]]
+shape = SubResource("RectangleShape2D_bnc7e")
+debug_color = Color(0.79049116, 0.39965725, 0.4251383, 0.41960785)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="spawners/spawn locations/healing and enemy_1" unique_id=710490985]
+[node name="spawn locations" type="Node2D" parent="enemies/spawners" unique_id=643152732]
+
+[node name="healing and enemy_1" type="Area2D" parent="enemies/spawners/spawn locations" unique_id=383905957]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemies/spawners/spawn locations/healing and enemy_1" unique_id=710490985]
 position = Vector2(-169.5, 380)
 shape = SubResource("RectangleShape2D_j8jky")
 debug_color = Color(0.6643857, 0.31596887, 1, 0.41960785)
 
-[node name="healing and enemy_2" type="Area2D" parent="spawners/spawn locations" unique_id=861819950]
+[node name="healing and enemy_2" type="Area2D" parent="enemies/spawners/spawn locations" unique_id=861819950]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="spawners/spawn locations/healing and enemy_2" unique_id=1581209244]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemies/spawners/spawn locations/healing and enemy_2" unique_id=1581209244]
 position = Vector2(-1885, -164)
 shape = SubResource("RectangleShape2D_gdyli")
 debug_color = Color(0.6643857, 0.31596887, 1, 0.41960785)
 
-[node name="healing and enemy_3" type="Area2D" parent="spawners/spawn locations" unique_id=164382674]
+[node name="healing and enemy_3" type="Area2D" parent="enemies/spawners/spawn locations" unique_id=164382674]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="spawners/spawn locations/healing and enemy_3" unique_id=1860255855]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemies/spawners/spawn locations/healing and enemy_3" unique_id=1860255855]
 position = Vector2(1608.5, -168)
 shape = SubResource("RectangleShape2D_vc5cj")
 debug_color = Color(0.6643857, 0.31596887, 1, 0.41960785)
 
-[node name="healing and enemy_4" type="Area2D" parent="spawners/spawn locations" unique_id=1904573018]
+[node name="healing and enemy_4" type="Area2D" parent="enemies/spawners/spawn locations" unique_id=1904573018]
 position = Vector2(0, -1107)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="spawners/spawn locations/healing and enemy_4" unique_id=1324250238]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemies/spawners/spawn locations/healing and enemy_4" unique_id=1324250238]
 position = Vector2(-5, 155)
 shape = SubResource("RectangleShape2D_2cjbq")
 debug_color = Color(0.6643857, 0.31596887, 1, 0.41960785)
 
-[node name="healing and enemy_5" type="Area2D" parent="spawners/spawn locations" unique_id=1614017595]
+[node name="healing and enemy_5" type="Area2D" parent="enemies/spawners/spawn locations" unique_id=1614017595]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="spawners/spawn locations/healing and enemy_5" unique_id=2008050234]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemies/spawners/spawn locations/healing and enemy_5" unique_id=2008050234]
 position = Vector2(-1064, -165)
 shape = SubResource("RectangleShape2D_gdyli")
 debug_color = Color(0.6643857, 0.31596887, 1, 0.41960785)
+
+[node name="teleporting enemy particles" type="CPUParticles2D" parent="enemies" unique_id=431224631 groups=["teleporting enemy particles"]]
+emitting = false
+amount = 400
+speed_scale = 0.5
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 300.0
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+color = Color(1, 0.38333333, 0, 1)
+
+[node name="EnemyAttacks" type="Node2D" parent="enemies" unique_id=506525120 groups=["healing"]]
 
 [node name="springs" type="Node2D" parent="." unique_id=1654871529]
 
@@ -378,7 +409,7 @@ position = Vector2(100548.75, -6916.409)
 scale = Vector2(-639864.25, 618453.8)
 sprite_frames = SubResource("SpriteFrames_cean3")
 frame = 2
-frame_progress = 0.16230139
+frame_progress = 0.31897682
 
 [node name="hitbox" type="CollisionShape2D" parent="springs/spring block" unique_id=1271575683 groups=["obstacle"]]
 position = Vector2(100000, 3099996)
@@ -669,10 +700,10 @@ scale = Vector2(4, 4)
 texture = ExtResource("43_vc5cj")
 
 [node name="hitbox" type="Area2D" parent="Character/Player body/sword" unique_id=1854058544 groups=["sword"]]
-position = Vector2(123, 369)
+position = Vector2(0, 369)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Character/Player body/sword/hitbox" unique_id=894390048]
-position = Vector2(94, 0)
+position = Vector2(12.312504, 0)
 scale = Vector2(1.5, 1.5)
 shape = SubResource("RectangleShape2D_brx3h")
 disabled = true
@@ -682,8 +713,6 @@ wait_time = 0.75
 one_shot = true
 
 [node name="velocity_stop_timer" type="Timer" parent="Character/Player body" unique_id=852849334]
-
-[node name="EnemyAttacks" type="Node2D" parent="." unique_id=506525120 groups=["healing"]]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=905149302]
 position = Vector2(0, 1)
@@ -768,13 +797,29 @@ label_settings = SubResource("LabelSettings_5bs5c")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="timeout" from="spawners/enemy_1 spawner/spawn_timer" to="spawners/enemy_1 spawner" method="_on_respawn_time_timeout"]
-[connection signal="timeout" from="spawners/enemy_1 spawner/respawn_timer" to="spawners/enemy_1 spawner" method="_on_respawn_timer_timeout"]
-[connection signal="animation_finished" from="spawners/enemy_1 spawner/AnimatedSprite2D" to="spawners/enemy_1 spawner" method="_on_animated_sprite_2d_animation_finished"]
-[connection signal="animation_looped" from="spawners/enemy_1 spawner/AnimatedSprite2D" to="spawners/enemy_1 spawner" method="_on_animated_sprite_2d_animation_looped"]
-[connection signal="timeout" from="spawners/healing potion spawner/respawn_timer" to="spawners/healing potion spawner" method="_on_respawn_timer_timeout"]
-[connection signal="animation_looped" from="spawners/healing potion spawner/AnimatedSprite2D" to="spawners/healing potion spawner" method="_on_animated_sprite_2d_animation_looped"]
-[connection signal="timeout" from="spawners/flying enemy spawner/respawn timer" to="spawners/flying enemy spawner" method="_on_respawn_timer_timeout"]
+[node name="pause button" type="Button" parent="CanvasLayer/Control" unique_id=489338573]
+process_mode = 3
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.87900007
+anchor_right = 1.0
+anchor_bottom = 0.048
+offset_left = -0.6801758
+offset_top = -1.0
+offset_bottom = 1.1599998
+toggle_mode = true
+shortcut = SubResource("Shortcut_ty1g6")
+text = "stop button(really good
+                                                      "
+script = ExtResource("49_ty1g6")
+
+[connection signal="timeout" from="enemies/spawners/enemy_1 spawner/spawn_timer" to="enemies/spawners/enemy_1 spawner" method="_on_respawn_time_timeout"]
+[connection signal="timeout" from="enemies/spawners/enemy_1 spawner/respawn_timer" to="enemies/spawners/enemy_1 spawner" method="_on_respawn_timer_timeout"]
+[connection signal="animation_finished" from="enemies/spawners/enemy_1 spawner/AnimatedSprite2D" to="enemies/spawners/enemy_1 spawner" method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="animation_looped" from="enemies/spawners/enemy_1 spawner/AnimatedSprite2D" to="enemies/spawners/enemy_1 spawner" method="_on_animated_sprite_2d_animation_looped"]
+[connection signal="timeout" from="enemies/spawners/healing potion spawner/respawn_timer" to="enemies/spawners/healing potion spawner" method="_on_respawn_timer_timeout"]
+[connection signal="animation_looped" from="enemies/spawners/healing potion spawner/AnimatedSprite2D" to="enemies/spawners/healing potion spawner" method="_on_animated_sprite_2d_animation_looped"]
+[connection signal="timeout" from="enemies/spawners/flying enemy spawner/respawn timer" to="enemies/spawners/flying enemy spawner" method="_on_respawn_timer_timeout"]
 [connection signal="area_entered" from="springs/spring block/jumping place hitbox" to="springs/spring block" method="_on_jumping_place_hitbox_area_entered"]
 [connection signal="area_exited" from="springs/spring block/jumping place hitbox" to="springs/spring block" method="_on_jumping_place_hitbox_area_exited"]
 [connection signal="frame_changed" from="springs/spring block/spring animation sprites" to="springs/spring block" method="_on_spring_animation_sprites_frame_changed"]
@@ -813,3 +858,4 @@ vertical_alignment = 1
 [connection signal="timeout" from="Character/Player body/sword/reload timer" to="Character/Player body/sword" method="_on_reload_timer_timeout"]
 [connection signal="timeout" from="Character/Player body/velocity_stop_timer" to="Character/Player body" method="_on_velocity_stop_timer_timeout"]
 [connection signal="timeout" from="CanvasLayer/Control/score/score adder timer" to="CanvasLayer/Control/score/score adder timer" method="_on_timeout"]
+[connection signal="toggled" from="CanvasLayer/Control/pause button" to="CanvasLayer/Control/pause button" method="_on_toggled"]

@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://dj47s4jvlbw5s"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ao2f3"]
+font_size = 64
+
+[node name="menu" type="Control" unique_id=1565886769]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="game name" type="Label" parent="." unique_id=1857175611]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.008
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 194.36
+offset_bottom = -789.0
+text = "the game name"
+label_settings = SubResource("LabelSettings_ao2f3")
+horizontal_alignment = 1
