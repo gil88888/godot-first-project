@@ -20,7 +20,7 @@ func _process(_delta: float) -> void:
 		gun_bullet.bullet_direction = global_position.direction_to(get_global_mouse_position())
 		gun_bullet.bullet_rotation = gun_bullet.bullet_direction.angle()
 
-					
+
 # make the reload flag true again 
 func _on_reload_time_timeout() -> void:
 	shoot_flag = true

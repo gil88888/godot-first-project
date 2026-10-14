@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://csdqix63fj2ui"]
+
+[ext_resource type="FontFile" uid="uid://e463nukjgl1o" path="res://resources/fonts/LeagueSpartan-Black.ttf" id="1_hyvan"]
+
+[resource]
+font = ExtResource("1_hyvan")
+font_size = 40

@@ -1,14 +1,39 @@
 extends Label
 
 var score_adder_scene := preload("res://scenes/score_adder.tscn")
-
-
+var next_ability_score_goal: int = 2000
+var power_chooser_scene = preload("res://scenes/power_chooser.tscn")
+var power_chooser
 func _ready() -> void:
 	GlobalVariables.score_label = self
 	
 # update the score text infinitly
 func _process(_delta: float) -> void:
-		self.text = "score: " + str(GlobalVariables.score)
+	self.text = "score: " + str(GlobalVariables.score)
+	# check if the player reach the next score goal if so pop-up the power chooser screen
+	if GlobalVariables.score >= next_ability_score_goal:
+		$"../../..".modulate.a = 0.3 # game transperency
+		# ui visible:
+		$"../hp".visible = false
+		$".".visible = false
+		$"../dash meter".visible = false
+		$"../pause button".visible = false
+		power_chooser = power_chooser_scene.instantiate()
+		if GlobalVariables.danger_level != 4:
+			GlobalVariables.danger_level += 1
+		next_ability_score_goal += 2000
+		GlobalVariables.game_stopped = true
+		$"../pause button".process_mode = Node.PROCESS_MODE_DISABLED
+		self.get_parent().add_child(power_chooser)
+	if power_chooser != null:
+		if power_chooser.get_meta("delete"):
+			$"../../..".modulate.a = 1 # game transperency
+			# ui visible:
+			$"../hp".visible = true
+			$".".visible = true
+			$"../dash meter".visible = true
+			$"../pause button".visible = true
+			power_chooser.queue_free()
 		
 func add_score(score) -> void:
 	# make the text appear and add the score

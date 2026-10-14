@@ -12,9 +12,7 @@ func _process(_delta: float) -> void:
 			$Sprite2D.position.x = -221
 			$Sprite2D.flip_h = true
 			$hitbox.position.x = -221
-	if can_attack:
-		self.visible = false
-		$hitbox/CollisionShape2D.disabled = true
+
 	if Input.is_action_just_pressed("slash") and can_attack:
 		attack()
 
@@ -24,6 +22,9 @@ func attack() -> void:
 	self.visible = true
 	$hitbox/CollisionShape2D.disabled = false
 	can_attack = false
+	await self.get_tree().create_timer(0.1).timeout
+	self.visible = false
+	$hitbox/CollisionShape2D.disabled = true
 	$"reload timer".start()
 	
 	

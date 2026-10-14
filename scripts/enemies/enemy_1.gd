@@ -1,7 +1,7 @@
 extends Area2D
 @onready var player: CharacterBody2D = get_tree().get_first_node_in_group("player") 
 var speed: int = 100
-var enemy_hp: int = 100
+var enemy_hp: int = 200
 var enemy_hit_animation_flag: bool = true
 var enemy_flipped: bool = false
 var movement_cooldown_flag: bool = false

@@ -76,9 +76,12 @@ func _process(delta: float) -> void:
 			pass
 		4:
 			self.position = self.position.move_toward(Vector2(-999999, self.global_position.y), (400 * delta))
+	
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y += gravity * delta
+
+			
 
 	if is_on_floor():
 		if enemy_ready_to_jump:
@@ -93,7 +96,7 @@ func _physics_process(delta: float) -> void:
 		elif enemy_ready_to_slide and player_in_enemy_ground_sky_detector and player_placement == "below":
 			enemy_ready_to_slide = false
 			set_collision_mask_value(2, false)
-			await get_tree().create_timer(0.2).timeout
+			await get_tree().create_timer(0.1).timeout
 			set_collision_mask_value(2, true)
 			
 

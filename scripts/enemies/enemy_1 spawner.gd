@@ -5,6 +5,7 @@ var enemy_2_scene = preload("res://scenes/enemy_2.tscn")
 var enemy_1 = null
 var enemy_2 = null
 var animation_finished_counter: int = 0
+var enemy_to_spawn: String
 @onready var spawn_animation: AnimatedSprite2D = $AnimatedSprite2D
 @onready var respawn_timer: Timer = $respawn_timer
 @onready var enemy_spawn_location_node: Node2D = $"../spawn locations" # the node that contain all the locations that the enemy can spawn
@@ -27,28 +28,47 @@ func spawning_enemy() -> void:
 	spawn_animation.play()
 
 func spawn_enemy() -> void:
-	if randi_range(1, 8) != 1:
+	match GlobalVariables.danger_level:
+		0:
+			enemy_to_spawn = "enemy_1"
+			respawn_timer.wait_time = randi_range(8, 10)
+		1:
+			if randi_range(1, 15) == 1:
+				enemy_to_spawn = "enemy_2"
+			else:
+				enemy_to_spawn = "enemy_1"
+			respawn_timer.wait_time = randi_range(7, 10)
+		2:
+			if randi_range(1, 12) == 1:
+				enemy_to_spawn = "enemy_2"
+			else:
+				enemy_to_spawn = "enemy_1"
+			respawn_timer.wait_time = randi_range(7, 9)
+		3:
+			respawn_timer.wait_time = randi_range(6, 9)
+			if randi_range(1, 8) == 1:
+				enemy_to_spawn = "enemy_2"
+			else:
+				enemy_to_spawn = "enemy_1"
+		4:
+			respawn_timer.wait_time = randi_range(6, 8)
+			if randi_range(1, 6) == 1:
+				enemy_to_spawn = "enemy_2"
+			else:
+				enemy_to_spawn = "enemy_1"
+
+				
+	if enemy_to_spawn == "enemy_1":
 		enemy_1 = enemy_1_scene.instantiate() # copy the scene(the enemy) into a var called enemy_1
 		get_parent().add_child(enemy_1) # add the enemy_1 to the enemies node
 		enemy_1.global_position = self.global_position # make the enemy_1 position the marker position
 		print("enemy_1 created in " , enemy_1.global_position)
-	else:
+	elif enemy_to_spawn == "enemy_2":
 		enemy_2 = enemy_2_scene.instantiate() # copy the scene(the enemy) into a var called enemy_1
 		get_parent().add_child(enemy_2) # add the enemy_1 to the enemies node
 		enemy_2.global_position = self.global_position # make the enemy_1 position the marker position
 		print("enemy_2 created in " , enemy_2.global_position)
-		
-	match GlobalVariables.danger_level:
-		0:
-			respawn_timer.wait_time = randi_range(6, 12)
-		1:
-			respawn_timer.wait_time = randi_range(4, 10)
-		2:
-			respawn_timer.wait_time = randi_range(3, 7)
-		3:
-			respawn_timer.wait_time = randi_range(2, 5)
-		4:
-			respawn_timer.wait_time = randi_range(1, 3)
+
 		
 	respawn_timer.start()
 

@@ -1,7 +1,10 @@
 *make the score animation look better
 *start making the actual sprites of the game
 *add menu
-add hp bar and make the damage more random
-#add new enemy that teleport
-#add the new enemy ability to teleport when it about to get hit
-# the dash bar now tweened the value to 0 when the player dash
+*add hp bar and make the damage more random
+# healing potion deleted after ten seconds
+# rework how danger level work and make it go up every time you get an ability
+
+# new abilities:
+	time slower
+	anti hitbox

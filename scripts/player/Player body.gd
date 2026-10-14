@@ -3,7 +3,7 @@ var speed: int = 1000 # 200
 var running_speed: int = 1400
 var dash_speed: int = 6500
 var current_speed: int = speed
-var gravity: int = 1500 # 1500
+var gravity: float = 1500 # 1500
 var jump_power: int = 1700 # 1300
 var running_flag: bool = true
 var jump_buffer_time: float = 0.10
@@ -21,16 +21,20 @@ var push_speed: float
 var can_stop_velocity: bool = true
 var velocity_stopped: bool = false
 var dashing_ProgressBar_animation_flag: bool = true
+var anti_hitbox_enabled: bool = false
+var player_current_position = null
 @onready var animation_timer: Timer = $"invincible animation"
 @onready var player_area: Area2D = $"Player area2d collision"
 @onready var dashing_timer: Timer = $"dashing timer"
-@onready var dash_meter: ProgressBar = $"../../CanvasLayer/Control/dash meter"
+@onready var dash_meter: ProgressBar = $"../../CanvasLayer/UI/dash meter"
 func _physics_process(delta):
 	# make the player fall if not on floor or stopping velocity
 	if not self.is_on_floor():
 		if not velocity_stopped:
 			velocity.y += gravity * delta * 2
-
+	# Variable jump height
+	if Input.is_action_just_released("jump") and velocity.y < 0:
+		velocity.y *= 0.5
 		
 	# check if the player being pushed from the borders
 	if push_player == "minus":
@@ -57,10 +61,20 @@ func _physics_process(delta):
 			if Input.is_action_pressed("move_right"):
 				velocity.x = current_speed
 				last_place_moved = "right"
+				$"walking animation".visible = true
+				$"walking animation".flip_h = false
+				$"idle animation".frame = 0
+				$"idle animation".visible = false
 			elif Input.is_action_pressed("move_left"):
 				last_place_moved = "left"
 				velocity.x = -current_speed
+				$"walking animation".visible = true
+				$"walking animation".flip_h = true
+				$"idle animation".frame = 0
+				$"idle animation".visible = false
 			else:
+				$"walking animation".visible = false
+				$"idle animation".visible = true
 				velocity.x = 0
 	if is_on_floor():
 		coyote_timer = coyote_time
@@ -84,8 +98,9 @@ func _physics_process(delta):
 		if Input.is_action_pressed("run") and running_flag and self.is_on_floor():
 			current_speed += (running_speed - speed)
 			running_flag = false
-		if Input.is_action_just_released("run") and self.is_on_floor():
-			current_speed -= (running_speed - speed)
+		elif not velocity_stopped:
+			#current_speed -= (running_speed - speed)
+			current_speed = speed
 			running_flag = true
 	# check jumping options that is not regular jump
 	if GlobalVariables.player_can_move:
@@ -100,7 +115,8 @@ func _physics_process(delta):
 		
 	# check if the player can dash
 	if Input.is_action_just_pressed("dash") and can_dash and GlobalVariables.player_can_move:
-		dash()
+		if GlobalVariables.abilities.get("dash"):
+			dash()
 	# if cant because of the loading time make the dashing progress bar red
 	elif Input.is_action_just_pressed("dash") and GlobalVariables.player_can_move and dashing_ProgressBar_animation_flag:
 		dashing_ProgressBar_animation_flag = false
@@ -121,7 +137,7 @@ func _physics_process(delta):
 	if GlobalVariables.player_collide_with_borders:
 		push_player_from_borders()
 	# add function to the player to stop velocity_y with the key W
-	if Input.is_action_just_pressed("stop velocity") and can_stop_velocity and not self.is_on_floor():
+	if Input.is_action_just_pressed("stop velocity") and can_stop_velocity and not self.is_on_floor() and GlobalVariables.abilities.get("stop_velocity"):
 		velocity_stopped = true
 		can_stop_velocity = false
 		current_speed = 50
@@ -141,12 +157,52 @@ func _physics_process(delta):
 			self.velocity.x = 0
 		$velocity_stop_timer.start()
 	if Input.is_action_just_released("stop velocity"):
-		print("stoped")
+		print("velocity stopped")
 		$velocity_stop_timer.stop()
 		$velocity_stop_timer.timeout.emit()
+	# active the anti hitbox ability when pressing the action
+	if Input.is_action_just_pressed("anti hitbox") and not player_dashing and velocity == Vector2(0, 0):
+		anti_hitbox()
+
 	
 	move_and_slide()
 func _process(_delta: float) -> void:
+	# check if the player have the time slower abilty
+	if GlobalVariables.abilities.get("time_slower") and not anti_hitbox_enabled:
+		Engine.time_scale = 0.9
+		
+	if anti_hitbox_enabled:
+		$"idle animation".visible = true
+		$"walking animation".visible = false
+		$"idle animation".modulate.a = 0.5
+		$"idle animation".global_position = player_current_position
+		$"black box".visible = true
+		var min_anti_gravity: int = 500
+		var max_anti_gravity: int = 1500
+		var highest_y: int = -500
+		var lowest_y: int = 2000
+		current_speed = 4000 # make the player faster
+		# make the player grvity as his global y if anti hitbox enbled(idk how this is work)
+		gravity = clampf(
+			remap(global_position.y, highest_y, lowest_y, min_anti_gravity, max_anti_gravity), min_anti_gravity,max_anti_gravity)
+	else:
+		$"idle animation".global_position = self.global_position
+		$"idle animation".modulate.a = 1
+		$"black box".visible = false
+		current_speed = speed
+		gravity = 1500
+	# check if the player have the better dash loading ability
+	if GlobalVariables.abilities.get("dash_plus"):
+		$"dashing timer".wait_time = 4
+	elif GlobalVariables.abilities.get("dash"):
+		$"dashing timer".wait_time = 10
+	# check if the player have the size down abilities
+	if GlobalVariables.abilities.get("size_down_plus"):
+		self.scale = Vector2(0.7, 0.7)
+	elif GlobalVariables.abilities.get("size_down"):
+		self.scale = Vector2(0.8, 0.8)
+	else:
+		self.scale = Vector2(0.9, 0.9)
 	# check if the player being invincible
 	if GlobalVariables.player_invincible == true:
 		if invinicible_animation_flag == true:
@@ -159,6 +215,30 @@ func _process(_delta: float) -> void:
 		# i have a lot of movement bugs so:
 	#print(speed, " ",  current_speed)
 
+
+func anti_hitbox() -> void:
+	$"Player area2d collision/CollisionShape2D".disabled = true # make the player collision disabled
+	Engine.time_scale = 0.25 # make the game slow
+	anti_hitbox_enabled = true # a variable that help to make the player gravity
+	$gun/reload_time.wait_time = 0.1 # make the gun really fast
+	var tween = create_tween().set_loops()
+	tween.tween_property($"../..", "modulate", Color.BLACK, 0.2)
+	tween.tween_property($"../..", "modulate", Color.WHITE, 0.2)
+	player_current_position	 = self.global_position
+	$sword.process_mode = Node.PROCESS_MODE_DISABLED
+	await self.get_tree().create_timer(1.5).timeout # make a timer that end after 0.3 seconds(the game slower so the timer will be 3 seconds) 
+	# return the game to the normal mode
+	Playerhp.player_invincible(1.5)
+	$sword.process_mode = Node.PROCESS_MODE_INHERIT
+	self.global_position = player_current_position
+	$"Player area2d collision/CollisionShape2D".disabled = false
+	$"../..".modulate = Color.WHITE
+
+	
+	tween.kill()
+	Engine.time_scale = 1
+	anti_hitbox_enabled = false
+	$gun/reload_time.wait_time = 0.3
 
 # start the animation 
 func _on_invincible_animation_timeout() -> void:
@@ -175,6 +255,8 @@ func _on_invincible_animation_timeout() -> void:
 			self.visible = true
 			return
 func dash() -> void:
+	if GlobalVariables.abilities.get("invincible_dash"):
+		Playerhp.player_invincible(1)
 	can_dash = false
 	player_dashing = true
 	await self.get_tree().create_timer(0.1).timeout

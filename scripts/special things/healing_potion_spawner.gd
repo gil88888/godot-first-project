@@ -22,17 +22,17 @@ func spawn_potion() -> void:
 		healing_potion = healing_potion_scene.instantiate() # copy the scene(the potion) into a var called healing_potion
 		get_parent().add_child(healing_potion) # add the potion to the spawners node
 		healing_potion.global_position = self.global_position # make the healing_potion position the marker position
-		match GlobalVariables.danger_level:
-			0:
-				$respawn_timer.wait_time = randi_range(12, 20)
-			1:
-				$respawn_timer.wait_time = randi_range(14, 23)
-			2:
-				$respawn_timer.wait_time = randi_range(16, 26)
-			3:
-				$respawn_timer.wait_time = randi_range(18, 29)
-			4:
-				$respawn_timer.wait_time = randi_range(20, 32)
+		#match GlobalVariables.danger_level:
+			#0:
+				#$respawn_timer.wait_time = randi_range(12, 20)
+			#1:
+				#$respawn_timer.wait_time = randi_range(14, 23)
+			#2:
+				#$respawn_timer.wait_time = randi_range(16, 26)
+			#3:
+				#$respawn_timer.wait_time = randi_range(18, 29)
+			#4:
+				#$respawn_timer.wait_time = randi_range(20, 32)
 		$respawn_timer.start()
 		
 		

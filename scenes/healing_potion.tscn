@@ -128,4 +128,9 @@ frame = 24
 frame_progress = 1.0
 script = ExtResource("25_lg61p")
 
+[node name="despawn timer" type="Timer" parent="." unique_id=356492465]
+wait_time = 10.0
+one_shot = true
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="AnimatedSprite2D" method="_on_animation_finished"]
+[connection signal="timeout" from="despawn timer" to="AnimatedSprite2D" method="_on_despawn_timer_timeout"]

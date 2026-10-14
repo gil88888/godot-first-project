@@ -4,13 +4,13 @@
 [ext_resource type="Script" uid="uid://bfshde82tklrk" path="res://scripts/enemies/enemy_2_physic_body.gd" id="1_oh86k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5bs5c"]
-size = Vector2(114, 160)
+size = Vector2(116, 99)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fi5i3"]
 load_path = "res://.godot/imported/enemy.png-30350bed09d6d0024978de626a92b909.ctex"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gdyli"]
-size = Vector2(115.5, 160)
+size = Vector2(115.75, 99)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ids8r"]
 size = Vector2(2901, 100)
@@ -31,6 +31,7 @@ collision_mask = 2
 script = ExtResource("1_oh86k")
 
 [node name="enemy body physics" type="CollisionShape2D" parent="." unique_id=1112049984]
+position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_5bs5c")
 debug_color = Color(0, 0.6, 0.7019608, 0.41960785)
 
@@ -39,10 +40,12 @@ script = ExtResource("1_fi5i3")
 
 [node name="Sprite2D" type="Sprite2D" parent="enemy_2" unique_id=2131356840]
 modulate = Color(0.9098039, 0.72156864, 0.34509805, 1)
-scale = Vector2(1.8, 2.5)
+position = Vector2(0, -0.49999905)
+scale = Vector2(1.8, 1.546875)
 texture = SubResource("CompressedTexture2D_fi5i3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="enemy_2" unique_id=973685410]
+position = Vector2(-0.125, -0.5)
 shape = SubResource("RectangleShape2D_gdyli")
 
 [node name="movement cooldown" type="Timer" parent="enemy_2" unique_id=1380922145]

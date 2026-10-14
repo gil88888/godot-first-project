@@ -3,6 +3,12 @@ extends ProgressBar
 @onready var dashing_timer: Timer = $"../../../Character/Player body/dashing timer"
 
 func _process(_delta: float) -> void:
+	# check if the player unlocked the dashing ability
+	if GlobalVariables.abilities.get("dash"):
+		self.visible = true
+	else:
+		self.visible = false
+		
 	if not dashing_timer.is_stopped():
 		self.value = (dashing_timer.wait_time - dashing_timer.time_left) * 100 / dashing_timer.wait_time 
 	else:

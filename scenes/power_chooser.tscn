@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://djvqe5o0q2hts"]
+
+[ext_resource type="Script" uid="uid://d1hlo8aj8njtg" path="res://scripts/gui/power_chooser.gd" id="1_sqpv8"]
+[ext_resource type="LabelSettings" uid="uid://csdqix63fj2ui" path="res://resources/fonts/power_chooser_text.tres" id="2_xlghl"]
+
+[node name="power chooser" type="Control" unique_id=795536001]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sqpv8")
+metadata/delete = false
+
+[node name="button 2" type="Button" parent="." unique_id=93015202]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 1305.0
+offset_top = 830.0
+offset_right = 710.0
+offset_bottom = -115.0
+
+[node name="button 1" type="Button" parent="." unique_id=702225314]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 250.0
+offset_top = 827.0
+offset_right = -345.0
+offset_bottom = -118.0
+text = "	"
+
+[node name="label 1" type="Label" parent="." unique_id=675776182]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_bottom = -1.0
+text = "insert text here or something"
+label_settings = ExtResource("2_xlghl")
+autowrap_mode = 3
+
+[node name="label 2" type="Label" parent="." unique_id=223203540]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+label_settings = ExtResource("2_xlghl")
+autowrap_mode = 3
+
+[node name="VSeparator" type="VSeparator" parent="." unique_id=1137235219]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.356
+anchor_right = 0.62200004
+anchor_bottom = 1.0
+offset_left = 0.47998047
+offset_right = 0.7598877
+offset_bottom = 3.0
+
+[connection signal="pressed" from="button 2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="button 1" to="." method="_on_button_1_pressed"]
