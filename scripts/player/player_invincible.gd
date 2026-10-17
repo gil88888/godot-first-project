@@ -7,14 +7,8 @@ func hurt_player(hp: int, invincible_time: float = 2) -> void:
 	can_regenerating = false
 	regenerating_timer.start()
 	GlobalVariables.player_hp -= hp
-	# kill the player if he is below 0 hp 
 	player_invincible(invincible_time)
-	if GlobalVariables.player_hp <= 0:
-		get_tree().change_scene_to_file("res://scenes/death screen.tscn")
-	
-		
 
-	
 func player_invincible(invincible_time: float = 2) -> void:
 	GlobalVariables.player_invincible = true
 	await get_tree().create_timer(invincible_time).timeout

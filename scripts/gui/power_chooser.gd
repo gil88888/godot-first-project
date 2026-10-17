@@ -10,7 +10,7 @@ var crash_saver = 0
 func _ready() -> void:
 	while true:
 		crash_saver += 1
-		if crash_saver == 10000:
+		if crash_saver == 10000000:
 			break
 		ability_1 = GlobalVariables.abilities.keys()[randi_range(0, GlobalVariables.abilities.size() -1)]
 		ability_2 = GlobalVariables.abilities.keys()[randi_range(0, GlobalVariables.abilities.size() -1)]
@@ -51,8 +51,11 @@ func _ready() -> void:
 			label_1.text = "the regenerating now can happend every half a second"
 			button_1.text = "regenerating+"
 		"time_slower":
-			label_1.text = "make the game 10% more slower \n note: make the player and bullet charging and stuff like this slower too"
+			label_1.text = "make the game 10% more slower"
 			button_1.text = "time slower"
+		"ghost_mode":
+			label_1.text = "pressing R active ghost mode \nwhen activating ghost mdoe the player hitbox is disabled,  make the time slower and gun charge is faster for some seconds \nwhen the ability is ended the player return to the place they used the abilty"
+			button_1.text = "ghost mode"
 	match ability_2:
 		"dash":
 			label_2.text = "make the player now have the option to dash press the button F to dash the dash have a charging bar that recharge every few seconds"
@@ -81,8 +84,11 @@ func _ready() -> void:
 			label_2.text = "the regenerating now can happend every half a second"
 			button_2.text = "regenerating+"
 		"time_slower":
-			label_2.text = "make the game 10% more slower \n note: make the player and bullet charging and stuff like this slower too"
+			label_2.text = "make the game 10% more slower"
 			button_2.text = "time slower"
+		"ghost_mode":
+			label_2.text = "pressing R active ghost mode \nwhen activating ghost mdoe the player hitbox is disabled,  make the time slower and gun charge is faster for some seconds \nwhen the ability is ended the player return to the place they used the abilty"
+			button_2.text = "ghost mode"
 			
 func _process(_delta: float) -> void:
 	# check if the player have an ability that unlock another ability
@@ -94,9 +100,13 @@ func _process(_delta: float) -> void:
 		GlobalVariables.abilities["size_down_plus"] = false
 	if GlobalVariables.abilities.get("regenerating") and not GlobalVariables.abilities["regenerating_plus"]:
 		GlobalVariables.abilities["regenerating_plus"] = false
+	if GlobalVariables.danger_level >= 3 and not GlobalVariables.abilities["ghost_mode"]:
+		GlobalVariables.abilities["ghost_mode"] = false
 	
 func _on_button_1_pressed() -> void:
-	print(ability_1)
+	if ability_1 == "dash" or ability_1 == "dash+" or ability_1 == "invincible_dash":
+		get_tree().get_first_node_in_group("dashing timer").stop()
+		get_tree().get_first_node_in_group("dashing timer").timeout.emit()
 	GlobalVariables.abilities[ability_1] = true
 	self.get_tree().get_first_node_in_group("pause button").process_mode = Node.PROCESS_MODE_ALWAYS
 	GlobalVariables.game_stopped = false
@@ -104,6 +114,9 @@ func _on_button_1_pressed() -> void:
 
 
 func _on_button_2_pressed() -> void:
+	if ability_2 == "dash" or ability_2 == "dash+" or ability_2 == "invincible_dash":
+		get_tree().get_first_node_in_group("dashing timer").stop()
+		get_tree().get_first_node_in_group("dashing timer").timeout.emit()
 	GlobalVariables.abilities[ability_2] = true
 	self.get_tree().get_first_node_in_group("pause button").process_mode = Node.PROCESS_MODE_ALWAYS
 	GlobalVariables.game_stopped = false

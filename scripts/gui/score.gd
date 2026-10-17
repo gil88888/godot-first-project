@@ -16,7 +16,7 @@ func _process(_delta: float) -> void:
 		# ui visible:
 		$"../hp".visible = false
 		$".".visible = false
-		$"../dash meter".visible = false
+		$"../TextureProgressBar".visible = false
 		$"../pause button".visible = false
 		power_chooser = power_chooser_scene.instantiate()
 		if GlobalVariables.danger_level != 4:
@@ -31,7 +31,7 @@ func _process(_delta: float) -> void:
 			# ui visible:
 			$"../hp".visible = true
 			$".".visible = true
-			$"../dash meter".visible = true
+			$"../TextureProgressBar".visible = true
 			$"../pause button".visible = true
 			power_chooser.queue_free()
 		

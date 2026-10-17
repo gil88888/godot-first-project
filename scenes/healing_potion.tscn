@@ -25,7 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://dtuj4icbksm7y" path="res://resources/sprites/healing potion/healing poition_0023.png" id="23_1as32"]
 [ext_resource type="Texture2D" uid="uid://cg2shvok5yxps" path="res://resources/sprites/healing potion/healing poition_0024.png" id="24_8i7p6"]
 [ext_resource type="Texture2D" uid="uid://bcrv7wpfwp2gv" path="res://resources/sprites/healing potion/healing poition_0025.png" id="24_tsuxo"]
-[ext_resource type="Script" uid="uid://cdqfde0df5u1g" path="res://scripts/special things/animated_sprite_2d.gd" id="25_lg61p"]
+[ext_resource type="Script" uid="uid://cdqfde0df5u1g" path="res://scripts/special things/healing_potion_animation.gd" id="25_lg61p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cean3"]
 size = Vector2(8, 26)
@@ -121,7 +121,7 @@ metadata/heal = 30
 position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_cean3")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1070154928]
+[node name="healing potion animation" type="AnimatedSprite2D" parent="." unique_id=1070154928]
 sprite_frames = SubResource("SpriteFrames_ao2f3")
 autoplay = "default"
 frame = 24
@@ -132,5 +132,5 @@ script = ExtResource("25_lg61p")
 wait_time = 10.0
 one_shot = true
 
-[connection signal="animation_finished" from="AnimatedSprite2D" to="AnimatedSprite2D" method="_on_animation_finished"]
-[connection signal="timeout" from="despawn timer" to="AnimatedSprite2D" method="_on_despawn_timer_timeout"]
+[connection signal="animation_finished" from="healing potion animation" to="healing potion animation" method="_on_animation_finished"]
+[connection signal="timeout" from="despawn timer" to="healing potion animation" method="_on_despawn_timer_timeout"]

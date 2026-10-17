@@ -5,14 +5,18 @@ var enemy_hp: int = 200
 var enemy_hit_animation_flag: bool = true
 var enemy_flipped: bool = false
 var movement_cooldown_flag: bool = false
-@onready var attack_class = Enemy1Attacks.new(self)
+@onready var attack_class = EnemyAttacks.new(self)
 var bullet_1_scene := preload("res://scenes/bullet_1.tscn")
 
 func attack() -> void:
 	var bullet_1 = bullet_1_scene.instantiate()
 	var bullet_x = self.global_position.x + randi_range(-500, 500)
-	var bullet_y = player.global_position.y - 300
-	attack_class.attack_pattern(Vector2(bullet_x, bullet_y), player.global_position , bullet_1, 1500, 0.5, true, true, true)
+	var bullet_y = player.global_position.y + randi_range(-600, -800)
+	
+	if randi_range(1, 10) == 1:
+		attack_class.attack_pattern(Vector2(player.global_position.x, player.global_position.y - 500), player.global_position, bullet_1, 8000, 1, false, true, true, false, true)
+	else:
+		attack_class.attack_pattern(Vector2(bullet_x, bullet_y), player.global_position , bullet_1, 1500, 0.5, true, true, true)															
 	
 		
 func _process(_delta: float) -> void:

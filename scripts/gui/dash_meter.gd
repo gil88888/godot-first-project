@@ -1,4 +1,4 @@
-extends ProgressBar
+extends TextureProgressBar
 @onready var player: CharacterBody2D = $"../../../Character/Player body"
 @onready var dashing_timer: Timer = $"../../../Character/Player body/dashing timer"
 

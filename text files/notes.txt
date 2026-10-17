@@ -3,8 +3,13 @@
 *add menu
 *add hp bar and make the damage more random
 # healing potion deleted after ten seconds
-# rework how danger level work and make it go up every time you get an ability
-
-# new abilities:
-	time slower
-	anti hitbox
+# reworked how danger level work and make it go up every time you get an ability
+# new dash meter design and new player sprites and animation
+# make the enemy_1 attacks higher
+# added new attack pattern to enemy_1
+# the player now can jump mid air while in ghost mode
+# make the healing potion flickering when it about to despawn
+# fix the pause button bug
+make the dash auto reload after getting a dash abiltiy
+expand the map
+מתמתיקה

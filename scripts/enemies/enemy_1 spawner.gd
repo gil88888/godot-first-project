@@ -69,10 +69,13 @@ func spawn_enemy() -> void:
 		enemy_2.global_position = self.global_position # make the enemy_1 position the marker position
 		print("enemy_2 created in " , enemy_2.global_position)
 
-		
-	respawn_timer.start()
+	
+	
 
 func _process(_delta: float) -> void:
+	if len(self.get_tree().get_nodes_in_group("enemy_1")) <= 7 and respawn_timer.is_stopped():
+		respawn_timer.start()
+		
 	if animation_finished_counter == 3:
 		spawn_animation.stop()
 		animation_finished_counter = 0

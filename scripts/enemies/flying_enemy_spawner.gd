@@ -26,7 +26,7 @@ func _process(delta: float) -> void:
 			flying_enemy.global_position = flying_enemy.global_position.move_toward(Vector2(self.global_position.x, spawn_location.global_position.y), (400 * delta))
 		if flying_enemy.global_position.y == spawn_location.global_position.y:
 			move_enemy_on_spawn = false
-	if self.get_tree().get_nodes_in_group("flying enemy") == [] and $"respawn timer".is_stopped():
+	if len(self.get_tree().get_nodes_in_group("flying enemy")) <= 1 and $"respawn timer".is_stopped():
 		print("start")
 		$"respawn timer".start()
 

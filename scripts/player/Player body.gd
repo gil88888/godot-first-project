@@ -21,13 +21,19 @@ var push_speed: float
 var can_stop_velocity: bool = true
 var velocity_stopped: bool = false
 var dashing_ProgressBar_animation_flag: bool = true
-var anti_hitbox_enabled: bool = false
+var ghost_mode_enabled: bool = false
 var player_current_position = null
 @onready var animation_timer: Timer = $"invincible animation"
 @onready var player_area: Area2D = $"Player area2d collision"
 @onready var dashing_timer: Timer = $"dashing timer"
-@onready var dash_meter: ProgressBar = $"../../CanvasLayer/UI/dash meter"
+@onready var dash_meter: TextureProgressBar = $"../../CanvasLayer/UI/TextureProgressBar"
 func _physics_process(delta):
+	# disable movement if the player cant move
+	if not GlobalVariables.player_can_move:
+		velocity.x = 0
+		velocity.y = 0
+		coyote_timer = 0
+		
 	# make the player fall if not on floor or stopping velocity
 	if not self.is_on_floor():
 		if not velocity_stopped:
@@ -61,23 +67,16 @@ func _physics_process(delta):
 			if Input.is_action_pressed("move_right"):
 				velocity.x = current_speed
 				last_place_moved = "right"
-				$"walking animation".visible = true
-				$"walking animation".flip_h = false
-				$"idle animation".frame = 0
-				$"idle animation".visible = false
 			elif Input.is_action_pressed("move_left"):
 				last_place_moved = "left"
 				velocity.x = -current_speed
-				$"walking animation".visible = true
-				$"walking animation".flip_h = true
-				$"idle animation".frame = 0
-				$"idle animation".visible = false
 			else:
-				$"walking animation".visible = false
-				$"idle animation".visible = true
 				velocity.x = 0
-	if is_on_floor():
+	if is_on_floor() or ghost_mode_enabled:
 		coyote_timer = coyote_time
+		if push_player != "no":
+			push_player = "no"
+			velocity.x = 0
 	else:
 		coyote_timer -= delta
 	can_jump = coyote_timer > 0
@@ -120,17 +119,20 @@ func _physics_process(delta):
 	# if cant because of the loading time make the dashing progress bar red
 	elif Input.is_action_just_pressed("dash") and GlobalVariables.player_can_move and dashing_ProgressBar_animation_flag:
 		dashing_ProgressBar_animation_flag = false
-		var style = dash_meter.get_theme_stylebox("fill").duplicate()
 		for i in range(8):
 			if dash_meter.value == 100:
-				style.bg_color = Color.html("#5ef281")
+				dash_meter.texture_under = preload("res://resources/sprites/dash loading bar unfinished.png")
+				dash_meter.texture_progress = preload("res://resources/sprites/dash loading bar unfinished.png")
 				break
-			await self.get_tree().create_timer(0.2).timeout
+			await self.get_tree().create_timer(0.2, false).timeout
 			if i % 2 == 0:
-				style.bg_color = Color.html("#f25e5e")
+				dash_meter.texture_under = preload("res://resources/sprites/dash loading bar depleted.png")
+				dash_meter.texture_progress = preload("res://resources/sprites/dash loading bar depleted.png")
 			else:
-				style.bg_color = Color.html("#5ef281")
-			dash_meter.add_theme_stylebox_override("fill", style)
+				dash_meter.texture_under = preload("res://resources/sprites/dash loading bar unfinished.png")
+				dash_meter.texture_progress = preload("res://resources/sprites/dash loading bar unfinished.png")
+		dash_meter.texture_under = preload("res://resources/sprites/dash loading bar depleted.png")
+		dash_meter.texture_progress = preload("res://resources/sprites/dash loading bar filled.png")
 		dashing_ProgressBar_animation_flag = true
 			
 	# check if the player collide with the borders
@@ -161,21 +163,24 @@ func _physics_process(delta):
 		$velocity_stop_timer.stop()
 		$velocity_stop_timer.timeout.emit()
 	# active the anti hitbox ability when pressing the action
-	if Input.is_action_just_pressed("anti hitbox") and not player_dashing and velocity == Vector2(0, 0):
-		anti_hitbox()
+	if Input.is_action_just_pressed("ghost mode") and not player_dashing and velocity == Vector2(0, 0) and GlobalVariables.abilities.get("ghost_mode") and not ghost_mode_enabled:
+		ghost_mode()
+		print("ghost mode")
 
 	
 	move_and_slide()
 func _process(_delta: float) -> void:
+	# kill the player if the hp is bellow 0
+	if GlobalVariables.player_hp <= 0:
+		get_tree().change_scene_to_file("res://scenes/death screen.tscn")
+		return
 	# check if the player have the time slower abilty
-	if GlobalVariables.abilities.get("time_slower") and not anti_hitbox_enabled:
+	if GlobalVariables.abilities.get("time_slower") and not ghost_mode_enabled:
 		Engine.time_scale = 0.9
 		
-	if anti_hitbox_enabled:
-		$"idle animation".visible = true
-		$"walking animation".visible = false
-		$"idle animation".modulate.a = 0.5
-		$"idle animation".global_position = player_current_position
+	if ghost_mode_enabled:
+		$"player animation".modulate.a = 0.5
+		$"player animation".global_position = player_current_position
 		$"black box".visible = true
 		var min_anti_gravity: int = 500
 		var max_anti_gravity: int = 1500
@@ -186,10 +191,9 @@ func _process(_delta: float) -> void:
 		gravity = clampf(
 			remap(global_position.y, highest_y, lowest_y, min_anti_gravity, max_anti_gravity), min_anti_gravity,max_anti_gravity)
 	else:
-		$"idle animation".global_position = self.global_position
-		$"idle animation".modulate.a = 1
+		$"player animation".global_position = self.global_position
+		$"player animation".modulate.a = 1
 		$"black box".visible = false
-		current_speed = speed
 		gravity = 1500
 	# check if the player have the better dash loading ability
 	if GlobalVariables.abilities.get("dash_plus"):
@@ -198,46 +202,47 @@ func _process(_delta: float) -> void:
 		$"dashing timer".wait_time = 10
 	# check if the player have the size down abilities
 	if GlobalVariables.abilities.get("size_down_plus"):
-		self.scale = Vector2(0.7, 0.7)
+		self.scale = Vector2(1, 1)
 	elif GlobalVariables.abilities.get("size_down"):
-		self.scale = Vector2(0.8, 0.8)
+		self.scale = Vector2(1.1, 1.1)
 	else:
-		self.scale = Vector2(0.9, 0.9)
+		self.scale = Vector2(1.2, 1.2)
 	# check if the player being invincible
 	if GlobalVariables.player_invincible == true:
 		if invinicible_animation_flag == true:
 			invinicible_animation_flag = false
 			animation_timer.start()
 	if not player_can_spring_jump:
-		for spring_block in $"../../springs".get_children():
+		for spring_block in $"../../blocks/springs".get_children():
 			if spring_block.spring_ready:
 				player_can_spring_jump = true
 		# i have a lot of movement bugs so:
 	#print(speed, " ",  current_speed)
 
 
-func anti_hitbox() -> void:
+func ghost_mode() -> void:
 	$"Player area2d collision/CollisionShape2D".disabled = true # make the player collision disabled
 	Engine.time_scale = 0.25 # make the game slow
-	anti_hitbox_enabled = true # a variable that help to make the player gravity
+	ghost_mode_enabled = true # a variable that help to make the player gravity
 	$gun/reload_time.wait_time = 0.1 # make the gun really fast
 	var tween = create_tween().set_loops()
 	tween.tween_property($"../..", "modulate", Color.BLACK, 0.2)
 	tween.tween_property($"../..", "modulate", Color.WHITE, 0.2)
 	player_current_position	 = self.global_position
 	$sword.process_mode = Node.PROCESS_MODE_DISABLED
-	await self.get_tree().create_timer(1.5).timeout # make a timer that end after 0.3 seconds(the game slower so the timer will be 3 seconds) 
+	await self.get_tree().create_timer(1.5, false, false, false).timeout # make a timer that end after 0.3 seconds(the game slower so the timer will be 3 seconds) 
 	# return the game to the normal mode
 	Playerhp.player_invincible(1.5)
 	$sword.process_mode = Node.PROCESS_MODE_INHERIT
 	self.global_position = player_current_position
 	$"Player area2d collision/CollisionShape2D".disabled = false
 	$"../..".modulate = Color.WHITE
+	current_speed = speed
 
 	
 	tween.kill()
 	Engine.time_scale = 1
-	anti_hitbox_enabled = false
+	ghost_mode_enabled = false
 	$gun/reload_time.wait_time = 0.3
 
 # start the animation 
@@ -272,7 +277,7 @@ func push_player_from_borders() -> void:
 		push_player = "plus"
 	push_speed = abs(velocity.x)
 	GlobalVariables.player_can_move = false
-	await self.get_tree().create_timer(1.5).timeout
+	await self.get_tree().create_timer(0.1).timeout
 	push_player = "no"
 	GlobalVariables.player_can_move = true
 

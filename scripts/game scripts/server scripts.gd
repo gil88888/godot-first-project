@@ -5,6 +5,8 @@ var data_saver_file = preload("res://scripts/game scripts/data saver.gd").new()
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	data_saver_file.load_data()
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+
 func _process(_delta: float) -> void:
 
 	# check if fullscreen button is pressed

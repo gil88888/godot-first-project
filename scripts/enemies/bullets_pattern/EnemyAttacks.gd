@@ -1,4 +1,4 @@
-class_name Enemy1Attacks
+class_name EnemyAttacks
 extends RefCounted
 
 var enemy: Node2D

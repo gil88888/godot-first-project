@@ -3,7 +3,7 @@ var speed: int = 200
 var enemy_hp: int = 200
 var move_to: String
 var enemy_hit_animation_flag = true
-@onready var attack_class = Enemy1Attacks.new(self)
+@onready var attack_class = EnemyAttacks.new(self)
 var bomb_scene := preload("res://scenes/bomb.tscn") 
 var bomb_tween: Tween
 var bomb
@@ -20,7 +20,7 @@ func _ready() -> void:
 		move_to = "left"
 
 func _process(delta: float) -> void:
-	if self.global_position.x >= 3100:
+	if self.global_position.x >= 7980:
 		move_to = "left"
 	elif self.global_position.x <= -3100:	
 		move_to = "right" 
