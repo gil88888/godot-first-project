@@ -14,7 +14,7 @@ var game_stopped: bool = false
 # false for no abilty true for ability and null for unlockable abilty 
 var abilities: Dictionary = {
 	time_slower = false, # false
-	ghost_mode = true, # null
+	ghost_mode = null, # null
 	dash = false, # false
 	dash_plus = null, # null
 	invincible_dash = null, # null
@@ -24,7 +24,13 @@ var abilities: Dictionary = {
 	regenerating_plus = null, # null
 	size_down = false, # false
 	size_down_plus = null, # null
-	#ranged_attack = false,
+	extra_max_hp = false, # false
+	extra_max_hp_plus = null, # null
+	better_healing_potion = false, # false
+	better_healing_potion_plus = null, #null
+	ranged_attack = true, # false
+	piercing = false, # false
+	piercing_plus = null # null
 	#increased_knockback = false,
 	#land_mines = false
 }

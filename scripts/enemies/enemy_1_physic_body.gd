@@ -15,10 +15,15 @@ var player_in_enemy_ground_sky_detector = false
 var enemy_ready_to_jump_to_player = true
 var enemy_ready_to_slide = false
 var enemy_ready_to_jump_timer_ended = false
+var extra_x_movement: int  = 0
 @onready var jump_to_player_delay_timer: Timer = $"enemy_1/jump to player delay"
 @onready var movement_cooldown_timer: Timer = $"enemy_1/movement cooldown"
 @onready var player: CharacterBody2D = get_tree().get_first_node_in_group("player") 
 
+
+func _ready() -> void:
+	choose_extra_x_place()
+	
 func _process(delta: float) -> void:
 	if self.global_position.y < player.global_position.y:
 		player_placement = "below"
@@ -69,12 +74,14 @@ func _process(delta: float) -> void:
 		1:
 			self.global_position.x = move_toward(self.global_position.x, player.global_position.x, 800 * delta)
 		2:
-			self.global_position.x = move_toward(self.global_position.x, player.global_position.x, 200 * delta)
 			# check where the enemy heading
-			if (player.global_position.x - self.global_position.x) > 0:
+			if (player.global_position.x - self.global_position.x) >= 0:
+				self.global_position.x = move_toward(self.global_position.x, player.global_position.x - extra_x_movement, 200 * delta)
 				enemy_flipped = false
 			else:
+				self.global_position.x = move_toward(self.global_position.x, player.global_position.x + extra_x_movement, 200 * delta)
 				enemy_flipped = true
+			
 		3:
 			self.global_position.x = move_toward(self.global_position.x, player.global_position.x, 1000 * delta)
 
@@ -102,8 +109,15 @@ func _physics_process(delta: float) -> void:
 			
 
 	move_and_slide()
- 
-# check if there are obstacle infront the enemyג
+	
+# choose extra movement x place
+func choose_extra_x_place() -> void:
+	await get_tree().create_timer(2).timeout
+	print("choose")
+	extra_x_movement = randi_range(100, 200)
+	choose_extra_x_place()
+
+# check if there are obstacle infront the enemy
 func _on_obstacle_detector_area_entered(area: Area2D) -> void:
 	if area.is_in_group("obstacle"):
 		enemy_ready_to_jump = true

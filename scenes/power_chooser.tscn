@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://djvqe5o0q2hts"]
 
-[ext_resource type="Script" uid="uid://d1hlo8aj8njtg" path="res://scripts/gui/power_chooser.gd" id="1_sqpv8"]
+[ext_resource type="Script" uid="uid://d1hlo8aj8njtg" path="res://scripts/Ui/power_chooser.gd" id="1_sqpv8"]
 [ext_resource type="LabelSettings" uid="uid://csdqix63fj2ui" path="res://resources/fonts/power_chooser_text.tres" id="2_xlghl"]
 
 [node name="power chooser" type="Control" unique_id=795536001]
@@ -38,10 +38,11 @@ text = "	"
 [node name="label 1" type="Label" parent="." unique_id=675776182]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.5
+anchor_top = 0.41900003
+anchor_right = 0.49
 anchor_bottom = 1.0
-offset_right = -20.0
-offset_bottom = -1.0
+offset_top = -152.52002
+offset_right = -1.8000488
 text = "insert text here or something"
 label_settings = ExtResource("2_xlghl")
 autowrap_mode = 3
@@ -52,8 +53,10 @@ anchors_preset = -1
 anchor_left = 0.49
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 0.19995117
-offset_top = 1.0
+offset_left = -0.8000488
+offset_top = 300.0
+offset_bottom = 1.0
+text = "insert text here too or something"
 label_settings = ExtResource("2_xlghl")
 autowrap_mode = 3
 

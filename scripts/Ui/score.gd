@@ -12,13 +12,15 @@ func _process(_delta: float) -> void:
 	self.text = "score: " + str(GlobalVariables.score)
 	# check if the player reach the next score goal if so pop-up the power chooser screen
 	if GlobalVariables.score >= next_ability_score_goal:
-		$"../../..".modulate.a = 0.3 # game transperency
+		$"../../..".modulate.a = 0.1 # game transperency
+		$"../../../Background/background/moving background".modulate.a = 0.255
 		# ui visible:
 		$"../hp".visible = false
 		$".".visible = false
 		$"../TextureProgressBar".visible = false
 		$"../pause button".visible = false
 		power_chooser = power_chooser_scene.instantiate()
+		#power_chooser.scale = Vector2(0.5, 0.5)
 		if GlobalVariables.danger_level != 4:
 			GlobalVariables.danger_level += 1
 		next_ability_score_goal += 2000
@@ -33,6 +35,7 @@ func _process(_delta: float) -> void:
 			$".".visible = true
 			$"../TextureProgressBar".visible = true
 			$"../pause button".visible = true
+			$"../../../Background/background/moving background".modulate.a = 0.5
 			power_chooser.queue_free()
 		
 func add_score(score) -> void:

@@ -29,10 +29,11 @@ func _process(_delta: float) -> void:
 		self.get_parent().queue_free()
 
 func _on_area_entered(area: Area2D) -> void:
-	if area.is_in_group("player") and GlobalVariables.player_invincible == false:
+	if area.is_in_group("player damage collision") and GlobalVariables.player_invincible == false:
 		Playerhp.hurt_player(25)
 	if area.is_in_group("gun bullet"):
-		enemy_hp -= 10
+		print(area)
+		enemy_hp -= area.get_parent().get_meta("bullet_damage")
 		GlobalVariables.score_label.add_score(randi_range(5, 15))
 		if enemy_hit_animation_flag:
 			self.get_node("Sprite2D").modulate = Color(90, 90, 0)

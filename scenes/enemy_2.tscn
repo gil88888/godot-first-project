@@ -13,7 +13,7 @@ load_path = "res://.godot/imported/enemy.png-30350bed09d6d0024978de626a92b909.ct
 size = Vector2(115.75, 99)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ids8r"]
-size = Vector2(2901, 100)
+size = Vector2(3000, 100)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ao2f3"]
 size = Vector2(1000, 160)
@@ -58,8 +58,10 @@ wait_time = 3.0
 
 [node name="jump to player delay" type="Timer" parent="enemy_2" unique_id=1041076170]
 wait_time = 0.5
+one_shot = true
 
 [node name="area attack view" type="Area2D" parent="enemy_2" unique_id=1816292785]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="enemy_2/area attack view" unique_id=491755165]
 shape = SubResource("RectangleShape2D_ids8r")
@@ -67,8 +69,10 @@ debug_color = Color(0.34218052, 0.610821, 0.33228222, 0.41960785)
 
 [node name="attack_cooldown" type="Timer" parent="enemy_2/area attack view" unique_id=1367490728]
 wait_time = 0.5
+one_shot = true
 
 [node name="dashing place" type="Area2D" parent="enemy_2" unique_id=758459286]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="enemy_2/dashing place" unique_id=836310445]
 shape = SubResource("RectangleShape2D_ao2f3")

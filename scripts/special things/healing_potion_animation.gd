@@ -6,11 +6,9 @@ func despawn_animation() -> void:
 	for i in range(1000):
 		if i % 2 == 0:
 			visible = true
-			print("invisible")
 		else:
-			print("visible")
 			visible = false
-		await get_tree().create_timer(0.25).timeout
+		await get_tree().create_timer(0.1).timeout
 	
 func _ready() -> void:
 	var tween = self.create_tween()

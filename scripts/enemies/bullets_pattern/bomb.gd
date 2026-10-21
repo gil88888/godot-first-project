@@ -12,7 +12,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	if area.is_in_group("player"):
+	if area.is_in_group("player damage collision"):
 		Playerhp.hurt_player(40)
 		explode()
  

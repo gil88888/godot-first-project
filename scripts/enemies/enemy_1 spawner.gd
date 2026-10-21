@@ -57,7 +57,6 @@ func spawn_enemy() -> void:
 			else:
 				enemy_to_spawn = "enemy_1"
 
-				
 	if enemy_to_spawn == "enemy_1":
 		enemy_1 = enemy_1_scene.instantiate() # copy the scene(the enemy) into a var called enemy_1
 		get_parent().add_child(enemy_1) # add the enemy_1 to the enemies node
@@ -73,7 +72,8 @@ func spawn_enemy() -> void:
 	
 
 func _process(_delta: float) -> void:
-	if len(self.get_tree().get_nodes_in_group("enemy_1")) <= 7 and respawn_timer.is_stopped():
+	if len(self.get_tree().get_nodes_in_group("enemy_1")) <= 6 and respawn_timer.is_stopped():
+		print(len(self.get_tree().get_nodes_in_group("enemy_1")))
 		respawn_timer.start()
 		
 	if animation_finished_counter == 3:

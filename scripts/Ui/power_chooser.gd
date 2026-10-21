@@ -10,7 +10,7 @@ var crash_saver = 0
 func _ready() -> void:
 	while true:
 		crash_saver += 1
-		if crash_saver == 10000000:
+		if crash_saver == 10000:
 			break
 		ability_1 = GlobalVariables.abilities.keys()[randi_range(0, GlobalVariables.abilities.size() -1)]
 		ability_2 = GlobalVariables.abilities.keys()[randi_range(0, GlobalVariables.abilities.size() -1)]
@@ -54,8 +54,29 @@ func _ready() -> void:
 			label_1.text = "make the game 10% more slower"
 			button_1.text = "time slower"
 		"ghost_mode":
-			label_1.text = "pressing R active ghost mode \nwhen activating ghost mdoe the player hitbox is disabled,  make the time slower and gun charge is faster for some seconds \nwhen the ability is ended the player return to the place they used the abilty"
+			label_1.text = "pressing R active ghost mode \nwhen activating ghost mode the player hitbox is disabled,  make the time slower and gun charge is faster for some seconds \nwhen the ability is ended the player return to the place they used the abilty"
 			button_1.text = "ghost mode"
+		"extra_max_hp":
+			label_1.text = "add to the player 50 max hp"
+			button_1.text = "extra max hp"
+		"extra_max_hp_plus":
+			label_1.text = "add to the player 50 max hp"
+			button_1.text = "extra max hp+"
+		"better_healing_potion":
+			label_1.text = "healing potion now heals +15 hp"
+			button_1.text = "better healing potion"
+		"better_healing_potion_plus":
+			label_1.text = "healing potion now heals +30 hp"
+			button_1.text = "better healing potion+"
+		"ranged_attack":
+			label_1.text = "the gun bullets are now deal 5 damage instead of 10\nevery frame the bullet is traveling it gain 0.75 more damage"
+			button_1.text = "ranged attacks"
+		"piercing":
+			label_1.text = "the player bullets gain piercing ability that make the bullte pierce through enemies\n every enemy the bullet pierce it damage divided by 2"
+			button_1.text = "piercing"
+		"piercing_plus":
+			label_1.text = "the bullets damage now multiply by 1.5 damage per enemy it pierce"
+			button_1.text = "piercing plus"
 	match ability_2:
 		"dash":
 			label_2.text = "make the player now have the option to dash press the button F to dash the dash have a charging bar that recharge every few seconds"
@@ -87,9 +108,29 @@ func _ready() -> void:
 			label_2.text = "make the game 10% more slower"
 			button_2.text = "time slower"
 		"ghost_mode":
-			label_2.text = "pressing R active ghost mode \nwhen activating ghost mdoe the player hitbox is disabled,  make the time slower and gun charge is faster for some seconds \nwhen the ability is ended the player return to the place they used the abilty"
+			label_2.text = "pressing R active ghost mode \nwhen activating ghost mode the player hitbox is disabled,  make the time slower and gun charge is faster for some seconds \nwhen the ability is ended the player return to the place they used the abilty"
 			button_2.text = "ghost mode"
-			
+		"extra_max_hp":
+			label_2.text = "add to the player 50 max hp"
+			button_2.text = "extra max hp"
+		"extra_max_hp_plus":
+			label_2.text = "add to the player 50 max hp"
+			button_2.text = "extra max hp+"
+		"better_healing_potion":
+			label_2.text = "healing potion now heals +15 hp"
+			button_2.text = "better healing potion"
+		"better_healing_potion_plus":
+			label_2.text = "healing potion now heals +30 hp"
+			button_2.text = "better healing potion+"
+		"ranged_attack":
+			label_2.text = "the gun bullets are now deal 5 damage instead of 10\nevery frame the bullet is traveling it gain 0.75 more damage"
+			button_2.text = "ranged attacks"
+		"piercing":
+			label_2.text = "the player bullets gain piercing ability that make the bullte pierce through enemies\n every enemy the bullet pierce it damage divided by 2"
+			button_2.text = "piercing"
+		"piercing_plus":
+			label_2.text = "the bullets damage now multiply by 1.5 damage per enemy it pierce"
+			button_2.text = "piercing plus"
 func _process(_delta: float) -> void:
 	# check if the player have an ability that unlock another ability
 	if GlobalVariables.abilities.get("dash") and not GlobalVariables.abilities["invincible_dash"]:
@@ -102,7 +143,13 @@ func _process(_delta: float) -> void:
 		GlobalVariables.abilities["regenerating_plus"] = false
 	if GlobalVariables.danger_level >= 3 and not GlobalVariables.abilities["ghost_mode"]:
 		GlobalVariables.abilities["ghost_mode"] = false
-	
+	if GlobalVariables.abilities.get("extra_max_hp") and not GlobalVariables.abilities["extra_max_hp_plus"]:
+		GlobalVariables.abilities["extra_max_hp_plus"] = false
+	if GlobalVariables.abilities.get("better_healing_potion") and not GlobalVariables.abilities["better_healing_potion_plus"]:
+		GlobalVariables.abilities["better_healing_potion_plus"] = false
+	if GlobalVariables.abilities.get("piercing") and not GlobalVariables.abilities["piercing_plus"] and GlobalVariables.danger_level >= 4:
+		GlobalVariables.abilities["piercing_plus"] = false
+		
 func _on_button_1_pressed() -> void:
 	if ability_1 == "dash" or ability_1 == "dash+" or ability_1 == "invincible_dash":
 		get_tree().get_first_node_in_group("dashing timer").stop()
@@ -110,6 +157,7 @@ func _on_button_1_pressed() -> void:
 	GlobalVariables.abilities[ability_1] = true
 	self.get_tree().get_first_node_in_group("pause button").process_mode = Node.PROCESS_MODE_ALWAYS
 	GlobalVariables.game_stopped = false
+	Playerhp.player_invincible(4)
 	self.set_meta("delete", true)
 
 
@@ -120,4 +168,5 @@ func _on_button_2_pressed() -> void:
 	GlobalVariables.abilities[ability_2] = true
 	self.get_tree().get_first_node_in_group("pause button").process_mode = Node.PROCESS_MODE_ALWAYS
 	GlobalVariables.game_stopped = false
+	Playerhp.player_invincible(4)
 	self.set_meta("delete", true)

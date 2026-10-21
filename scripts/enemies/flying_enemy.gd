@@ -1,6 +1,6 @@
 extends Area2D
 var speed: int = 200
-var enemy_hp: int = 200
+var enemy_hp: int = 300
 var move_to: String
 var enemy_hit_animation_flag = true
 @onready var attack_class = EnemyAttacks.new(self)
@@ -25,7 +25,7 @@ func _process(delta: float) -> void:
 	elif self.global_position.x <= -3100:	
 		move_to = "right" 
 	if move_to == "right":
-		self.global_position.x = move_toward(self.global_position.x, 3100, speed * delta)
+		self.global_position.x = move_toward(self.global_position.x, 7980, speed * delta)
 	elif move_to == "left":
 		self.global_position.x = move_toward(self.global_position.x, -3100, speed * delta)
 		
@@ -41,10 +41,10 @@ func _process(delta: float) -> void:
 			bomb_tween.kill()
 			
 func _on_area_entered(area: Area2D) -> void:
-	if area.is_in_group("player") and GlobalVariables.player_invincible == false:
+	if area.is_in_group("player damage collision") and GlobalVariables.player_invincible == false:
 		Playerhp.hurt_player(10)
 	if area.is_in_group("gun bullet"):
-		enemy_hp -= 10
+		enemy_hp -= area.get_parent().get_meta("bullet_damage")
 		GlobalVariables.score_label.add_score(randi_range(1, 10))
 		if enemy_hit_animation_flag:
 			self.get_node("Sprite2D").modulate = Color(90, 90, 0)

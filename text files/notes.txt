@@ -1,15 +1,28 @@
 *make the score animation look better
-*start making the actual sprites of the game
 *add menu
 *add hp bar and make the damage more random
-# healing potion deleted after ten seconds
-# reworked how danger level work and make it go up every time you get an ability
-# new dash meter design and new player sprites and animation
-# make the enemy_1 attacks higher
-# added new attack pattern to enemy_1
-# the player now can jump mid air while in ghost mode
-# make the healing potion flickering when it about to despawn
-# fix the pause button bug
-make the dash auto reload after getting a dash abiltiy
+*enemy_1 start walking fastely to one location/ stop moveing, unknown bug maybe because of self collision
+make the teleporting enemy bullets infinty range
 expand the map
-מתמתיקה
+# the player have now seperated hitbox that calculate damage
+# healing potions now disappear after 15 seconds instead of 10 seconds
+# added a background to the game
+# changed a bit of the enemy_1 movement and make it not move the the specific player location
+# now the player can slip off a platform by pressing S
+fix the bug that make the background stop moving
+new abilities:
+	extra max hp
+	better healing potion
+	extra max hp+
+	better healing potion+
+	ranged attack
+	pierceing
+	pierceing plus
+
+bug fixes:
+	fixed the bug that make the enemy jump before the 3 seconds delay
+	fixed the telporting enemy spam teleporting bullets bug
+	fixes some delta time issue
+	fixed the bug that make the enemy fall from the world by making bad teleport bullet by making it teleport next to the player
+	
+	

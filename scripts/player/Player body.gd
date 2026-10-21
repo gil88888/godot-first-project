@@ -6,7 +6,7 @@ var current_speed: int = speed
 var gravity: float = 1500 # 1500
 var jump_power: int = 1700 # 1300
 var running_flag: bool = true
-var jump_buffer_time: float = 0.10
+var jump_buffer_time: float = 0.1
 var jump_buffer_timer: float = 0.0
 var coyote_time: float = 0.10
 var coyote_timer: float = 0.0
@@ -23,10 +23,12 @@ var velocity_stopped: bool = false
 var dashing_ProgressBar_animation_flag: bool = true
 var ghost_mode_enabled: bool = false
 var player_current_position = null
+var active_player_variable_jump = true
+var body_platform_list = []
 @onready var animation_timer: Timer = $"invincible animation"
 @onready var player_area: Area2D = $"Player area2d collision"
 @onready var dashing_timer: Timer = $"dashing timer"
-@onready var dash_meter: TextureProgressBar = $"../../CanvasLayer/UI/TextureProgressBar"
+@onready var dash_meter: TextureProgressBar = $"../../Ui Layer/UI/TextureProgressBar"
 func _physics_process(delta):
 	# disable movement if the player cant move
 	if not GlobalVariables.player_can_move:
@@ -39,8 +41,8 @@ func _physics_process(delta):
 		if not velocity_stopped:
 			velocity.y += gravity * delta * 2
 	# Variable jump height
-	if Input.is_action_just_released("jump") and velocity.y < 0:
-		velocity.y *= 0.5
+	if Input.is_action_just_released("jump") and velocity.y < 0 and active_player_variable_jump:
+		velocity.y *= 0.25
 		
 	# check if the player being pushed from the borders
 	if push_player == "minus":
@@ -73,6 +75,7 @@ func _physics_process(delta):
 			else:
 				velocity.x = 0
 	if is_on_floor() or ghost_mode_enabled:
+		active_player_variable_jump = true
 		coyote_timer = coyote_time
 		if push_player != "no":
 			push_player = "no"
@@ -105,6 +108,7 @@ func _physics_process(delta):
 	if GlobalVariables.player_can_move:
 		if Input.is_action_just_pressed("jump") and player_area.in_jump_block and player_area.jump_block.jump_block_disabled == false:
 			self.velocity.y = player_area.jump_block.velocity_y
+			active_player_variable_jump = false
 		if player_can_spring_jump and Input.is_action_just_pressed("jump"):
 			self.velocity.y -= 1500
 			player_can_spring_jump = false
@@ -134,7 +138,11 @@ func _physics_process(delta):
 		dash_meter.texture_under = preload("res://resources/sprites/dash loading bar depleted.png")
 		dash_meter.texture_progress = preload("res://resources/sprites/dash loading bar filled.png")
 		dashing_ProgressBar_animation_flag = true
-			
+	# check if the player active the fall from platform action
+	if Input.is_action_pressed("fall_from_platform"):
+		fall_from_platform()
+		
+		
 	# check if the player collide with the borders
 	if GlobalVariables.player_collide_with_borders:
 		push_player_from_borders()
@@ -166,7 +174,15 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("ghost mode") and not player_dashing and velocity == Vector2(0, 0) and GlobalVariables.abilities.get("ghost_mode") and not ghost_mode_enabled:
 		ghost_mode()
 		print("ghost mode")
+		
+	# check all the platform the player is collide with
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()
 
+		if collider is StaticBody2D:
+			body_platform_list.append(collider)
+	
 	
 	move_and_slide()
 func _process(_delta: float) -> void:
@@ -202,11 +218,11 @@ func _process(_delta: float) -> void:
 		$"dashing timer".wait_time = 10
 	# check if the player have the size down abilities
 	if GlobalVariables.abilities.get("size_down_plus"):
-		self.scale = Vector2(1, 1)
+		self.scale = Vector2(0.8, 0.8)
 	elif GlobalVariables.abilities.get("size_down"):
-		self.scale = Vector2(1.1, 1.1)
+		self.scale = Vector2(0.9, 0.9)
 	else:
-		self.scale = Vector2(1.2, 1.2)
+		self.scale = Vector2(1, 1)
 	# check if the player being invincible
 	if GlobalVariables.player_invincible == true:
 		if invinicible_animation_flag == true:
@@ -219,9 +235,24 @@ func _process(_delta: float) -> void:
 		# i have a lot of movement bugs so:
 	#print(speed, " ",  current_speed)
 
+# a function that make the player fall from a platform
+func fall_from_platform() -> void:
+	for i in body_platform_list:
+		var collision_shape = i.get_node_or_null("CollisionShape2D")
+		if collision_shape != null:
+			if collision_shape.one_way_collision:
+				add_collision_exception_with(i)
+				print("sdf")
+	await get_tree().create_timer(0.1).timeout
+	for i in body_platform_list:
+		remove_collision_exception_with(i)
 
+	body_platform_list = []
+
+# active ghost mode
 func ghost_mode() -> void:
 	$"Player area2d collision/CollisionShape2D".disabled = true # make the player collision disabled
+	$player_hit_place/CollisionShape2D.disabled = true # make the player unhitable
 	Engine.time_scale = 0.25 # make the game slow
 	ghost_mode_enabled = true # a variable that help to make the player gravity
 	$gun/reload_time.wait_time = 0.1 # make the gun really fast
@@ -236,6 +267,7 @@ func ghost_mode() -> void:
 	$sword.process_mode = Node.PROCESS_MODE_INHERIT
 	self.global_position = player_current_position
 	$"Player area2d collision/CollisionShape2D".disabled = false
+	$player_hit_place/CollisionShape2D.disabled = false
 	$"../..".modulate = Color.WHITE
 	current_speed = speed
 
