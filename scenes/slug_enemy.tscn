@@ -1,0 +1,201 @@
+[gd_scene format=3 uid="uid://cxxyja0d0x2gl"]
+
+[ext_resource type="Script" uid="uid://cfn4tab8lilqo" path="res://scripts/enemies/slug_enemy.gd" id="1_numhj"]
+[ext_resource type="Texture2D" uid="uid://cmqidtuj5td3f" path="res://resources/sprites/slug_enemy.png" id="1_vwgnl"]
+[ext_resource type="Texture2D" uid="uid://cctrr3hmxnp8w" path="res://resources/sprites/slug come from floor animation/slug_come_from_floor_animation1.png" id="2_30ibc"]
+[ext_resource type="Texture2D" uid="uid://cpqs35iqiy8qh" path="res://resources/sprites/slug come from floor animation/slug_come_from_floor_animation2.png" id="3_2gcnm"]
+[ext_resource type="Texture2D" uid="uid://cel48hk3xgqfe" path="res://resources/sprites/slug come from floor animation/slug_come_from_floor_animation3.png" id="4_q3pyx"]
+[ext_resource type="Texture2D" uid="uid://b0rkmkfqelsar" path="res://resources/sprites/slug come from floor animation/slug_come_from_floor_animation4.png" id="5_tlaf2"]
+[ext_resource type="Texture2D" uid="uid://d0e61wb2y4agu" path="res://resources/sprites/slug come from floor animation/slug_come_from_floor_animation5.png" id="6_l5een"]
+[ext_resource type="Texture2D" uid="uid://dceh2jg7pn1tj" path="res://resources/sprites/slug come from floor animation/slug_come_from_floor_animation6.png" id="7_bicy0"]
+[ext_resource type="Texture2D" uid="uid://buq224wk8coyn" path="res://resources/sprites/slug come from floor animation/slug_come_from_floor_animation7.png" id="8_nedai"]
+[ext_resource type="Texture2D" uid="uid://8h5ybpcwnoqj" path="res://resources/sprites/slug come from floor animation/slug_come_from_floor_animation8.png" id="9_h1tgy"]
+[ext_resource type="Texture2D" uid="uid://codshnoyhsd70" path="res://resources/sprites/slug come from floor animation/slug_come_from_floor_animation9.png" id="10_ko6fs"]
+[ext_resource type="Texture2D" uid="uid://dv4fbn2404hyn" path="res://resources/sprites/slug come from floor animation/slug_come_from_floor_animation10.png" id="11_05e5w"]
+[ext_resource type="Texture2D" uid="uid://dxiuj488c364u" path="res://resources/sprites/slug come from floor animation/slug_come_from_floor_animation11.png" id="12_hwe1w"]
+[ext_resource type="Texture2D" uid="uid://ncjcpohhh6fa" path="res://resources/sprites/slug come from floor animation/slug_come_from_floor_animation12.png" id="13_y5eic"]
+[ext_resource type="Texture2D" uid="uid://37ijbpebv6dt" path="res://resources/sprites/slug come from floor animation/slug_come_from_floor_animation13.png" id="14_fmjtk"]
+[ext_resource type="Texture2D" uid="uid://qxgaswp60mrd" path="res://resources/sprites/slug come from floor animation/slug_come_from_floor_animation14.png" id="15_5x7b2"]
+[ext_resource type="Texture2D" uid="uid://dj0qmlek6d8el" path="res://resources/sprites/slug come from floor animation/slug_come_from_floor_animation15.png" id="16_yu4pi"]
+[ext_resource type="Texture2D" uid="uid://c14tc12adfxto" path="res://resources/sprites/slug come from floor animation/slug_come_from_floor_animation16.png" id="17_8wqb3"]
+[ext_resource type="Texture2D" uid="uid://spb6v66tcpt6" path="res://resources/sprites/slug come from floor animation/slug_come_from_floor_animation17.png" id="18_mdrr1"]
+[ext_resource type="Texture2D" uid="uid://vvj3p12t8f3k" path="res://resources/sprites/slug come from floor animation/slug_come_from_floor_animation18.png" id="19_gwg4g"]
+[ext_resource type="Texture2D" uid="uid://bt1sanf125q3o" path="res://resources/sprites/slug come from floor animation/slug_come_from_floor_animation19.png" id="20_o3wee"]
+[ext_resource type="Texture2D" uid="uid://cr3cywualnn5a" path="res://resources/sprites/slug come from floor animation/slug_come_from_floor_animation20.png" id="21_531s2"]
+[ext_resource type="Texture2D" uid="uid://g53sdlnvwiwq" path="res://resources/sprites/slug come from floor animation/slug_come_from_floor_animation21.png" id="22_uo4f0"]
+[ext_resource type="Texture2D" uid="uid://cixqs0du743f7" path="res://resources/sprites/slug come from floor animation/slug_come_from_floor_animation22.png" id="23_pct14"]
+[ext_resource type="Texture2D" uid="uid://b7j0jkm1n1f2v" path="res://resources/sprites/slug come from floor animation/slug_come_from_floor_animation23.png" id="24_wg7sx"]
+[ext_resource type="Texture2D" uid="uid://d00wtiy5mlfy7" path="res://resources/sprites/slug come from floor animation/slug_come_from_floor_animation24.png" id="25_25p3k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ao2f3"]
+size = Vector2(176, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_numhj"]
+atlas = ExtResource("1_vwgnl")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q2p28"]
+atlas = ExtResource("1_vwgnl")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhdos"]
+atlas = ExtResource("1_vwgnl")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0i072"]
+atlas = ExtResource("1_vwgnl")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1s4do"]
+atlas = ExtResource("1_vwgnl")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cean3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_30ibc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_2gcnm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_q3pyx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_tlaf2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_l5een")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_bicy0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_nedai")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_h1tgy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ko6fs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_05e5w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_hwe1w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_y5eic")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_fmjtk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_5x7b2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_yu4pi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_8wqb3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_mdrr1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_gwg4g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_o3wee")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_531s2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_uo4f0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_pct14")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_wg7sx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_25p3k")
+}],
+"loop": 0,
+"name": &"come from floor",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_numhj")
+}],
+"loop": 0,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q2p28")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qhdos")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0i072")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1s4do")
+}],
+"loop": 0,
+"name": &"moving",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cean3"]
+size = Vector2(160, 144)
+
+[node name="slug_enemy" type="CharacterBody2D" unique_id=1740843424 groups=["physic enemies", "slug"]]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_numhj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1824400171]
+visible = false
+position = Vector2(0, 16)
+shape = SubResource("RectangleShape2D_ao2f3")
+
+[node name="slug_animation" type="AnimatedSprite2D" parent="." unique_id=47598150]
+position = Vector2(1.9073486e-06, -1.9073486e-06)
+scale = Vector2(5.9999995, 5.9999995)
+sprite_frames = SubResource("SpriteFrames_cean3")
+animation = &"moving"
+autoplay = "come from floor"
+
+[node name="hitbox" type="Area2D" parent="." unique_id=1182043054 groups=["block bullet", "enemies", "enemies area"]]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox" unique_id=1824686779]
+position = Vector2(0, 16)
+shape = SubResource("RectangleShape2D_cean3")
+disabled = true
+debug_color = Color(0.9877061, 0, 0.31514838, 0.41960785)
+
+[node name="check_player_position" type="Timer" parent="." unique_id=2033953952]
+wait_time = 3.0
+autostart = true
+
+[node name="animation timer" type="Timer" parent="." unique_id=669559390]
+autostart = true
+
+[node name="invincibilty timer" type="Timer" parent="." unique_id=169865816]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="animation_finished" from="slug_animation" to="." method="_on_slug_animation_animation_finished"]
+[connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="timeout" from="check_player_position" to="." method="_on_check_player_position_timeout"]
+[connection signal="timeout" from="animation timer" to="." method="_on_animation_timer_timeout"]

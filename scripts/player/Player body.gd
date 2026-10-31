@@ -21,14 +21,23 @@ var push_speed: float
 var can_stop_velocity: bool = true
 var velocity_stopped: bool = false
 var dashing_ProgressBar_animation_flag: bool = true
+var flying_progress_bar_animation_flag: bool = true
 var ghost_mode_enabled: bool = false
+var ghost_mode_active_cost: int = 10
 var player_current_position = null
 var active_player_variable_jump = true
 var body_platform_list = []
+@onready var dash_meter_texture_depleted = preload("res://resources/sprites/loading bars/dash loading bar depleted.png")
+@onready var dash_meter_texture_progress = preload("res://resources/sprites/loading bars/dash loading bar filled.png")
+@onready var dash_meter_texture_unfinished = preload("res://resources/sprites/loading bars/dash loading bar unfinished.png")
+@onready var flying_meter_texture_depleted = preload("res://resources/sprites/loading bars/flying loading bar depleted.png")
+@onready var flying_meter_texture_progress = preload("res://resources/sprites/loading bars/flying loading bar filled.png")
+@onready var flying_meter_texture_unfinished = preload("res://resources/sprites/loading bars/flying loading bar unfinished.png")
 @onready var animation_timer: Timer = $"invincible animation"
 @onready var player_area: Area2D = $"Player area2d collision"
 @onready var dashing_timer: Timer = $"dashing timer"
-@onready var dash_meter: TextureProgressBar = $"../../Ui Layer/UI/TextureProgressBar"
+@onready var dash_meter: TextureProgressBar = $"../../Ui Layer/UI/dash progress bar"
+@onready var flying_meter: TextureProgressBar = $"../../Ui Layer/UI/flying progress bar"
 func _physics_process(delta):
 	# disable movement if the player cant move
 	if not GlobalVariables.player_can_move:
@@ -39,7 +48,10 @@ func _physics_process(delta):
 	# make the player fall if not on floor or stopping velocity
 	if not self.is_on_floor():
 		if not velocity_stopped:
-			velocity.y += gravity * delta * 2
+			if Input.is_action_pressed("fall_from_platform"):
+				velocity.y += gravity * delta * 4
+			else:
+				velocity.y += gravity * delta * 2
 	# Variable jump height
 	if Input.is_action_just_released("jump") and velocity.y < 0 and active_player_variable_jump:
 		velocity.y *= 0.25
@@ -125,18 +137,18 @@ func _physics_process(delta):
 		dashing_ProgressBar_animation_flag = false
 		for i in range(8):
 			if dash_meter.value == 100:
-				dash_meter.texture_under = preload("res://resources/sprites/dash loading bar unfinished.png")
-				dash_meter.texture_progress = preload("res://resources/sprites/dash loading bar unfinished.png")
+				dash_meter.texture_under = dash_meter_texture_unfinished
+				dash_meter.texture_progress = dash_meter_texture_unfinished
 				break
 			await self.get_tree().create_timer(0.2, false).timeout
 			if i % 2 == 0:
-				dash_meter.texture_under = preload("res://resources/sprites/dash loading bar depleted.png")
-				dash_meter.texture_progress = preload("res://resources/sprites/dash loading bar depleted.png")
+				dash_meter.texture_under = dash_meter_texture_unfinished
+				dash_meter.texture_progress = dash_meter_texture_unfinished
 			else:
-				dash_meter.texture_under = preload("res://resources/sprites/dash loading bar unfinished.png")
-				dash_meter.texture_progress = preload("res://resources/sprites/dash loading bar unfinished.png")
-		dash_meter.texture_under = preload("res://resources/sprites/dash loading bar depleted.png")
-		dash_meter.texture_progress = preload("res://resources/sprites/dash loading bar filled.png")
+				dash_meter.texture_under = dash_meter_texture_depleted
+				dash_meter.texture_progress = dash_meter_texture_depleted
+		dash_meter.texture_under = dash_meter_texture_depleted
+		dash_meter.texture_progress = dash_meter_texture_progress
 		dashing_ProgressBar_animation_flag = true
 	# check if the player active the fall from platform action
 	if Input.is_action_pressed("fall_from_platform"):
@@ -166,7 +178,25 @@ func _physics_process(delta):
 		else:
 			self.velocity.x = 0
 		$velocity_stop_timer.start()
-	if Input.is_action_just_released("stop velocity"):
+	elif Input.is_action_just_pressed("stop velocity") and GlobalVariables.abilities.get("stop_velocity") and flying_progress_bar_animation_flag and (not can_stop_velocity or is_on_floor()):
+		flying_progress_bar_animation_flag = false
+		for i in range(8):
+			if flying_meter.value == 100:
+				flying_meter.texture_under = flying_meter_texture_unfinished
+				flying_meter.texture_progress = flying_meter_texture_unfinished
+				break
+			await self.get_tree().create_timer(0.2, false).timeout
+			if i % 2 == 0:
+				flying_meter.texture_under = flying_meter_texture_unfinished
+				flying_meter.texture_progress = flying_meter_texture_unfinished
+			else:
+				flying_meter.texture_under = flying_meter_texture_depleted
+				flying_meter.texture_progress = flying_meter_texture_depleted
+		flying_meter.texture_under = flying_meter_texture_depleted
+		flying_meter.texture_progress = flying_meter_texture_progress
+		flying_progress_bar_animation_flag = true
+		
+	if Input.is_action_just_released("stop velocity") and velocity_stopped:
 		print("velocity stopped")
 		$velocity_stop_timer.stop()
 		$velocity_stop_timer.timeout.emit()
@@ -242,20 +272,20 @@ func fall_from_platform() -> void:
 		if collision_shape != null:
 			if collision_shape.one_way_collision:
 				add_collision_exception_with(i)
-				print("sdf")
 	await get_tree().create_timer(0.1).timeout
 	for i in body_platform_list:
 		remove_collision_exception_with(i)
-
 	body_platform_list = []
 
 # active ghost mode
 func ghost_mode() -> void:
+	Playerhp.hurt_player(ghost_mode_active_cost, 0) # hurt the player 
+	ghost_mode_active_cost += 10 # make it so the next time the player use ghost mode it will cost more
 	$"Player area2d collision/CollisionShape2D".disabled = true # make the player collision disabled
 	$player_hit_place/CollisionShape2D.disabled = true # make the player unhitable
 	Engine.time_scale = 0.25 # make the game slow
 	ghost_mode_enabled = true # a variable that help to make the player gravity
-	$gun/reload_time.wait_time = 0.1 # make the gun really fast
+	$gun/reload_time.wait_time = 0.05 # make the gun really fast
 	var tween = create_tween().set_loops()
 	tween.tween_property($"../..", "modulate", Color.BLACK, 0.2)
 	tween.tween_property($"../..", "modulate", Color.WHITE, 0.2)
@@ -270,8 +300,6 @@ func ghost_mode() -> void:
 	$player_hit_place/CollisionShape2D.disabled = false
 	$"../..".modulate = Color.WHITE
 	current_speed = speed
-
-	
 	tween.kill()
 	Engine.time_scale = 1
 	ghost_mode_enabled = false
@@ -293,7 +321,7 @@ func _on_invincible_animation_timeout() -> void:
 			return
 func dash() -> void:
 	if GlobalVariables.abilities.get("invincible_dash"):
-		Playerhp.player_invincible(1)
+		Playerhp.player_invincible(5)
 	can_dash = false
 	player_dashing = true
 	await self.get_tree().create_timer(0.1).timeout
@@ -317,9 +345,13 @@ func push_player_from_borders() -> void:
 func _on_velocity_stop_timer_timeout() -> void:
 	velocity_stopped = false
 	current_speed = speed
-	await self.get_tree().create_timer(5).timeout
-	can_stop_velocity = true
+	$velocity_cooldown.start()
+	
 
 
 func _on_dashing_timer_timeout() -> void:
 	can_dash = true
+
+
+func _on_velocity_cooldown_timeout() -> void:
+	can_stop_velocity = true

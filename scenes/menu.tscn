@@ -1,15 +1,93 @@
 [gd_scene format=3 uid="uid://dj47s4jvlbw5s"]
 
+[ext_resource type="Script" uid="uid://cjydin6luqpbj" path="res://scripts/Ui/menu.gd" id="1_mhnvy"]
+[ext_resource type="FontFile" uid="uid://e463nukjgl1o" path="res://resources/fonts/LeagueSpartan-Black.ttf" id="1_yqeox"]
+[ext_resource type="Texture2D" uid="uid://6o0fbur5ugd5" path="res://resources/sprites/background1.png" id="2_con2f"]
+[ext_resource type="Script" uid="uid://cc5illjo5eubu" path="res://scripts/Ui/moving_background.gd" id="3_mhnvy"]
+[ext_resource type="Script" uid="uid://qrdgj2n15eis" path="res://scripts/Ui/settings.gd" id="5_4ytvr"]
+
 [sub_resource type="LabelSettings" id="LabelSettings_ao2f3"]
 font_size = 64
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mhnvy"]
+bg_color = Color(0.3164582, 0.6294463, 0.8681091, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.30980393, 0.8745098, 0.8745098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tiu5q"]
+bg_color = Color(0.3164582, 0.6294463, 0.8681091, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.30980393, 0.8745098, 0.8745098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xlrm8"]
+bg_color = Color(0.40784314, 0.6313726, 0.8666667, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.30980393, 0.8745098, 0.8745098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b5hke"]
+bg_color = Color(0.2484, 0.49863997, 0.69, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.30980393, 0.8745098, 0.8745098, 1)
+
+[sub_resource type="Theme" id="Theme_ao2f3"]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_disabled_color = Color(0.30980393, 0.8745098, 0.8745098, 1)
+Button/colors/font_hover_pressed_color = Color(0.30980393, 0.8745098, 0.8745098, 1)
+Button/colors/font_outline_color = Color(0.30980393, 0.8745098, 0.8745098, 1)
+Button/colors/font_pressed_color = Color(1, 1, 1, 1)
+Button/font_sizes/font_size = 32
+Button/fonts/font = ExtResource("1_yqeox")
+Button/icons/icon = null
+Button/styles/focus = SubResource("StyleBoxFlat_mhnvy")
+Button/styles/hover = SubResource("StyleBoxFlat_tiu5q")
+Button/styles/normal = SubResource("StyleBoxFlat_xlrm8")
+Button/styles/pressed = SubResource("StyleBoxFlat_b5hke")
 
 [node name="menu" type="Control" unique_id=1565886769]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -24.0
+offset_right = -24.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_mhnvy")
+
+[node name="background" type="Control" parent="." unique_id=724786830]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="moving background" type="TextureRect" parent="background" unique_id=1164171738]
+modulate = Color(1, 1, 1, 0.39215687)
+z_index = -100
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_con2f")
+stretch_mode = 1
+script = ExtResource("3_mhnvy")
+metadata/move_background = true
 
 [node name="game name" type="Label" parent="." unique_id=1857175611]
 layout_mode = 1
@@ -19,6 +97,89 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 194.36
 offset_bottom = -789.0
-text = "the game name"
+text = "game name here"
 label_settings = SubResource("LabelSettings_ao2f3")
 horizontal_alignment = 1
+
+[node name="start game button" type="Button" parent="." unique_id=1063671083]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.42900002
+anchor_top = 0.47400004
+anchor_right = 0.558
+anchor_bottom = 0.563
+offset_left = 0.3199463
+offset_top = 0.079956055
+offset_right = 0.6398926
+offset_bottom = -0.040039063
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_ao2f3")
+text = "start game"
+
+[node name="setting button" type="Button" parent="." unique_id=2119407495]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.42900002
+anchor_top = 0.47400004
+anchor_right = 0.558
+anchor_bottom = 0.563
+offset_left = 0.3199463
+offset_top = 192.07996
+offset_right = 0.6398926
+offset_bottom = 191.95996
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_ao2f3")
+text = "settings"
+
+[node name="quit button" type="Button" parent="." unique_id=1760862663]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.42900002
+anchor_top = 0.47400004
+anchor_right = 0.558
+anchor_bottom = 0.563
+offset_left = 0.3199463
+offset_top = 384.07996
+offset_right = 0.6398926
+offset_bottom = 383.95996
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_ao2f3")
+text = "quit"
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1292442491]
+position = Vector2(960, 544)
+
+[node name="settings" type="Control" parent="." unique_id=1730069974]
+layout_mode = 1
+anchor_left = 2.604
+anchor_right = 3.604
+anchor_bottom = 1.0
+offset_left = 0.31982422
+offset_right = 0.31982422
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_4ytvr")
+
+[node name="back from settings button" type="Button" parent="settings" unique_id=910214909]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.42900002
+anchor_top = 0.47400004
+anchor_right = 0.558
+anchor_bottom = 0.563
+offset_left = 0.3199463
+offset_top = 384.07996
+offset_right = 0.6398926
+offset_bottom = 383.95996
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_ao2f3")
+text = "back"
+
+[connection signal="pressed" from="start game button" to="." method="_on_start_game_button_pressed"]
+[connection signal="pressed" from="setting button" to="." method="_on_setting_button_pressed"]
+[connection signal="pressed" from="quit button" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="settings/back from settings button" to="settings" method="_on_back_from_settings_button_pressed"]

@@ -8,7 +8,7 @@ var area2_entered: bool = false
 var spring_ready: bool = false # for the player body file
 
 func _process(_delta: float) -> void:
-	if area2_entered and area_entered:
+	if area2_entered and area_entered and not Input.is_action_pressed("fall_from_platform"):
 		spring_sprite.play()
 		spring_pressed = true
 	else:
@@ -24,12 +24,9 @@ func _process(_delta: float) -> void:
 func _on_jumping_place_hitbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("player"):
 		area_entered = true
-		print("area")
 func _on_jumping_place_hitbox_area_exited(area: Area2D) -> void:
 	if area.is_in_group("player"):
-		area_entered = false
-		print("unarea")
-		
+		area_entered = false		
 func _on_spring_animation_sprites_frame_changed() -> void:
 	if spring_sprite.frame == 4:
 		spring_block_hitbox.position.y = 3100000

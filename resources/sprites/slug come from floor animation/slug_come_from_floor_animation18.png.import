@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://drypg5835omc0"
-path="res://.godot/imported/enemy.png-30350bed09d6d0024978de626a92b909.ctex"
+uid="uid://vvj3p12t8f3k"
+path="res://.godot/imported/slug_come_from_floor_animation18.png-ed1988cdf68f88b9375025300d793733.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/sprites/enemy.png"
-dest_files=["res://.godot/imported/enemy.png-30350bed09d6d0024978de626a92b909.ctex"]
+source_file="res://resources/sprites/slug come from floor animation/slug_come_from_floor_animation18.png"
+dest_files=["res://.godot/imported/slug_come_from_floor_animation18.png-ed1988cdf68f88b9375025300d793733.ctex"]
 
 [params]
 

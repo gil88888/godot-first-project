@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://d32q2fhrh0k0b"]
+
+[ext_resource type="Script" uid="uid://dp30y6oon12cg" path="res://enemy_3.gd" id="1_djy1j"]
+[ext_resource type="Texture2D" uid="uid://cfmaw4o81xj1u" path="res://resources/sprites/test object.png" id="2_oib00"]
+[ext_resource type="Texture2D" uid="uid://dk12efcjxqhb4" path="res://resources/sprites/test object 2.png" id="3_oib00"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ao2f3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_oib00")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5bs5c"]
+size = Vector2(128, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ao2f3"]
+size = Vector2(128, 128)
+
+[node name="enemy_3" type="CharacterBody2D" unique_id=154259082 groups=["physic enemies"]]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_djy1j")
+metadata/shocked = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=475360842]
+position = Vector2(-1.9073486e-06, 5.722046e-06)
+scale = Vector2(4, 4.0000005)
+sprite_frames = SubResource("SpriteFrames_ao2f3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=155250063]
+shape = SubResource("RectangleShape2D_5bs5c")
+
+[node name="attack cooldown" type="Timer" parent="." unique_id=2109163584]
+wait_time = 5.0
+autostart = true
+
+[node name="check player position" type="Timer" parent="." unique_id=219623629]
+wait_time = 0.1
+autostart = true
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1905641473 groups=["block bullet", "enemies area"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1580101640]
+shape = SubResource("RectangleShape2D_ao2f3")
+
+[node name="attack area" type="Sprite2D" parent="." unique_id=1727601422]
+visible = false
+modulate = Color(1, 0.31, 0.31, 0.45882353)
+z_index = 3
+scale = Vector2(2, 1)
+texture = ExtResource("3_oib00")
+
+[connection signal="timeout" from="attack cooldown" to="." method="_on_attack_cooldown_timeout"]
+[connection signal="timeout" from="check player position" to="." method="_on_check_player_position_timeout"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

@@ -1,28 +1,10 @@
 *make the score animation look better
-*add menu
 *add hp bar and make the damage more random
-*enemy_1 start walking fastely to one location/ stop moveing, unknown bug maybe because of self collision
 make the teleporting enemy bullets infinty range
-expand the map
-# the player have now seperated hitbox that calculate damage
-# healing potions now disappear after 15 seconds instead of 10 seconds
-# added a background to the game
-# changed a bit of the enemy_1 movement and make it not move the the specific player location
-# now the player can slip off a platform by pressing S
-fix the bug that make the background stop moving
-new abilities:
-	extra max hp
-	better healing potion
-	extra max hp+
-	better healing potion+
-	ranged attack
-	pierceing
-	pierceing plus
-
+fixed the bug that make the enemy jump before the 3 seconds delay
 bug fixes:
-	fixed the bug that make the enemy jump before the 3 seconds delay
-	fixed the telporting enemy spam teleporting bullets bug
-	fixes some delta time issue
-	fixed the bug that make the enemy fall from the world by making bad teleport bullet by making it teleport next to the player
-	
-	
+	fix a bug that make invincibility do nothing on certain bullets and enemies
+	fixed self enemies collision and the bug that was because of it that makes the enemies movement randomly corupted
+	fixed the bug that make the dash animation first show grey and red every 0.2 seconds which make the animation look weird 
+	fix spring obstacle
+	fix teleporting_enemy teleporting bugs

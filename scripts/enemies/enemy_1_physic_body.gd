@@ -25,6 +25,17 @@ func _ready() -> void:
 	choose_extra_x_place()
 	
 func _process(delta: float) -> void:
+	# check if the enemy is shocked
+	print(get_meta("shocked"))
+	if get_meta("shocked"):
+		$enemy_1/Sprite2D.modulate = modulate.darkened(-0.5)
+	else:
+		$enemy_1/Sprite2D.modulate = modulate.darkened(0)
+				
+	# make the enemy unable to collide with other enemies
+	for i in get_tree().get_nodes_in_group("physic enemies"):
+		add_collision_exception_with(i)
+		
 	if self.global_position.y < player.global_position.y:
 		player_placement = "below"
 		$"enemy_1/sky and ground detector".position.y = 404
@@ -40,7 +51,7 @@ func _process(delta: float) -> void:
 		$"enemy_1/dashing place".position.x = 516
 		$"enemy_1/obstacle detector".position.x = 135
 	# enemy movement
-	if not movement_cooldown_flag:
+	if not movement_cooldown_flag and not get_meta("shocked"):
 		# make the move
 		movement_cooldown_flag = true
 
@@ -70,23 +81,24 @@ func _process(delta: float) -> void:
 
 		movement_cooldown_timer.wait_time = movement_cooldown_wait_time
 		movement_cooldown_timer.start()
-	match random_movement:
-		1:
-			self.global_position.x = move_toward(self.global_position.x, player.global_position.x, 800 * delta)
-		2:
-			# check where the enemy heading
-			if (player.global_position.x - self.global_position.x) >= 0:
-				self.global_position.x = move_toward(self.global_position.x, player.global_position.x - extra_x_movement, 200 * delta)
-				enemy_flipped = false
-			else:
-				self.global_position.x = move_toward(self.global_position.x, player.global_position.x + extra_x_movement, 200 * delta)
-				enemy_flipped = true
-			
-		3:
-			self.global_position.x = move_toward(self.global_position.x, player.global_position.x, 1000 * delta)
+	if not get_meta("shocked"):
+		match random_movement:
+			1:
+				self.global_position.x = move_toward(self.global_position.x, player.global_position.x, 800 * delta)
+			2:
+				# check where the enemy heading
+				if (player.global_position.x - self.global_position.x) >= 0:
+					self.global_position.x = move_toward(self.global_position.x, player.global_position.x - extra_x_movement, 200 * delta)
+					enemy_flipped = false
+				else:
+					self.global_position.x = move_toward(self.global_position.x, player.global_position.x + extra_x_movement, 200 * delta)
+					enemy_flipped = true
+				
+			3:
+				self.global_position.x = move_toward(self.global_position.x, player.global_position.x, 1000 * delta)
 
-		4:
-			self.position = self.position.move_toward(Vector2(-999999, self.global_position.y), (400 * delta))
+			4:
+				self.position = self.position.move_toward(Vector2(-999999, self.global_position.y), (400 * delta))
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -113,7 +125,6 @@ func _physics_process(delta: float) -> void:
 # choose extra movement x place
 func choose_extra_x_place() -> void:
 	await get_tree().create_timer(2).timeout
-	print("choose")
 	extra_x_movement = randi_range(100, 200)
 	choose_extra_x_place()
 
@@ -147,10 +158,6 @@ func _on_sky_and_ground_detector_area_entered(area: Area2D) -> void:
 		player_in_enemy_ground_sky_detector = true
 		if player_placement == "below":
 			enemy_ready_to_slide = true
-		#elif player_placement == "above":
-			#print("jump")
-			
-			
 
 func _on_sky_and_ground_detector_area_exited(area: Area2D) -> void:
 	if area.is_in_group("player"):

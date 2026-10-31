@@ -1,20 +1,21 @@
 [gd_scene format=3 uid="uid://caa7tnhf3wbm8"]
 
-[ext_resource type="Texture2D" uid="uid://bkx1jq64e7jns" path="res://resources/sprites/bullet_1.png" id="1_j3m4d"]
+[ext_resource type="Texture2D" uid="uid://c0qumiq0ubh0q" path="res://resources/sprites/bullet_1.png" id="1_j3m4d"]
 [ext_resource type="Script" uid="uid://b4nesxh31faeh" path="res://scripts/enemies/bullets_pattern/bullet_1.gd" id="1_v6s6y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cean3"]
 size = Vector2(68.05903, 105.20368)
 
-[node name="bullet_1" type="Node2D" unique_id=642658861]
+[node name="bullet_1" type="Node2D" unique_id=642658861 groups=["detectable_bullet"]]
 rotation = -2.3561945
 script = ExtResource("1_v6s6y")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1674682385]
+rotation = 1.5707964
 scale = Vector2(10.000001, 10.000001)
 texture = ExtResource("1_j3m4d")
 
-[node name="Area2D" type="Area2D" parent="." unique_id=613928599]
+[node name="Area2D" type="Area2D" parent="." unique_id=613928599 groups=["detectable_bullet"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=187248067]
 position = Vector2(-11.256096, 11.256096)

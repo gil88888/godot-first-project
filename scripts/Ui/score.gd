@@ -17,13 +17,14 @@ func _process(_delta: float) -> void:
 		# ui visible:
 		$"../hp".visible = false
 		$".".visible = false
-		$"../TextureProgressBar".visible = false
+		$"../dash progress bar".visible = false
+		$"../flying progress bar".visible = false
 		$"../pause button".visible = false
 		power_chooser = power_chooser_scene.instantiate()
 		#power_chooser.scale = Vector2(0.5, 0.5)
 		if GlobalVariables.danger_level != 4:
 			GlobalVariables.danger_level += 1
-		next_ability_score_goal += 2000
+		next_ability_score_goal += 3000
 		GlobalVariables.game_stopped = true
 		$"../pause button".process_mode = Node.PROCESS_MODE_DISABLED
 		self.get_parent().add_child(power_chooser)
@@ -33,7 +34,8 @@ func _process(_delta: float) -> void:
 			# ui visible:
 			$"../hp".visible = true
 			$".".visible = true
-			$"../TextureProgressBar".visible = true
+			$"../dash progress bar".visible = true
+			$"../flying progress bar".visible = true
 			$"../pause button".visible = true
 			$"../../../Background/background/moving background".modulate.a = 0.5
 			power_chooser.queue_free()

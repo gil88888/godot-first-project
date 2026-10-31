@@ -1,18 +1,19 @@
 [gd_scene format=3 uid="uid://b5a0q4yh3jd8v"]
 
 [ext_resource type="Script" uid="uid://c4efjwem4r1jg" path="res://scripts/enemies/flying_enemy.gd" id="1_fgwew"]
-[ext_resource type="Texture2D" uid="uid://drypg5835omc0" path="res://resources/sprites/enemy.png" id="1_vbcm2"]
+[ext_resource type="Texture2D" uid="uid://cuei5tcd04uv4" path="res://resources/sprites/gun.png" id="2_fgwew"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ao2f3"]
 size = Vector2(191.99973, 191.99974)
 
-[node name="flying enemy" type="Area2D" unique_id=384748481 groups=["block bullet", "flying enemy"]]
+[node name="flying enemy" type="Area2D" unique_id=384748481 groups=["block bullet", "enemies", "enemies area", "flying enemy"]]
 rotation = 3.140361
 script = ExtResource("1_fgwew")
+metadata/shocked = false
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2113484709]
 scale = Vector2(3, 3)
-texture = ExtResource("1_vbcm2")
+texture = ExtResource("2_fgwew")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=351247947]
 position = Vector2(-7.6208903e-06, -2.2899454e-05)

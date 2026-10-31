@@ -19,6 +19,15 @@ var enemy_ready_to_jump_timer_ended = false
 @onready var player: CharacterBody2D = get_tree().get_first_node_in_group("player") 
 
 func _process(delta: float) -> void:
+	if get_meta("shocked"):
+		$enemy_2/Sprite2D.modulate = modulate.darkened(-0.5)
+	else:
+		$enemy_2/Sprite2D.modulate = modulate.darkened(0)
+		
+	# make the enemy unable to collide with other enemies
+	for i in get_tree().get_nodes_in_group("physic enemies"):
+		add_collision_exception_with(i)
+		
 	if self.global_position.y < player.global_position.y:
 		player_placement = "below"
 		$"enemy_2/sky and ground detector".position.y = 404
@@ -36,7 +45,7 @@ func _process(delta: float) -> void:
 		$"enemy_2/obstacle detector".position.x = 135
 		$"enemy_2/area attack view".position.x = 1366
 	# enemy movement
-	if not movement_cooldown_flag:
+	if not movement_cooldown_flag and not get_meta("shocked"):
 		# make the move
 		movement_cooldown_flag = true
 

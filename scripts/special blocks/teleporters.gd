@@ -12,14 +12,14 @@ func teleport_player(location: Vector2) -> void:
 	player.process_mode = Node.PROCESS_MODE_DISABLED
 	portals_active = false
 	player.global_position = location
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(0.25).timeout
 	GlobalVariables.player_can_move = true
 	player.visible = true
 	player.process_mode = Node.ProcessMode.PROCESS_MODE_INHERIT
 	await get_tree().create_timer(3).timeout
 	portals_active = true
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if portals_active:
 		$teleporter1/Sprite2D.texture = portal_open_sprite
 		$teleporter2/Sprite2D.texture = portal_open_sprite

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d1xmt14jbgy6w"]
 
-[ext_resource type="Texture2D" uid="uid://cia616qpwm77b" path="res://resources/sprites/bomb.png" id="1_4kkau"]
+[ext_resource type="Texture2D" uid="uid://dc6dythh71hr1" path="res://resources/sprites/bomb.png" id="1_4kkau"]
 [ext_resource type="Script" uid="uid://8umdcunpkjfe" path="res://scripts/enemies/bullets_pattern/bomb.gd" id="1_vpdcx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ao2f3"]
@@ -15,7 +15,7 @@ metadata/delete_tween = false
 scale = Vector2(0.99999994, 0.99999994)
 texture = ExtResource("1_4kkau")
 
-[node name="Area2D" type="Area2D" parent="." unique_id=263196435]
+[node name="Area2D" type="Area2D" parent="." unique_id=263196435 groups=["detectable_bullet"]]
 scale = Vector2(0.9999998, 0.9999998)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=604751730]

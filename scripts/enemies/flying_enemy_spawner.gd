@@ -18,7 +18,6 @@ func spawn_enemy() -> void:
 	flying_enemy = flying_enemy_scene.instantiate() # copy the scene(the potion) into a var called healing_potion
 	get_parent().add_child(flying_enemy) # add the potion to the spawners node
 	flying_enemy.global_position = self.global_position # make the healing_potion position the marker position
-	print("spawned")
 	
 func _process(delta: float) -> void:
 	if spawn_location != null and flying_enemy != null:
@@ -27,7 +26,6 @@ func _process(delta: float) -> void:
 		if flying_enemy.global_position.y == spawn_location.global_position.y:
 			move_enemy_on_spawn = false
 	if len(self.get_tree().get_nodes_in_group("flying enemy")) <= 1 and $"respawn timer".is_stopped():
-		print("start")
 		$"respawn timer".start()
 
 func _on_respawn_timer_timeout() -> void:

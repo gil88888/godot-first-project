@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://beyjm4ks1an8c"]
 
 [ext_resource type="Script" uid="uid://j5ag7wihvup8" path="res://scripts/enemies/enemy_1.gd" id="1_a1412"]
-[ext_resource type="Texture2D" uid="uid://drypg5835omc0" path="res://resources/sprites/enemy.png" id="2_ejytf"]
+[ext_resource type="Texture2D" uid="uid://ca1w5f68uno15" path="res://resources/sprites/test block.png" id="3_ejytf"]
 [ext_resource type="Script" uid="uid://b7priogbpsr08" path="res://scripts/enemies/enemy_1_physic_body.gd" id="4_dq62l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ejytf"]
@@ -22,23 +22,23 @@ size = Vector2(101, 128)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_of8pq"]
 size = Vector2(167.25, 684)
 
-[node name="enemy_1_physic_body" type="CharacterBody2D" unique_id=762459054 groups=["enemy_1"]]
+[node name="enemy_1_physic_body" type="CharacterBody2D" unique_id=762459054 groups=["enemy_1", "physic enemies"]]
 z_index = 1
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("4_dq62l")
+metadata/shocked = false
 
 [node name="enemy body physics" type="CollisionShape2D" parent="." unique_id=1112049984]
 shape = SubResource("RectangleShape2D_ejytf")
 debug_color = Color(0, 0.6, 0.7019608, 0.41960785)
 
-[node name="enemy_1" type="Area2D" parent="." unique_id=597861740 groups=["block bullet"]]
+[node name="enemy_1" type="Area2D" parent="." unique_id=597861740 groups=["block bullet", "enemies area", "obstacle"]]
 script = ExtResource("1_a1412")
 
 [node name="Sprite2D" type="Sprite2D" parent="enemy_1" unique_id=2131356840]
-modulate = Color(0.99215686, 0, 0, 1)
 scale = Vector2(2.6093752, 1.9374999)
-texture = ExtResource("2_ejytf")
+texture = ExtResource("3_ejytf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="enemy_1" unique_id=973685410]
 shape = SubResource("RectangleShape2D_dq62l")

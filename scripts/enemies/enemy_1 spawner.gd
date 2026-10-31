@@ -2,8 +2,8 @@ extends Marker2D
 
 var enemy_1_scene = preload("res://scenes/enemy_1.tscn")
 var enemy_2_scene = preload("res://scenes/enemy_2.tscn")
-var enemy_1 = null
-var enemy_2 = null
+var enemy_3_scene = preload("res://scenes/enemy_3.tscn")
+var enemy = null
 var animation_finished_counter: int = 0
 var enemy_to_spawn: String
 @onready var spawn_animation: AnimatedSprite2D = $AnimatedSprite2D
@@ -11,9 +11,6 @@ var enemy_to_spawn: String
 @onready var enemy_spawn_location_node: Node2D = $"../spawn locations" # the node that contain all the locations that the enemy can spawn
 var spawn_locations_list: Array = [] # a list to contain all the areas that the enemy can spawn in
 var spawn_location # the location that got chosen
-func _ready() -> void:
-	spawning_enemy()
-
 	
 func spawning_enemy() -> void:
 	for location in enemy_spawn_location_node.get_children():
@@ -31,46 +28,48 @@ func spawn_enemy() -> void:
 	match GlobalVariables.danger_level:
 		0:
 			enemy_to_spawn = "enemy_1"
-			respawn_timer.wait_time = randi_range(8, 10)
+			respawn_timer.wait_time = randi_range(18, 20)
 		1:
 			if randi_range(1, 15) == 1:
 				enemy_to_spawn = "enemy_2"
 			else:
 				enemy_to_spawn = "enemy_1"
-			respawn_timer.wait_time = randi_range(7, 10)
+			respawn_timer.wait_time = randi_range(12, 14)
 		2:
 			if randi_range(1, 12) == 1:
 				enemy_to_spawn = "enemy_2"
 			else:
 				enemy_to_spawn = "enemy_1"
-			respawn_timer.wait_time = randi_range(7, 9)
+			respawn_timer.wait_time = randi_range(11, 13)
 		3:
-			respawn_timer.wait_time = randi_range(6, 9)
 			if randi_range(1, 8) == 1:
 				enemy_to_spawn = "enemy_2"
 			else:
 				enemy_to_spawn = "enemy_1"
+			respawn_timer.wait_time = randi_range(10, 12)
 		4:
-			respawn_timer.wait_time = randi_range(6, 8)
 			if randi_range(1, 6) == 1:
+				enemy_to_spawn = "enemy_2"
+			else:	
+				enemy_to_spawn = "enemy_1"
+			respawn_timer.wait_time = randi_range(9, 11)
+		5:
+			if randi_range(1, 5) == 1:
 				enemy_to_spawn = "enemy_2"
 			else:
 				enemy_to_spawn = "enemy_1"
+			respawn_timer.wait_time = randi_range(6, 8)
 
 	if enemy_to_spawn == "enemy_1":
-		enemy_1 = enemy_1_scene.instantiate() # copy the scene(the enemy) into a var called enemy_1
-		get_parent().add_child(enemy_1) # add the enemy_1 to the enemies node
-		enemy_1.global_position = self.global_position # make the enemy_1 position the marker position
-		print("enemy_1 created in " , enemy_1.global_position)
+		enemy = enemy_1_scene.instantiate() # copy the scene(the enemy) into a var called enemy_1
 	elif enemy_to_spawn == "enemy_2":
-		enemy_2 = enemy_2_scene.instantiate() # copy the scene(the enemy) into a var called enemy_1
-		get_parent().add_child(enemy_2) # add the enemy_1 to the enemies node
-		enemy_2.global_position = self.global_position # make the enemy_1 position the marker position
-		print("enemy_2 created in " , enemy_2.global_position)
-
+		enemy = enemy_2_scene.instantiate() # copy the scene(the enemy) into a var called enemy_1
+	elif enemy_to_spawn == "enemy_3":
+		enemy = enemy_3_scene.instantiate() # copy the scene(the enemy) into a var called enemy_1
 	
-	
-
+	get_parent().get_parent().add_child(enemy) # add the enemy_1 to the enemies node
+	enemy.global_position = self.global_position
+	print("enemy_1 created in " , enemy.global_position)
 func _process(_delta: float) -> void:
 	if len(self.get_tree().get_nodes_in_group("enemy_1")) <= 6 and respawn_timer.is_stopped():
 		print(len(self.get_tree().get_nodes_in_group("enemy_1")))

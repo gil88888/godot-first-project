@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ypon5epi1x0t"
-path="res://.godot/imported/dash loading bar filled.png-1c26445ca3969ed53d3668685222ee37.ctex"
+uid="uid://cmqidtuj5td3f"
+path="res://.godot/imported/slug_enemy.png-908bece07045be4087e609b9815cbddd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/sprites/dash loading bar filled.png"
-dest_files=["res://.godot/imported/dash loading bar filled.png-1c26445ca3969ed53d3668685222ee37.ctex"]
+source_file="res://resources/sprites/slug_enemy.png"
+dest_files=["res://.godot/imported/slug_enemy.png-908bece07045be4087e609b9815cbddd.ctex"]
 
 [params]
 

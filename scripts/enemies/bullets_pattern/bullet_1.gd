@@ -12,6 +12,9 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	# hit the player and deal damage if it enter the player
 	if area.is_in_group("player damage collision"):
 		Playerhp.hurt_player(20)
+	if area.name == "fly hitbox":
+		area.get_parent().queue_free()
+		self.queue_free()
 	# delete the bullet and add score if the player hit that with his gun
 	#if area.is_in_group("gun bullet"):
 		#bullet_hp -= randi_range(10, 20)

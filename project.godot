@@ -15,6 +15,10 @@ run/main_scene="uid://d32vlgw68dqe2"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://i63hgslg6hvd"
+
 [autoload]
 
 GlobalVariables="*uid://ci0ba6px0frn4"
@@ -48,6 +52,11 @@ sword="the sword that the player have this grou used to check the sword collison
 "teleporting bullet"="a group for detect if there is any teleporting bullet on the game"
 enemy_1=""
 "player damage collision"="a group that used to detect when the player get a hit"
+"physic enemies"="a group that contain all the enemies in the game"
+slug=""
+"enemies area"=""
+detectable_bullet="bullets that can be detected by the fly assitant"
+fly=""
 
 [input]
 

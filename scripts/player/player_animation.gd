@@ -20,23 +20,27 @@ func _process(_delta: float) -> void:
 		# Choose the animation based on the player's state
 		if not player_body.is_on_floor():
 			if last_moved_place == "right":
-				play("air right")
+				animation = "air right"
 			else:
-				play("air left")
+				animation = "air left"
 		else:
 			var moving_left = Input.is_action_pressed("move_left")
 			var moving_right = Input.is_action_pressed("move_right")
 
 			if moving_left and not moving_right:
 				last_moved_place = "left"
-				play("walking left")
+				animation = "walking left"
+				play()
 			elif moving_right and not moving_left:
 				last_moved_place = "right"
-				play("walking right")
+				animation = "walking right"
+				play()
 			else:
 				if last_moved_place == "right":
-					play("idle right")
+					animation = "idle right"
+					play()
 				else:
-					play("idle left")
+					animation = "idle left"
+					play()
 					
 					

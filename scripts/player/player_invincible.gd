@@ -1,13 +1,22 @@
-extends Node2D
+extends Node
 
 var can_regenerating: bool = true
 var regenerating_flag: bool = true
-@onready var regenerating_timer: Timer = self.get_tree().get_first_node_in_group("regenerating timer") 
+@onready var hit_sfx = preload("res://resources/sfx/player damaged.wav")
+var sound_player := AudioStreamPlayer.new()
+var regenerating_timer
+func _ready() -> void:
+	
+	sound_player.stream = hit_sfx
+	add_child(sound_player)
 func hurt_player(hp: int, invincible_time: float = 2) -> void:
-	can_regenerating = false
-	regenerating_timer.start()
-	GlobalVariables.player_hp -= hp
-	player_invincible(invincible_time)
+	regenerating_timer = self.get_tree().get_first_node_in_group("regenerating timer")
+	if not GlobalVariables.player_invincible:
+		sound_player.play()
+		can_regenerating = false
+		regenerating_timer.start()
+		GlobalVariables.player_hp -= hp
+		player_invincible(invincible_time)
 
 func player_invincible(invincible_time: float = 2) -> void:
 	GlobalVariables.player_invincible = true

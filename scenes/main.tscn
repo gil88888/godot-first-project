@@ -1,10 +1,14 @@
 [gd_scene format=4 uid="uid://d32vlgw68dqe2"]
 
 [ext_resource type="Script" uid="uid://bd044i71ic1p5" path="res://scripts/Ui/hp.gd" id="1_5q0nq"]
+[ext_resource type="Script" uid="uid://jncff8rr8r5r" path="res://scripts/music and sounds/sound_manager.gd" id="1_t5ykj"]
 [ext_resource type="Script" uid="uid://dpcj7v7vclbt0" path="res://scripts/Ui/score.gd" id="2_dgi5k"]
+[ext_resource type="AudioStream" uid="uid://hvc5qaiccjv5" path="res://resources/music/battl music 1.mp3" id="2_e755i"]
 [ext_resource type="Script" uid="uid://du7j7cctwwgl0" path="res://scripts/special things/camera_2d.gd" id="2_jscy8"]
 [ext_resource type="Script" uid="uid://cfo6xdpw1v51x" path="res://scripts/special things/score_adder_timer.gd" id="3_j8jky"]
+[ext_resource type="AudioStream" uid="uid://cr78cp1lboeab" path="res://resources/music/battle music 2.mp3" id="3_od4ux"]
 [ext_resource type="Script" uid="uid://btuav11qksixe" path="res://scripts/special blocks/jumping_block.gd" id="3_pm3ni"]
+[ext_resource type="AudioStream" uid="uid://dlplebjfft3mr" path="res://resources/music/battle music 3.mp3" id="4_xhfw6"]
 [ext_resource type="Texture2D" uid="uid://citb3pymnysm2" path="res://resources/sprites/jump_block/jump block disabled_1.png" id="4_y6deb"]
 [ext_resource type="Texture2D" uid="uid://1w8n64n2n6wt" path="res://resources/sprites/jump_block/jump block disabled_2.png" id="5_og1vs"]
 [ext_resource type="Texture2D" uid="uid://dq8s7kkom55uw" path="res://resources/sprites/jump_block/jump block_2.png" id="7_vxglm"]
@@ -27,6 +31,7 @@
 [ext_resource type="Script" uid="uid://4afho6xrdcdq" path="res://scripts/player/Player area2d collision.gd" id="17_fuf3a"]
 [ext_resource type="Texture2D" uid="uid://b22ey2xpdlpcs" path="res://resources/sprites/healing potion spawn location/healing potion spawner_0005.png" id="17_txyw0"]
 [ext_resource type="Script" uid="uid://bare0d63eu4rv" path="res://scripts/enemies/flying_enemy_spawner.gd" id="18_cjqg0"]
+[ext_resource type="Script" uid="uid://bfbfg3b7i3ynu" path="res://scripts/enemies/slug_spawner.gd" id="18_ro3en"]
 [ext_resource type="Texture2D" uid="uid://1rcoi3tusyy7" path="res://resources/sprites/healing potion spawn location/healing potion spawner_0006.png" id="18_vc5cj"]
 [ext_resource type="Texture2D" uid="uid://cuei5tcd04uv4" path="res://resources/sprites/gun.png" id="19_c6pm6"]
 [ext_resource type="Script" uid="uid://dkt0nrhlicwah" path="res://scripts/player/gun.gd" id="20_5he1u"]
@@ -45,18 +50,27 @@
 [ext_resource type="Script" uid="uid://b0xler6xaxuc6" path="res://scripts/special blocks/teleporters.gd" id="33_dnhof"]
 [ext_resource type="Script" uid="uid://bf6eg53be2bo2" path="res://scripts/special things/healing_potion_spawner.gd" id="36_kmb1v"]
 [ext_resource type="Script" uid="uid://bqhh8ygiqp1xk" path="res://scripts/player/player_animation.gd" id="36_ty1g6"]
-[ext_resource type="Texture2D" uid="uid://c834fuhqyi1bs" path="res://resources/sprites/blob.png" id="38_txyw0"]
+[ext_resource type="Texture2D" uid="uid://yyapfx33cbbh" path="res://resources/sprites/blob.png" id="38_txyw0"]
+[ext_resource type="AudioStream" uid="uid://do7m86afmpsko" path="res://resources/sfx/player damaged.wav" id="40_ro3en"]
+[ext_resource type="AudioStream" uid="uid://dlep2km43k6j5" path="res://resources/sfx/shoot bullet.wav" id="42_augu2"]
 [ext_resource type="Script" uid="uid://73boem4l8nrw" path="res://scripts/Ui/canvas_layer.gd" id="43_j2jfr"]
+[ext_resource type="AudioStream" uid="uid://cjq63trpx5u77" path="res://resources/sfx/hit bullet.wav" id="43_tm6hj"]
 [ext_resource type="Script" uid="uid://bb1jig74cywy8" path="res://scripts/player/sword.gd" id="43_txyw0"]
 [ext_resource type="Texture2D" uid="uid://bvpo4nksnp4ut" path="res://resources/sprites/sword_placeholder.png" id="43_vc5cj"]
 [ext_resource type="Texture2D" uid="uid://2frn2epni165" path="res://resources/sprites/floor/floor colors.png" id="44_0loja"]
-[ext_resource type="Texture2D" uid="uid://ypon5epi1x0t" path="res://resources/sprites/dash loading bar filled.png" id="47_nvyfr"]
+[ext_resource type="Texture2D" uid="uid://cmx1hwijdyywi" path="res://resources/sprites/loading bars/dash loading bar filled.png" id="47_nvyfr"]
 [ext_resource type="Script" uid="uid://b2h0grte28sf3" path="res://scripts/Ui/dash_meter.gd" id="48_nvyfr"]
-[ext_resource type="Texture2D" uid="uid://b2bxum5qwn7in" path="res://resources/sprites/dash loading bar depleted.png" id="48_ty1g6"]
+[ext_resource type="Texture2D" uid="uid://wsysiqyomxw5" path="res://resources/sprites/loading bars/dash loading bar depleted.png" id="48_ty1g6"]
 [ext_resource type="Texture2D" uid="uid://fsnl7swosi7x" path="res://resources/sprites/floor color pallete.png" id="49_1epgm"]
 [ext_resource type="Script" uid="uid://cvj11amqy8g1d" path="res://scripts/Ui/pause button.gd" id="49_ty1g6"]
-[ext_resource type="Texture2D" uid="uid://8uf5aee2j1xo" path="res://resources/sprites/background1.png" id="56_dnhof"]
+[ext_resource type="AudioStream" uid="uid://dtnq3bairomvu" path="res://resources/sfx/enemy bullet.wav" id="52_mlv25"]
+[ext_resource type="Script" uid="uid://bl7xsjh7gvyku" path="res://scripts/fly assistant/fly_assistant spawner.gd" id="53_mlv25"]
+[ext_resource type="Texture2D" uid="uid://6o0fbur5ugd5" path="res://resources/sprites/background1.png" id="56_dnhof"]
 [ext_resource type="Script" uid="uid://cc5illjo5eubu" path="res://scripts/Ui/moving_background.gd" id="57_1v6qk"]
+[ext_resource type="Texture2D" uid="uid://jifri3ccu2t2" path="res://resources/sprites/loading bars/flying loading bar depleted.png" id="64_r4e17"]
+[ext_resource type="Texture2D" uid="uid://c3ql0jifglsla" path="res://resources/sprites/loading bars/flying loading bar filled.png" id="65_y57op"]
+[ext_resource type="Script" uid="uid://cucwx4yrjjmil" path="res://scripts/Ui/flying_progress_bar.gd" id="66_mlv25"]
+[ext_resource type="PackedScene" uid="uid://d32q2fhrh0k0b" path="res://scenes/enemy_3.tscn" id="71_a82wo"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ao2f3"]
 animations = [{
@@ -114,7 +128,7 @@ animations = [{
 size = Vector2(11038, 100)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j8jky"]
-size = Vector2(11054, 137)
+size = Vector2(10528, 137)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gdyli"]
 size = Vector2(579, 137)
@@ -130,6 +144,9 @@ size = Vector2(1024, 137)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0loja"]
 size = Vector2(1280, 140.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_od4ux"]
+size = Vector2(1024, 140.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_getpj"]
 size = Vector2(1537.5444, 187.55539)
@@ -155,7 +172,10 @@ size = Vector2(768, 191)
 size = Vector2(1151.875, 207.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r4e17"]
-size = Vector2(1533.875, 208)
+size = Vector2(1533.875, 206)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xhfw6"]
+size = Vector2(1151.7188, 206.02783)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hhp3w"]
 size = Vector2(16600004, 6200004.5)
@@ -184,7 +204,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cean3"]
-size = Vector2(17600000, 13600005)
+size = Vector2(15999996, 13600005)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u8ctb"]
 size = Vector2(20500016, 3500010)
@@ -250,30 +270,6 @@ size = Vector2(73.37953, 45.2507)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_of8pq"]
 size = Vector2(180.00002, 110.88901)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_e755i"]
-atlas = ExtResource("38_txyw0")
-region = Rect2(0, 160, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ro3en"]
-atlas = ExtResource("38_txyw0")
-region = Rect2(0, 192, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_txyw0"]
-atlas = ExtResource("38_txyw0")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vc5cj"]
-atlas = ExtResource("38_txyw0")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_nvyfr"]
-atlas = ExtResource("38_txyw0")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ty1g6"]
-atlas = ExtResource("38_txyw0")
-region = Rect2(96, 0, 32, 32)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_j2jfr"]
 atlas = ExtResource("38_txyw0")
 region = Rect2(96, 96, 32, 32)
@@ -306,6 +302,22 @@ region = Rect2(64, 128, 32, 32)
 atlas = ExtResource("38_txyw0")
 region = Rect2(96, 128, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_txyw0"]
+atlas = ExtResource("38_txyw0")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vc5cj"]
+atlas = ExtResource("38_txyw0")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nvyfr"]
+atlas = ExtResource("38_txyw0")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ty1g6"]
+atlas = ExtResource("38_txyw0")
+region = Rect2(96, 0, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_0loja"]
 atlas = ExtResource("38_txyw0")
 region = Rect2(32, 64, 32, 32)
@@ -326,19 +338,37 @@ region = Rect2(32, 32, 32, 32)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_e755i")
+"texture": SubResource("AtlasTexture_j2jfr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bjg73")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bu4jf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o7ddy")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"air left",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ro3en")
+"texture": SubResource("AtlasTexture_dnhof")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1v6qk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_augu2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tm6hj")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"air right",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -370,7 +400,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_o7ddy")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"idle left",
 "speed": 2.0
 }, {
@@ -387,7 +417,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_tm6hj")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"idle right",
 "speed": 2.0
 }, {
@@ -528,6 +558,24 @@ events = [SubResource("InputEventKey_ty1g6")]
 
 [node name="Main" type="Node2D" unique_id=1411518559]
 
+[node name="music manager" type="Node" parent="." unique_id=258433499]
+process_mode = 4
+script = ExtResource("1_t5ykj")
+
+[node name="battle musics" type="Node" parent="music manager" unique_id=800069899]
+
+[node name="boss" type="AudioStreamPlayer" parent="music manager/battle musics" unique_id=1748024601]
+stream = ExtResource("4_xhfw6")
+bus = &"music"
+
+[node name="battle music" type="AudioStreamPlayer" parent="music manager/battle musics" unique_id=1659297258]
+stream = ExtResource("2_e755i")
+bus = &"music"
+
+[node name="battle music 2" type="AudioStreamPlayer" parent="music manager/battle musics" unique_id=698076734]
+stream = ExtResource("3_od4ux")
+bus = &"music"
+
 [node name="enemies" type="Node2D" parent="." unique_id=1203003906]
 
 [node name="spawners" type="Node2D" parent="enemies" unique_id=466193919]
@@ -574,13 +622,33 @@ script = ExtResource("18_cjqg0")
 wait_time = 25.0
 one_shot = true
 
+[node name="slug_spawner" type="Marker2D" parent="enemies/spawners" unique_id=1144102654]
+position = Vector2(-4656, -9270.999)
+scale = Vector2(2.609, 1.937)
+script = ExtResource("18_ro3en")
+
+[node name="spawn_timer" type="Timer" parent="enemies/spawners/slug_spawner" unique_id=1788602826]
+wait_time = 3.0
+
+[node name="respawn_timer" type="Timer" parent="enemies/spawners/slug_spawner" unique_id=160805978]
+wait_time = 10.0
+one_shot = true
+
 [node name="spawn locations2" type="Node2D" parent="enemies/spawners" unique_id=752208993]
 
-[node name="flying enemy spawn loc" type="Area2D" parent="enemies/spawners/spawn locations2" unique_id=1598874041]
+[node name="flying enemy spawn loc2" type="Area2D" parent="enemies/spawners/spawn locations2" unique_id=1990202049]
 position = Vector2(0, -1250)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="enemies/spawners/spawn locations2/flying enemy spawn loc" unique_id=1405845507 groups=["flying enemy spawn location"]]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemies/spawners/spawn locations2/flying enemy spawn loc2" unique_id=908650591 groups=["flying enemy spawn location"]]
 position = Vector2(2477, 13)
+shape = SubResource("RectangleShape2D_bnc7e")
+debug_color = Color(0.79049116, 0.39965725, 0.4251383, 0.41960785)
+
+[node name="flying enemy spawn loc" type="Area2D" parent="enemies/spawners/spawn locations2" unique_id=1598874041]
+position = Vector2(0, -1688)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemies/spawners/spawn locations2/flying enemy spawn loc" unique_id=1405845507 groups=["flying enemy spawn location"]]
+position = Vector2(2480, 104)
 shape = SubResource("RectangleShape2D_bnc7e")
 debug_color = Color(0.79049116, 0.39965725, 0.4251383, 0.41960785)
 
@@ -589,7 +657,7 @@ debug_color = Color(0.79049116, 0.39965725, 0.4251383, 0.41960785)
 [node name="healing and enemy_1" type="Area2D" parent="enemies/spawners/spawn locations" unique_id=383905957]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="enemies/spawners/spawn locations/healing and enemy_1" unique_id=710490985]
-position = Vector2(2572, 380)
+position = Vector2(2432, 380)
 shape = SubResource("RectangleShape2D_j8jky")
 debug_color = Color(0.6643857, 0.31596887, 1, 0.41960785)
 
@@ -636,9 +704,26 @@ position = Vector2(5312, -966.25)
 shape = SubResource("RectangleShape2D_0loja")
 debug_color = Color(0.6643857, 0.31596887, 1, 0.41960785)
 
+[node name="healing and enemy_8" type="Area2D" parent="enemies/spawners/spawn locations" unique_id=1648745939]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemies/spawners/spawn locations/healing and enemy_8" unique_id=1546705570]
+position = Vector2(6808, -296)
+shape = SubResource("RectangleShape2D_od4ux")
+debug_color = Color(0.6643857, 0.31596887, 1, 0.41960785)
+
+[node name="healing and enemy_9" type="Area2D" parent="enemies/spawners/spawn locations" unique_id=2125677324]
+position = Vector2(-2592, 208)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemies/spawners/spawn locations/healing and enemy_9" unique_id=628321534]
+position = Vector2(6808, -296)
+shape = SubResource("RectangleShape2D_od4ux")
+debug_color = Color(0.6643857, 0.31596887, 1, 0.41960785)
+
 [node name="teleporting enemy particles" type="CPUParticles2D" parent="enemies" unique_id=431224631 groups=["teleporting enemy particles"]]
 emitting = false
 amount = 400
+lifetime = 0.25
+one_shot = true
 speed_scale = 0.5
 spread = 180.0
 gravity = Vector2(0, 0)
@@ -796,7 +881,7 @@ metadata/synced = false
 collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="blocks/platforms/platform5" unique_id=1413395920]
-position = Vector2(5313.0625, -792)
+position = Vector2(5313.0625, -791)
 shape = SubResource("RectangleShape2D_r4e17")
 one_way_collision = true
 
@@ -832,15 +917,80 @@ frame_progress = 0.7147944
 script = ExtResource("24_o7ddy")
 metadata/synced = false
 
+[node name="platform6" type="StaticBody2D" parent="blocks/platforms" unique_id=2067273447 groups=["obstacle"]]
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="blocks/platforms/platform6" unique_id=782500137]
+position = Vector2(6799.8594, -119.013916)
+shape = SubResource("RectangleShape2D_xhfw6")
+one_way_collision = true
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="blocks/platforms/platform6" unique_id=770376099]
+position = Vector2(6416.7813, -118.02783)
+scale = Vector2(11.016078, 7.064812)
+sprite_frames = SubResource("SpriteFrames_hhp3w")
+frame_progress = 0.18092488
+script = ExtResource("24_o7ddy")
+metadata/synced = false
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="blocks/platforms/platform6" unique_id=1886424545]
+position = Vector2(6800.781, -118.02783)
+scale = Vector2(11.016078, 7.064812)
+sprite_frames = SubResource("SpriteFrames_hhp3w")
+frame_progress = 0.7147944
+script = ExtResource("24_o7ddy")
+metadata/synced = true
+
+[node name="AnimatedSprite2D4" type="AnimatedSprite2D" parent="blocks/platforms/platform6" unique_id=79626119]
+position = Vector2(7184.7813, -118.02783)
+scale = Vector2(11.016078, 7.064812)
+sprite_frames = SubResource("SpriteFrames_hhp3w")
+frame_progress = 0.7147944
+script = ExtResource("24_o7ddy")
+metadata/synced = false
+
+[node name="platform7" type="StaticBody2D" parent="blocks/platforms" unique_id=979557306 groups=["obstacle"]]
+position = Vector2(-2576, 208)
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="blocks/platforms/platform7" unique_id=1881219727]
+position = Vector2(6799.8594, -115.013916)
+shape = SubResource("RectangleShape2D_xhfw6")
+one_way_collision = true
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="blocks/platforms/platform7" unique_id=1044922605]
+position = Vector2(6416.7813, -118.02783)
+scale = Vector2(11.016078, 7.064812)
+sprite_frames = SubResource("SpriteFrames_hhp3w")
+frame_progress = 0.18092488
+script = ExtResource("24_o7ddy")
+metadata/synced = false
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="blocks/platforms/platform7" unique_id=622584715]
+position = Vector2(6800.781, -118.02783)
+scale = Vector2(11.016078, 7.064812)
+sprite_frames = SubResource("SpriteFrames_hhp3w")
+frame_progress = 0.7147944
+script = ExtResource("24_o7ddy")
+metadata/synced = true
+
+[node name="AnimatedSprite2D4" type="AnimatedSprite2D" parent="blocks/platforms/platform7" unique_id=1002479369]
+position = Vector2(7184.7813, -118.02783)
+scale = Vector2(11.016078, 7.064812)
+sprite_frames = SubResource("SpriteFrames_hhp3w")
+frame_progress = 0.7147944
+script = ExtResource("24_o7ddy")
+metadata/synced = false
+
 [node name="springs" type="Node2D" parent="blocks" unique_id=1654871529]
 
-[node name="spring block" type="StaticBody2D" parent="blocks/springs" unique_id=270477515 groups=["obstacle"]]
+[node name="spring block" type="StaticBody2D" parent="blocks/springs" unique_id=270477515]
 position = Vector2(2718, 349)
 scale = Vector2(1e-05, 1e-05)
 collision_layer = 3
 script = ExtResource("11_5q0nq")
 
-[node name="jumping place hitbox" type="Area2D" parent="blocks/springs/spring block" unique_id=2007805015 groups=["obstacle"]]
+[node name="jumping place hitbox" type="Area2D" parent="blocks/springs/spring block" unique_id=2007805015]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="blocks/springs/spring block/jumping place hitbox" unique_id=1749417633]
 position = Vector2(99968, -700000)
@@ -854,7 +1004,7 @@ sprite_frames = SubResource("SpriteFrames_cean3")
 frame = 2
 frame_progress = 0.31897682
 
-[node name="hitbox" type="CollisionShape2D" parent="blocks/springs/spring block" unique_id=1271575683 groups=["obstacle"]]
+[node name="hitbox" type="CollisionShape2D" parent="blocks/springs/spring block" unique_id=1271575683]
 position = Vector2(100000, 3099996)
 shape = SubResource("RectangleShape2D_cean3")
 one_way_collision = true
@@ -867,13 +1017,13 @@ position = Vector2(-50048, 0)
 shape = SubResource("RectangleShape2D_u8ctb")
 debug_color = Color(0.59812933, 0.38967273, 0.9622646, 0.41960785)
 
-[node name="spring block2" type="StaticBody2D" parent="blocks/springs" unique_id=874499250 groups=["obstacle"]]
+[node name="spring block2" type="StaticBody2D" parent="blocks/springs" unique_id=874499250]
 position = Vector2(895, -194)
 scale = Vector2(1e-05, 1e-05)
 collision_layer = 3
 script = ExtResource("11_5q0nq")
 
-[node name="jumping place hitbox" type="Area2D" parent="blocks/springs/spring block2" unique_id=1910287943 groups=["obstacle"]]
+[node name="jumping place hitbox" type="Area2D" parent="blocks/springs/spring block2" unique_id=1910287943]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="blocks/springs/spring block2/jumping place hitbox" unique_id=2098913752]
 position = Vector2(99968, -700000)
@@ -887,8 +1037,8 @@ sprite_frames = SubResource("SpriteFrames_cean3")
 frame = 2
 frame_progress = 0.16230139
 
-[node name="hitbox" type="CollisionShape2D" parent="blocks/springs/spring block2" unique_id=1043140996 groups=["obstacle"]]
-position = Vector2(99992, 3100009)
+[node name="hitbox" type="CollisionShape2D" parent="blocks/springs/spring block2" unique_id=1043140996]
+position = Vector2(100000, 3100010)
 shape = SubResource("RectangleShape2D_cean3")
 one_way_collision = true
 
@@ -900,13 +1050,13 @@ position = Vector2(-50048, 0)
 shape = SubResource("RectangleShape2D_u8ctb")
 debug_color = Color(0.59812933, 0.38967273, 0.9622646, 0.41960785)
 
-[node name="spring block3" type="StaticBody2D" parent="blocks/springs" unique_id=1197281405 groups=["obstacle"]]
+[node name="spring block3" type="StaticBody2D" parent="blocks/springs" unique_id=1197281405]
 position = Vector2(-1475, -194.00002)
 scale = Vector2(1e-05, 1e-05)
 collision_layer = 3
 script = ExtResource("11_5q0nq")
 
-[node name="jumping place hitbox" type="Area2D" parent="blocks/springs/spring block3" unique_id=928505360 groups=["obstacle"]]
+[node name="jumping place hitbox" type="Area2D" parent="blocks/springs/spring block3" unique_id=928505360]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="blocks/springs/spring block3/jumping place hitbox" unique_id=740775752]
 position = Vector2(99968, -700000)
@@ -918,9 +1068,8 @@ position = Vector2(100548.75, -6916.409)
 scale = Vector2(-639864.25, 618453.8)
 sprite_frames = SubResource("SpriteFrames_cean3")
 frame = 2
-frame_progress = 0.16230139
 
-[node name="hitbox" type="CollisionShape2D" parent="blocks/springs/spring block3" unique_id=2031819456 groups=["obstacle"]]
+[node name="hitbox" type="CollisionShape2D" parent="blocks/springs/spring block3" unique_id=2031819456]
 position = Vector2(100000, 3099996)
 shape = SubResource("RectangleShape2D_cean3")
 one_way_collision = true
@@ -929,6 +1078,39 @@ one_way_collision = true
 position = Vector2(0, -10000002)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="blocks/springs/spring block3/player_position_check" unique_id=764533532]
+position = Vector2(-50048, 0)
+shape = SubResource("RectangleShape2D_u8ctb")
+debug_color = Color(0.59812933, 0.38967273, 0.9622646, 0.41960785)
+
+[node name="spring block4" type="StaticBody2D" parent="blocks/springs" unique_id=1526777291]
+position = Vector2(5880, 352)
+scale = Vector2(1e-05, 1e-05)
+collision_layer = 3
+script = ExtResource("11_5q0nq")
+
+[node name="jumping place hitbox" type="Area2D" parent="blocks/springs/spring block4" unique_id=238448915]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="blocks/springs/spring block4/jumping place hitbox" unique_id=167072294]
+position = Vector2(99968, -700000)
+shape = SubResource("RectangleShape2D_hhp3w")
+debug_color = Color(0.07415242, 0.6469272, 0.17412964, 0.41960785)
+
+[node name="spring animation sprites" type="AnimatedSprite2D" parent="blocks/springs/spring block4" unique_id=89161677]
+position = Vector2(100548.75, -6916.409)
+scale = Vector2(-639864.25, 618453.8)
+sprite_frames = SubResource("SpriteFrames_cean3")
+frame = 2
+frame_progress = 0.16230139
+
+[node name="hitbox" type="CollisionShape2D" parent="blocks/springs/spring block4" unique_id=1443606124]
+position = Vector2(100000, 3099996)
+shape = SubResource("RectangleShape2D_cean3")
+one_way_collision = true
+
+[node name="player_position_check" type="Area2D" parent="blocks/springs/spring block4" unique_id=1526792354]
+position = Vector2(0, -10000002)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="blocks/springs/spring block4/player_position_check" unique_id=63456921]
 position = Vector2(-50048, 0)
 shape = SubResource("RectangleShape2D_u8ctb")
 debug_color = Color(0.59812933, 0.38967273, 0.9622646, 0.41960785)
@@ -996,6 +1178,24 @@ frame_progress = 0.23896669
 
 [node name="Timer" type="Timer" parent="blocks/Jumping Block3" unique_id=1318862675]
 wait_time = 2.0
+
+[node name="Jumping Block5" type="Area2D" parent="blocks" unique_id=1990296753 groups=["jumping blocks"]]
+z_index = 1
+position = Vector2(5392, -328)
+scale = Vector2(1.5, 1.5)
+script = ExtResource("3_pm3ni")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="blocks/Jumping Block5" unique_id=1996860724]
+shape = SubResource("RectangleShape2D_5bs5c")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="blocks/Jumping Block5" unique_id=1845674575]
+scale = Vector2(1.597, 1.5)
+sprite_frames = SubResource("SpriteFrames_gdyli")
+animation = &"jump_block_enabled_anim"
+autoplay = "jump_block_enabled_anim"
+frame_progress = 0.23896669
+
+[node name="Timer" type="Timer" parent="blocks/Jumping Block5" unique_id=2091634543]
 
 [node name="right border" type="StaticBody2D" parent="blocks" unique_id=1625212738 groups=["obstacle"]]
 position = Vector2(8222, -41)
@@ -1100,7 +1300,7 @@ position = Vector2(-636, 419)
 scale = Vector2(3.527778, 3.9499993)
 texture = ExtResource("13_5q0nq")
 
-[node name="hurt player" type="Node2D" parent="obstacles" unique_id=242072449]
+[node name="hurt player" type="Node" parent="obstacles" unique_id=360650380]
 script = ExtResource("14_dgi5k")
 
 [node name="invincible timer" type="Timer" parent="obstacles/hurt player" unique_id=311889127]
@@ -1109,12 +1309,16 @@ wait_time = 2.0
 [node name="regenerating timer" type="Timer" parent="obstacles/hurt player" unique_id=889364186 groups=["regenerating timer"]]
 wait_time = 10.0
 
+[node name="player damaged" type="AudioStreamPlayer" parent="obstacles/hurt player" unique_id=1109975666]
+stream = ExtResource("40_ro3en")
+bus = &"sound effects"
+
 [node name="Character" type="Node2D" parent="." unique_id=1504031467]
 
 [node name="Player body" type="CharacterBody2D" parent="Character" unique_id=1742410234 groups=["player"]]
 top_level = true
-z_index = 2
-position = Vector2(0, 342)
+z_index = 3
+position = Vector2(8, 360)
 script = ExtResource("16_kmb1v")
 
 [node name="invincible animation" type="Timer" parent="Character/Player body" unique_id=820729606]
@@ -1149,6 +1353,15 @@ script = ExtResource("20_5he1u")
 [node name="reload_time" type="Timer" parent="Character/Player body/gun" unique_id=392556361]
 wait_time = 0.3
 
+[node name="shoot sfx" type="AudioStreamPlayer" parent="Character/Player body/gun" unique_id=155726731]
+stream = ExtResource("42_augu2")
+volume_db = -2.0
+bus = &"sound effects"
+
+[node name="bullet_hit_sfx" type="AudioStreamPlayer" parent="Character/Player body/gun" unique_id=925949142 groups=["bullet_hit_sfx"]]
+stream = ExtResource("43_tm6hj")
+bus = &"sound effects"
+
 [node name="dashing timer" type="Timer" parent="Character/Player body" unique_id=906221348 groups=["dashing timer"]]
 wait_time = 10.0
 one_shot = true
@@ -1159,8 +1372,8 @@ position = Vector2(0, -40)
 script = ExtResource("43_txyw0")
 
 [node name="Sprite2D" type="Sprite2D" parent="Character/Player body/sword" unique_id=1371375496 groups=["sword"]]
-position = Vector2(186.66666, 33.333336)
-scale = Vector2(3, 3)
+position = Vector2(155, 56)
+scale = Vector2(4, 4)
 texture = ExtResource("43_vc5cj")
 
 [node name="hitbox" type="Area2D" parent="Character/Player body/sword" unique_id=1854058544 groups=["sword"]]
@@ -1176,7 +1389,15 @@ debug_color = Color(0.9829988, 0, 0.36233953, 0.41960785)
 wait_time = 0.5
 one_shot = true
 
+[node name="sword_sfx" type="AudioStreamPlayer" parent="Character/Player body/sword" unique_id=496124095]
+stream = ExtResource("52_mlv25")
+
 [node name="velocity_stop_timer" type="Timer" parent="Character/Player body" unique_id=852849334]
+one_shot = true
+
+[node name="velocity_cooldown" type="Timer" parent="Character/Player body" unique_id=1131799082]
+wait_time = 3.0
+one_shot = true
 
 [node name="black box" type="Sprite2D" parent="Character/Player body" unique_id=1330619795]
 visible = false
@@ -1191,6 +1412,12 @@ texture = SubResource("CanvasTexture_ao2f3")
 position = Vector2(0, 26)
 shape = SubResource("RectangleShape2D_0vx8i")
 debug_color = Color(0.9591965, 6.738305e-07, 0.52563787, 0.41960785)
+
+[node name="fly assistant spawner" type="Node" parent="." unique_id=1016146520]
+script = ExtResource("53_mlv25")
+
+[node name="respawn_timer" type="Timer" parent="fly assistant spawner" unique_id=92680915]
+wait_time = 10.0
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=905149302]
 position = Vector2(0, 1)
@@ -1270,7 +1497,7 @@ text = "stop button(really good
                                                       "
 script = ExtResource("49_ty1g6")
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="Ui Layer/UI" unique_id=1752286339]
+[node name="dash progress bar" type="TextureProgressBar" parent="Ui Layer/UI" unique_id=1752286339]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.85200006
@@ -1284,6 +1511,21 @@ fill_mode = 5
 texture_under = ExtResource("48_ty1g6")
 texture_progress = ExtResource("47_nvyfr")
 script = ExtResource("48_nvyfr")
+
+[node name="flying progress bar" type="TextureProgressBar" parent="Ui Layer/UI" unique_id=573724002]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.68100005
+anchor_right = 0.083000004
+anchor_bottom = 0.83000004
+offset_top = 0.51989746
+offset_right = -127.360016
+offset_bottom = -128.40009
+scale = Vector2(5, 5)
+fill_mode = 5
+texture_under = ExtResource("64_r4e17")
+texture_progress = ExtResource("65_y57op")
+script = ExtResource("66_mlv25")
 
 [node name="Background" type="CanvasLayer" parent="." unique_id=1921576174]
 process_mode = 3
@@ -1318,6 +1560,8 @@ texture = ExtResource("56_dnhof")
 stretch_mode = 1
 script = ExtResource("57_1v6qk")
 
+[node name="enemy_3" parent="." unique_id=154259082 instance=ExtResource("71_a82wo")]
+
 [connection signal="timeout" from="enemies/spawners/enemy_1 spawner/spawn_timer" to="enemies/spawners/enemy_1 spawner" method="_on_respawn_time_timeout"]
 [connection signal="timeout" from="enemies/spawners/enemy_1 spawner/respawn_timer" to="enemies/spawners/enemy_1 spawner" method="_on_respawn_timer_timeout"]
 [connection signal="animation_finished" from="enemies/spawners/enemy_1 spawner/AnimatedSprite2D" to="enemies/spawners/enemy_1 spawner" method="_on_animated_sprite_2d_animation_finished"]
@@ -1325,6 +1569,8 @@ script = ExtResource("57_1v6qk")
 [connection signal="timeout" from="enemies/spawners/healing potion spawner/respawn_timer" to="enemies/spawners/healing potion spawner" method="_on_respawn_timer_timeout"]
 [connection signal="animation_looped" from="enemies/spawners/healing potion spawner/AnimatedSprite2D" to="enemies/spawners/healing potion spawner" method="_on_animated_sprite_2d_animation_looped"]
 [connection signal="timeout" from="enemies/spawners/flying enemy spawner/respawn timer" to="enemies/spawners/flying enemy spawner" method="_on_respawn_timer_timeout"]
+[connection signal="timeout" from="enemies/spawners/slug_spawner/spawn_timer" to="enemies/spawners/slug_spawner" method="_on_respawn_time_timeout"]
+[connection signal="timeout" from="enemies/spawners/slug_spawner/respawn_timer" to="enemies/spawners/slug_spawner" method="_on_respawn_timer_timeout"]
 [connection signal="area_entered" from="blocks/springs/spring block/jumping place hitbox" to="blocks/springs/spring block" method="_on_jumping_place_hitbox_area_entered"]
 [connection signal="area_exited" from="blocks/springs/spring block/jumping place hitbox" to="blocks/springs/spring block" method="_on_jumping_place_hitbox_area_exited"]
 [connection signal="frame_changed" from="blocks/springs/spring block/spring animation sprites" to="blocks/springs/spring block" method="_on_spring_animation_sprites_frame_changed"]
@@ -1340,6 +1586,11 @@ script = ExtResource("57_1v6qk")
 [connection signal="frame_changed" from="blocks/springs/spring block3/spring animation sprites" to="blocks/springs/spring block3" method="_on_spring_animation_sprites_frame_changed"]
 [connection signal="area_entered" from="blocks/springs/spring block3/player_position_check" to="blocks/springs/spring block3" method="_on_player_position_check_area_entered"]
 [connection signal="area_exited" from="blocks/springs/spring block3/player_position_check" to="blocks/springs/spring block3" method="_on_player_position_check_area_exited"]
+[connection signal="area_entered" from="blocks/springs/spring block4/jumping place hitbox" to="blocks/springs/spring block4" method="_on_jumping_place_hitbox_area_entered"]
+[connection signal="area_exited" from="blocks/springs/spring block4/jumping place hitbox" to="blocks/springs/spring block4" method="_on_jumping_place_hitbox_area_exited"]
+[connection signal="frame_changed" from="blocks/springs/spring block4/spring animation sprites" to="blocks/springs/spring block4" method="_on_spring_animation_sprites_frame_changed"]
+[connection signal="area_entered" from="blocks/springs/spring block4/player_position_check" to="blocks/springs/spring block4" method="_on_player_position_check_area_entered"]
+[connection signal="area_exited" from="blocks/springs/spring block4/player_position_check" to="blocks/springs/spring block4" method="_on_player_position_check_area_exited"]
 [connection signal="area_entered" from="blocks/Jumping Block" to="blocks/Jumping Block" method="_on_area_entered"]
 [connection signal="area_exited" from="blocks/Jumping Block" to="blocks/Jumping Block" method="_on_area_exited"]
 [connection signal="timeout" from="blocks/Jumping Block/Timer" to="blocks/Jumping Block" method="_on_timer_timeout"]
@@ -1349,6 +1600,9 @@ script = ExtResource("57_1v6qk")
 [connection signal="area_entered" from="blocks/Jumping Block3" to="blocks/Jumping Block3" method="_on_area_entered"]
 [connection signal="area_exited" from="blocks/Jumping Block3" to="blocks/Jumping Block3" method="_on_area_exited"]
 [connection signal="timeout" from="blocks/Jumping Block3/Timer" to="blocks/Jumping Block3" method="_on_timer_timeout"]
+[connection signal="area_entered" from="blocks/Jumping Block5" to="blocks/Jumping Block5" method="_on_area_entered"]
+[connection signal="area_exited" from="blocks/Jumping Block5" to="blocks/Jumping Block5" method="_on_area_exited"]
+[connection signal="timeout" from="blocks/Jumping Block5/Timer" to="blocks/Jumping Block5" method="_on_timer_timeout"]
 [connection signal="area_entered" from="blocks/right border/Area2D" to="blocks/right border" method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="blocks/right border/Area2D" to="blocks/right border" method="_on_area_2d_area_exited"]
 [connection signal="area_entered" from="blocks/left border/Area2D" to="blocks/left border" method="_on_area_2d_area_entered"]
@@ -1368,5 +1622,7 @@ script = ExtResource("57_1v6qk")
 [connection signal="timeout" from="Character/Player body/dashing timer" to="Character/Player body" method="_on_dashing_timer_timeout"]
 [connection signal="timeout" from="Character/Player body/sword/reload timer" to="Character/Player body/sword" method="_on_reload_timer_timeout"]
 [connection signal="timeout" from="Character/Player body/velocity_stop_timer" to="Character/Player body" method="_on_velocity_stop_timer_timeout"]
+[connection signal="timeout" from="Character/Player body/velocity_cooldown" to="Character/Player body" method="_on_velocity_cooldown_timeout"]
+[connection signal="timeout" from="fly assistant spawner/respawn_timer" to="fly assistant spawner" method="_on_respawn_timer_timeout"]
 [connection signal="timeout" from="Ui Layer/UI/score/score adder timer" to="Ui Layer/UI/score/score adder timer" method="_on_timeout"]
 [connection signal="toggled" from="Ui Layer/UI/pause button" to="Ui Layer/UI/pause button" method="_on_toggled"]

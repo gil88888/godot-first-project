@@ -1,10 +1,8 @@
 extends Area2D
 @onready var player: CharacterBody2D = get_tree().get_first_node_in_group("player") 
-var speed: int = 100
 var enemy_hp: int = 200
 var enemy_hit_animation_flag: bool = true
 var enemy_flipped: bool = false
-var movement_cooldown_flag: bool = false
 @onready var attack_class = EnemyAttacks.new(self)
 var bullet_1_scene := preload("res://scenes/bullet_1.tscn")
 
@@ -36,21 +34,29 @@ func _on_area_entered(area: Area2D) -> void:
 		enemy_hp -= area.get_parent().get_meta("bullet_damage")
 		GlobalVariables.score_label.add_score(randi_range(5, 15))
 		if enemy_hit_animation_flag:
-			self.get_node("Sprite2D").modulate = Color(90, 90, 0)
+			#if not $"..".get_meta("shocked"):
+				#self.get_node("Sprite2D").modulate = Color(90, 90, 0)
 			enemy_hit_animation_flag = false
 			$"hit animation".start()
 	if area.is_in_group("sword"):
 		enemy_hp -= 15
 		GlobalVariables.score_label.add_score(randi_range(50, 70))
 		if enemy_hit_animation_flag:
-			self.get_node("Sprite2D").modulate = Color(90, 90, 0)
+			#if not $"..".get_meta("shocked"):
+				#self.get_node("Sprite2D").modulate = Color(90, 90, 0)
 			enemy_hit_animation_flag = false
 			$"hit animation".start()
-			
+	if area.is_in_group("fly"):
+		print_rich("[color=green]", area.name)
+		$"..".set_meta("shocked", true)
+		await get_tree().create_timer(3).timeout
+		$"..".set_meta("shocked", false)
+
 
 func _on_hit_animation_timeout() -> void:
 		enemy_hit_animation_flag = true
-		self.get_node("Sprite2D").modulate = Color(253, 0, 0)
+		#if not $"..".get_meta("shocked"):
+			#self.get_node("Sprite2D").modulate = Color(253.033, 253.033, 253.033, 1.0)
 		
 
 		

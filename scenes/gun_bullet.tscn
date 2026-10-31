@@ -1,43 +1,62 @@
 [gd_scene format=3 uid="uid://cjitsxntk71j0"]
 
-[ext_resource type="Texture2D" uid="uid://drypg5835omc0" path="res://resources/sprites/enemy.png" id="1_yw78l"]
+[ext_resource type="Texture2D" uid="uid://djtlntd6qqrr0" path="res://resources/sprites/gun_bullet.png" id="1_yw78l"]
 [ext_resource type="Script" uid="uid://dax172aycscq3" path="res://scripts/player/gun_bullet.gd" id="2_gpgfc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gdyli"]
-size = Vector2(64, 64)
+size = Vector2(30, 12)
 
-[node name="gun bullet" type="Sprite2D" unique_id=1533134189 groups=["gun bullet"]]
-modulate = Color(1, 0.34509805, 1, 1)
-scale = Vector2(1.5, 1)
+[node name="gun bullet" type="Node2D" unique_id=356036695]
+
+[node name="teleporting enemy particles" type="CPUParticles2D" parent="." unique_id=511133523 groups=["teleporting enemy particles"]]
+scale = Vector2(4, 4)
+emitting = false
+amount = 20
+lifetime = 0.1
+one_shot = true
+speed_scale = 0.5
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 300.0
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+color = Color(0.22000003, 0.88300014, 1, 1)
+
+[node name="gun bullet" type="Sprite2D" parent="." unique_id=1533134189 groups=["gun bullet"]]
+scale = Vector2(4, 4)
 texture = ExtResource("1_yw78l")
 script = ExtResource("2_gpgfc")
-metadata/bullet_damage = 10.0
+metadata/bullet_damage = 20.0
 
-[node name="Label" type="Label" parent="." unique_id=519365452]
+[node name="Label" type="Label" parent="gun bullet" unique_id=519365452]
 visible = false
 modulate = Color(0, 0, 0, 1)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -32.0
-offset_top = -32.0
-offset_right = -32.0
-offset_bottom = -32.0
+offset_left = -16.0
+offset_top = -16.0
+offset_right = -16.0
+offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "damage"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=567076914]
-rect = Rect2(-12, -12, 24, 24)
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="gun bullet" unique_id=567076914]
+rect = Rect2(-16, -7, 32, 14)
 
-[node name="Area2D" type="Area2D" parent="." unique_id=1251516681 groups=["gun bullet"]]
+[node name="Area2D" type="Area2D" parent="gun bullet" unique_id=1251516681 groups=["gun bullet"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=438225373]
-position = Vector2(6.357829e-07, 0)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="gun bullet/Area2D" unique_id=438225373]
+position = Vector2(4.7683716e-07, 0)
 shape = SubResource("RectangleShape2D_gdyli")
 
-[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="screen_exited" from="gun bullet/VisibleOnScreenNotifier2D" to="gun bullet" method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="area_entered" from="gun bullet/Area2D" to="gun bullet" method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="gun bullet/Area2D" to="gun bullet" method="_on_area_2d_body_entered"]

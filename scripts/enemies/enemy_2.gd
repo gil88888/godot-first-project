@@ -1,7 +1,7 @@
 extends Area2D
 @onready var player: CharacterBody2D = get_tree().get_first_node_in_group("player") 
 var speed: int = 100
-var enemy_hp: int = 10000
+var enemy_hp: int = 50
 var enemy_hit_animation_flag: bool = true
 var enemy_flipped: bool = false
 var movement_cooldown_flag: bool = false
@@ -16,15 +16,15 @@ func attack() -> void:
 		
 func _process(_delta: float) -> void:
 	# if the enemy out of the map
-	if get_parent().global_position.y > 10000:
-		can_contact_damage = false
-		if self.get_parent().global_position >  player.global_position:
-			self.get_parent().global_position = Vector2(player.global_position.x - 400, player.global_position.y + 350)
-			
-		elif self.get_parent().global_position < player.global_position:
-			self.get_parent().global_position = Vector2(player.global_position.x + 400, player.global_position.y + 350)
-		await get_tree().create_timer(0.1).timeout
-		can_contact_damage = true
+	#if get_parent().global_position.y > 10000:
+		#can_contact_damage = false
+		#if self.get_parent().global_position >  player.global_position:
+			#self.get_parent().global_position = Vector2(player.global_position.x - 400, player.global_position.y + 350)
+			#
+		#elif self.get_parent().global_position < player.global_position:
+			#self.get_parent().global_position = Vector2(player.global_position.x + 400, player.global_position.y + 350)
+		#await get_tree().create_timer(0.1).timeout
+		#can_contact_damage = true
 		
 	# check if the teleporting bullet sending a signal to teleport
 	if teleporting_bullet != null and self.get_parent().global_position != Vector2(23234234, 234234234):
@@ -42,7 +42,7 @@ func _process(_delta: float) -> void:
 	# check if the enemy is dead
 	if enemy_hp <= 0:
 		GlobalVariables.score_label.add_score(randi_range(200, 300))
-		self.get_parent().global_position = Vector2(23234234, 234234234)
+		self.get_parent().global_position = Vector2(-23234234, -234234234)
 		enemy_hp = 100
 		await self.get_tree().create_timer(2).timeout
 		self.get_parent().queue_free()
@@ -78,14 +78,14 @@ func _on_area_entered(area: Area2D) -> void:
 			enemy_hp -= 25
 			GlobalVariables.score_label.add_score(randi_range(5, 15))
 			if enemy_hit_animation_flag:
-				self.get_node("Sprite2D").modulate = Color(90, 90, 0)
+				#self.get_node("Sprite2D").modulate = Color(90, 90, 0)
 				enemy_hit_animation_flag = false
 				$"hit animation".start()
 		elif randi_range(1, 2) == 1:
 			enemy_hp -= 25
 			GlobalVariables.score_label.add_score(randi_range(5, 15))
 			if enemy_hit_animation_flag:
-				self.get_node("Sprite2D").modulate = Color(90, 90, 0)
+				#self.get_node("Sprite2D").modulate = Color(90, 90, 0)
 				enemy_hit_animation_flag = false
 				$"hit animation".start()
 			var enemy_spawn_location = 	self.get_tree().get_first_node_in_group("flying enemy spawn location")
@@ -117,11 +117,14 @@ func _on_area_entered(area: Area2D) -> void:
 				self.get_parent().global_position = enemy_location
 			await get_tree().create_timer(0.1).timeout
 			can_contact_damage = true
-			
+	if area.is_in_group("fly"):
+		get_parent().set_meta("shocked", true)
+		await get_tree().create_timer(3).timeout
+		get_parent().set_meta("shocked", false)
 
 func _on_hit_animation_timeout() -> void:
 		enemy_hit_animation_flag = true
-		self.get_node("Sprite2D").modulate = Color(0.91, 0.722, 0.346, 1.0)
+		#self.get_node("Sprite2D").modulate = Color(0.91, 0.722, 0.346, 1.0)
 		
 
 		

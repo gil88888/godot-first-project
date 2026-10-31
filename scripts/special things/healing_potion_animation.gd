@@ -17,7 +17,7 @@ func _ready() -> void:
 	tween.tween_property(self, "position:y", -5, 0.7)
 	despawn_timer.start()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if despawn_timer.time_left <= 3 and not despawn_flag:
 		despawn_flag = true
 		despawn_animation()

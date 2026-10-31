@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://cnymhtnejhkko"]
+
+[ext_resource type="Script" uid="uid://c706cb2145i3n" path="res://scripts/fly assistant/fly_assistant.gd" id="1_108oy"]
+[ext_resource type="Texture2D" uid="uid://bue8df1xt6jsp" path="res://resources/sprites/fly assistant/fly assistant1.png" id="2_hesuf"]
+[ext_resource type="Texture2D" uid="uid://cfpdw751ojox7" path="res://resources/sprites/fly assistant/fly assistant2.png" id="3_42bc7"]
+[ext_resource type="Texture2D" uid="uid://c8jwet60b18cs" path="res://resources/sprites/fly assistant/fly assistant3.png" id="4_nteyj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kf1oj"]
+radius = 112.01141
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ao2f3"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ao2f3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_hesuf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_42bc7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_nteyj")
+}],
+"loop": 1,
+"name": &"flying",
+"speed": 5.0
+}]
+
+[node name="fly_assistant" type="Node2D" unique_id=1918692480]
+z_index = 2
+scale = Vector2(5, 5)
+script = ExtResource("1_108oy")
+metadata/place_positon = Vector2(0, 0)
+
+[node name="moving place" type="Area2D" parent="." unique_id=1372166113]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="moving place" unique_id=303158287]
+shape = SubResource("CircleShape2D_kf1oj")
+debug_color = Color(0.98, 0.13066666, 0, 0.21568628)
+
+[node name="fly hitbox" type="Area2D" parent="." unique_id=1718693417 groups=["fly"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fly hitbox" unique_id=534625138]
+shape = SubResource("RectangleShape2D_ao2f3")
+
+[node name="movement cooldown" type="Timer" parent="." unique_id=814436128]
+wait_time = 0.1
+one_shot = true
+autostart = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=687669585]
+sprite_frames = SubResource("SpriteFrames_ao2f3")
+animation = &"flying"
+autoplay = "flying"
+
+[node name="despawn timer" type="Timer" parent="." unique_id=2115735632]
+wait_time = 12.0
+one_shot = true
+autostart = true
+
+[connection signal="area_entered" from="moving place" to="." method="_on_moving_place_area_entered"]
+[connection signal="area_exited" from="moving place" to="." method="_on_moving_place_area_exited"]
+[connection signal="timeout" from="movement cooldown" to="." method="_on_movement_cooldown_timeout"]
+[connection signal="timeout" from="despawn timer" to="." method="_on_despawn_timer_timeout"]

@@ -20,14 +20,20 @@ func _ready() -> void:
 		move_to = "left"
 
 func _process(delta: float) -> void:
+	if get_meta("shocked"):
+		$Sprite2D.modulate = modulate.darkened(-0.5)
+	else:
+		$Sprite2D.modulate = modulate.darkened(0)
+		
 	if self.global_position.x >= 7980:
 		move_to = "left"
 	elif self.global_position.x <= -3100:	
 		move_to = "right" 
-	if move_to == "right":
-		self.global_position.x = move_toward(self.global_position.x, 7980, speed * delta)
-	elif move_to == "left":
-		self.global_position.x = move_toward(self.global_position.x, -3100, speed * delta)
+	if not get_meta("shocked"):
+		if move_to == "right":
+			self.global_position.x = move_toward(self.global_position.x, 7980, speed * delta)
+		elif move_to == "left":
+			self.global_position.x = move_toward(self.global_position.x, -3100, speed * delta)
 		
 	# check if the enemy is dead
 	if enemy_hp <= 0:
@@ -47,21 +53,25 @@ func _on_area_entered(area: Area2D) -> void:
 		enemy_hp -= area.get_parent().get_meta("bullet_damage")
 		GlobalVariables.score_label.add_score(randi_range(1, 10))
 		if enemy_hit_animation_flag:
-			self.get_node("Sprite2D").modulate = Color(90, 90, 0)
+			#self.get_node("Sprite2D").modulate = Color(90, 90, 0)
 			enemy_hit_animation_flag = false
 			$"hit animation".start()
 	if area.is_in_group("sword"):
 		enemy_hp -= 15
 		GlobalVariables.score_label.add_score(randi_range(40, 60))
 		if enemy_hit_animation_flag:
-			self.get_node("Sprite2D").modulate = Color(90, 90, 0)
+			#self.get_node("Sprite2D").modulate = Color(90, 90, 0)
 			enemy_hit_animation_flag = false
 			$"hit animation".start()
+	if area.is_in_group("fly"):
+		set_meta("shocked", true)
+		await get_tree().create_timer(3).timeout
+		set_meta("shocked", false)
 
 
 func _on_hit_animation_timeout() -> void:
 	enemy_hit_animation_flag = true
-	self.get_node("Sprite2D").modulate = Color(255, 255, 255)
+	#self.get_node("Sprite2D").modulate = Color(255, 255, 255)
 
 
 func _on_attack_cooldown_timeout() -> void:
