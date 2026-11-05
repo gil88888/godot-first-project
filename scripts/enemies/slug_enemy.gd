@@ -9,10 +9,28 @@ var player_current_position: Vector2
 var can_move: bool = true
 var in_floor: bool = true
 var shocked: bool = false
+var platforms_in_platforms_detector: Array = []
 @onready var invincibility_timer: Timer = $"invincibilty timer"
 @onready var slug_animation: AnimatedSprite2D = $slug_animation
+@onready var platform_detector: Area2D = $"platform detector"
 
 func _physics_process(delta: float) -> void:
+	# check if there is no platforms ahead
+	if platforms_in_platforms_detector == []:
+		$check_player_position.stop()
+		$check_player_position.start()
+		if player_location == "right":
+			player_location = "left"
+		else:
+			player_location = "right"
+			
+	# make the platform detector change position to the slug heading position
+	if player_location == "right":
+		platform_detector.position.x = -192.0
+		player_current_position = Vector2(-10000000, 0)
+	else:
+		platform_detector.position.x = 192.0
+		player_current_position = Vector2(10000000, 0)
 	# check if the enemy is shocked
 	if shocked:
 		slug_animation.modulate = modulate.darkened(-0.5)
@@ -36,13 +54,13 @@ func _physics_process(delta: float) -> void:
 			global_position.x = move_toward(global_position.x, player_current_position.x, speed * delta)
 		
 		# if the slug reached the current player position, switch to the other side
-		if global_position.x == player_current_position.x:
-			if player_location == "right":
-				player_location = "left"
-				player_current_position.x += 300
-			else:
-				player_location = "right"
-				player_current_position.x -= 300
+		#if global_position.x == player_current_position.x:
+			#if player_location == "right":
+				#player_location = "left"
+				#player_current_position.x += 300
+			#else:
+				#player_location = "right"
+				#player_current_position.x -= 300
 		# change the slug sprite to the side it heading
 		if player_location == "right":
 			slug_animation.flip_h = false
@@ -53,11 +71,16 @@ func _physics_process(delta: float) -> void:
 
 func _on_check_player_position_timeout() -> void:
 	# check where the player supposed to be
-	if player.global_position.x - self.global_position.x < 0:
+	#if player.global_position.x - self.global_position.x < 0:
+		#player_location = "right"
+	#else:
+		#player_location = "left"
+	#player_current_position = player.global_position
+	$check_player_position.wait_time = randi_range(3, 8)
+	if randi_range(1, 2):
 		player_location = "right"
 	else:
 		player_location = "left"
-	player_current_position = player.global_position
 
 func _on_animation_timer_timeout() -> void:
 	slug_animation.play()
@@ -98,6 +121,7 @@ func hurt_slug(damage) -> void:
 
 
 func _on_slug_animation_animation_finished() -> void:
+	self.global_position.y -= 26
 	in_floor = false
 	gravity = 1000
 	slug_animation.animation = "moving"
@@ -107,3 +131,13 @@ func _on_slug_animation_animation_finished() -> void:
 	else:
 		player_location = "left"
 	player_current_position = player.global_position
+
+
+func _on_platform_detector_body_entered(body: Node2D) -> void:
+	if body.is_in_group("platform"):
+		platforms_in_platforms_detector.append(body)
+
+
+func _on_platform_detector_body_exited(body: Node2D) -> void:
+	if body.is_in_group("platform"):
+		platforms_in_platforms_detector.erase(body)

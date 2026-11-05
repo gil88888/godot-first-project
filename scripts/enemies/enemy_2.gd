@@ -9,6 +9,13 @@ var movement_cooldown_flag: bool = false
 var teleporting_bullet_scene := preload("res://scenes/teleporting_bullet.tscn")
 var teleporting_bullet = null
 var can_contact_damage = true
+var kill_enemy_flag: bool = false
+func kill_enemy():
+	GlobalVariables.score_label.add_score(randi_range(200, 300))
+	enemy_hp = 100
+	await self.get_tree().create_timer(2).timeout
+	self.get_parent().queue_free()
+	
 func attack() -> void:
 	teleporting_bullet = teleporting_bullet_scene.instantiate()
 	attack_class.attack_pattern(Vector2(self.global_position.x, self.global_position.y), player.global_position , teleporting_bullet, 3000, 0, true, false, false, true, false)
@@ -41,11 +48,10 @@ func _process(_delta: float) -> void:
 			can_contact_damage = true
 	# check if the enemy is dead
 	if enemy_hp <= 0:
-		GlobalVariables.score_label.add_score(randi_range(200, 300))
 		self.get_parent().global_position = Vector2(-23234234, -234234234)
-		enemy_hp = 100
-		await self.get_tree().create_timer(2).timeout
-		self.get_parent().queue_free()
+		if not kill_enemy_flag:
+			kill_enemy_flag = true
+			kill_enemy()
 
 
 func _on_area_entered(area: Area2D) -> void:
@@ -117,10 +123,11 @@ func _on_area_entered(area: Area2D) -> void:
 				self.get_parent().global_position = enemy_location
 			await get_tree().create_timer(0.1).timeout
 			can_contact_damage = true
-	if area.is_in_group("fly"):
-		get_parent().set_meta("shocked", true)
-		await get_tree().create_timer(3).timeout
-		get_parent().set_meta("shocked", false)
+	if area != null:
+		if area.is_in_group("fly"):
+			get_parent().set_meta("shocked", true)
+			await get_tree().create_timer(3).timeout
+			get_parent().set_meta("shocked", false)
 
 func _on_hit_animation_timeout() -> void:
 		enemy_hit_animation_flag = true

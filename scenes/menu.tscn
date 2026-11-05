@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://6o0fbur5ugd5" path="res://resources/sprites/background1.png" id="2_con2f"]
 [ext_resource type="Script" uid="uid://cc5illjo5eubu" path="res://scripts/Ui/moving_background.gd" id="3_mhnvy"]
 [ext_resource type="Script" uid="uid://qrdgj2n15eis" path="res://scripts/Ui/settings.gd" id="5_4ytvr"]
+[ext_resource type="Theme" uid="uid://b6qpn6q6r1h05" path="res://resources/themes/buttons.tres" id="6_g3eks"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ao2f3"]
 font_size = 64
@@ -54,6 +55,9 @@ Button/styles/focus = SubResource("StyleBoxFlat_mhnvy")
 Button/styles/hover = SubResource("StyleBoxFlat_tiu5q")
 Button/styles/normal = SubResource("StyleBoxFlat_xlrm8")
 Button/styles/pressed = SubResource("StyleBoxFlat_b5hke")
+
+[sub_resource type="LabelSettings" id="LabelSettings_cean3"]
+font = ExtResource("1_yqeox")
 
 [node name="menu" type="Control" unique_id=1565886769]
 layout_mode = 3
@@ -155,10 +159,13 @@ position = Vector2(960, 544)
 [node name="settings" type="Control" parent="." unique_id=1730069974]
 layout_mode = 1
 anchor_left = 2.604
+anchor_top = -0.92600006
 anchor_right = 3.604
-anchor_bottom = 1.0
+anchor_bottom = 0.074
 offset_left = 0.31982422
+offset_top = 0.080078125
 offset_right = 0.31982422
+offset_bottom = 0.08000183
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("5_4ytvr")
@@ -178,6 +185,42 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_ao2f3")
 text = "back"
+
+[node name="sound slider" type="HSlider" parent="settings" unique_id=1424142814]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.44200003
+anchor_top = 0.20700002
+anchor_right = 0.592
+anchor_bottom = 0.22200002
+offset_left = -336.64008
+offset_top = 176.43999
+offset_right = -336.64
+offset_bottom = 176.23997
+grow_horizontal = 2
+scale = Vector2(3, 3)
+theme = ExtResource("6_g3eks")
+min_value = -6.0
+max_value = 6.0
+value = 6.0
+rounded = true
+tick_count = 2
+ticks_on_borders = true
+ticks_position = 3
+
+[node name="label" type="Label" parent="settings/sound slider" unique_id=1358802644]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.31500003
+anchor_top = -2.167
+anchor_right = 0.68500006
+anchor_bottom = -0.72900003
+offset_left = -0.053344727
+offset_top = 0.005332947
+offset_right = 0.053268433
+offset_bottom = -0.002667427
+text = "sound: 50"
+label_settings = SubResource("LabelSettings_cean3")
 
 [connection signal="pressed" from="start game button" to="." method="_on_start_game_button_pressed"]
 [connection signal="pressed" from="setting button" to="." method="_on_setting_button_pressed"]

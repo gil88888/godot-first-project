@@ -21,6 +21,12 @@ size = Vector2(128, 128)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ao2f3"]
 size = Vector2(128, 128)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ao2f3"]
+radius = 488.5898
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cean3"]
+size = Vector2(128, 512)
+
 [node name="enemy_3" type="CharacterBody2D" unique_id=154259082 groups=["physic enemies"]]
 collision_layer = 2
 collision_mask = 2
@@ -32,7 +38,7 @@ position = Vector2(-1.9073486e-06, 5.722046e-06)
 scale = Vector2(4, 4.0000005)
 sprite_frames = SubResource("SpriteFrames_ao2f3")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=155250063]
+[node name="static hitbox" type="CollisionShape2D" parent="." unique_id=155250063]
 shape = SubResource("RectangleShape2D_5bs5c")
 
 [node name="attack cooldown" type="Timer" parent="." unique_id=2109163584]
@@ -40,12 +46,12 @@ wait_time = 5.0
 autostart = true
 
 [node name="check player position" type="Timer" parent="." unique_id=219623629]
-wait_time = 0.1
+wait_time = 0.25
 autostart = true
 
-[node name="Area2D" type="Area2D" parent="." unique_id=1905641473 groups=["block bullet", "enemies area"]]
+[node name="area hitbox" type="Area2D" parent="." unique_id=1905641473 groups=["block bullet", "enemies area"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1580101640]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="area hitbox" unique_id=1580101640]
 shape = SubResource("RectangleShape2D_ao2f3")
 
 [node name="attack area" type="Sprite2D" parent="." unique_id=1727601422]
@@ -55,6 +61,33 @@ z_index = 3
 scale = Vector2(2, 1)
 texture = ExtResource("3_oib00")
 
+[node name="jump attck disabled range" type="Area2D" parent="." unique_id=1072178802]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="jump attck disabled range" unique_id=2032633371]
+shape = SubResource("CircleShape2D_ao2f3")
+debug_color = Color(0.68, 0.51, 0, 0.13333334)
+
+[node name="sky detector" type="Area2D" parent="." unique_id=971083036]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="sky detector" unique_id=479376358]
+position = Vector2(0, -320)
+shape = SubResource("RectangleShape2D_cean3")
+debug_color = Color(1, 0, 0.116666794, 0.17254902)
+
+[node name="attack_up_cooldown" type="Timer" parent="." unique_id=1546158741]
+wait_time = 2.0
+autostart = true
+
+[node name="sliding timer" type="Timer" parent="." unique_id=1670179433]
+wait_time = 2.5
+autostart = true
+
 [connection signal="timeout" from="attack cooldown" to="." method="_on_attack_cooldown_timeout"]
 [connection signal="timeout" from="check player position" to="." method="_on_check_player_position_timeout"]
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="area hitbox" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="jump attck disabled range" to="." method="_on_jump_attck_disabled_range_area_entered"]
+[connection signal="area_exited" from="jump attck disabled range" to="." method="_on_jump_attck_disabled_range_area_exited"]
+[connection signal="area_entered" from="sky detector" to="." method="_on_sky_detector_area_entered"]
+[connection signal="area_exited" from="sky detector" to="." method="_on_sky_detector_area_exited"]
+[connection signal="timeout" from="attack_up_cooldown" to="." method="_on_attack_up_cooldown_timeout"]
+[connection signal="timeout" from="sliding timer" to="." method="_on_sliding_timer_timeout"]

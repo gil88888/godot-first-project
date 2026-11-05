@@ -81,6 +81,9 @@ func _ready() -> void:
 		"fly_assistant":
 			label_1.text = "every 10 seconds a fly spawned and try to bait enemies and bullet\ntouching a bullet make the bullet and the fly disappear and touching a enemy make the enemy unable to move\nthe fly disappear after 15 seconds"
 			button_1.text = "fly assistant"
+		"homing_shots":
+			label_1.text = "give the player shots an homing effect that make the bullets bait enemies"
+			button_1.text = "homing shots"
 	match ability_2:
 		"dash":
 			label_2.text = "make the player now have the option to dash press the button F to dash the dash have a charging bar that recharge every few seconds"
@@ -139,6 +142,10 @@ func _ready() -> void:
 		"fly_assistant":
 			label_2.text = "every 10 seconds a fly spawned and try to bait enemies and bullet\ntouching a bullet make the bullet and the fly disappear and touching a enemy make the enemy unable to move\nthe fly disappear after 15 seconds"
 			button_2.text = "fly assistant"
+		"homing_shots":
+			label_2.text = "give the player shots an homing effect that make the bullets bait enemies"
+			button_2.text = "homing shots"
+			
 func _process(_delta: float) -> void:
 	# check if the player have an ability that unlock another ability
 	if GlobalVariables.abilities.get("dash") and not GlobalVariables.abilities["invincible_dash"]:
@@ -159,6 +166,8 @@ func _process(_delta: float) -> void:
 		GlobalVariables.abilities["piercing_plus"] = false
 	if not GlobalVariables.abilities.get("fly_assistant") and GlobalVariables.danger_level >= 4:
 		GlobalVariables.abilities["fly_assistant"] = false
+	if not GlobalVariables.abilities.get("homing_shots") and GlobalVariables.danger_level >= 5:
+		GlobalVariables.abilities["homing_shots"] = false
 		
 func _on_button_1_pressed() -> void:
 	if ability_1 == "dash" or ability_1 == "dash_plus" or ability_1 == "invincible_dash":

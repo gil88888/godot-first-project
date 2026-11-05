@@ -1,5 +1,5 @@
 extends CharacterBody2D
-var speed: int = 1000 # 200
+var speed: int = 1000 # 200 bruh
 var running_speed: int = 1400
 var dash_speed: int = 6500
 var current_speed: int = speed

@@ -57,6 +57,7 @@ slug=""
 "enemies area"=""
 detectable_bullet="bullets that can be detected by the fly assitant"
 fly=""
+platform="platform body"
 
 [input]
 

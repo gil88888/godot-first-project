@@ -25,41 +25,64 @@ func spawning_enemy() -> void:
 	spawn_animation.play()
 
 func spawn_enemy() -> void:
+	var random_enemy_number: int = randi_range(1, 100)
+	if GlobalVariables.danger_level > 6:
+		if random_enemy_number in range(1, 30):
+			enemy_to_spawn = "enemy_2"
+		elif random_enemy_number in range(30, 60):
+			enemy_to_spawn = "enemy_3"
+		else:
+			enemy_to_spawn = "enemy_1"
+		respawn_timer.wait_time = randi_range(5, 7)
 	match GlobalVariables.danger_level:
 		0:
 			enemy_to_spawn = "enemy_1"
 			respawn_timer.wait_time = randi_range(18, 20)
 		1:
-			if randi_range(1, 15) == 1:
+			if random_enemy_number in range(1, 6):
 				enemy_to_spawn = "enemy_2"
 			else:
 				enemy_to_spawn = "enemy_1"
 			respawn_timer.wait_time = randi_range(12, 14)
 		2:
-			if randi_range(1, 12) == 1:
+			if random_enemy_number in range(1, 11):
 				enemy_to_spawn = "enemy_2"
 			else:
 				enemy_to_spawn = "enemy_1"
 			respawn_timer.wait_time = randi_range(11, 13)
 		3:
-			if randi_range(1, 8) == 1:
+			if random_enemy_number in range(1, 21):
 				enemy_to_spawn = "enemy_2"
+			elif random_enemy_number in range(95, 101):
+				enemy_to_spawn = "enemy_3"
 			else:
 				enemy_to_spawn = "enemy_1"
 			respawn_timer.wait_time = randi_range(10, 12)
 		4:
-			if randi_range(1, 6) == 1:
+			if random_enemy_number in range(1, 26):
 				enemy_to_spawn = "enemy_2"
+			elif random_enemy_number in range(26, 35):
+				enemy_to_spawn = "enemy_3"
 			else:	
 				enemy_to_spawn = "enemy_1"
 			respawn_timer.wait_time = randi_range(9, 11)
 		5:
-			if randi_range(1, 5) == 1:
+			if random_enemy_number in range(1, 26):
 				enemy_to_spawn = "enemy_2"
+			elif random_enemy_number in range(26, 50):
+				enemy_to_spawn = "enemy_3"
 			else:
 				enemy_to_spawn = "enemy_1"
 			respawn_timer.wait_time = randi_range(6, 8)
-
+		6:
+			if random_enemy_number in range(1, 30):
+				enemy_to_spawn = "enemy_2"
+			elif random_enemy_number in range(30, 60):
+				enemy_to_spawn = "enemy_3"
+			else:
+				enemy_to_spawn = "enemy_1"
+			respawn_timer.wait_time = randi_range(5, 7)
+		
 	if enemy_to_spawn == "enemy_1":
 		enemy = enemy_1_scene.instantiate() # copy the scene(the enemy) into a var called enemy_1
 	elif enemy_to_spawn == "enemy_2":

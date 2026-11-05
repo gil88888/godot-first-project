@@ -155,6 +155,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5bs5c"]
+size = Vector2(200, 332)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cean3"]
 size = Vector2(160, 144)
 
@@ -174,6 +177,13 @@ scale = Vector2(5.9999995, 5.9999995)
 sprite_frames = SubResource("SpriteFrames_cean3")
 animation = &"moving"
 autoplay = "come from floor"
+
+[node name="platform detector" type="Area2D" parent="." unique_id=128095543]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="platform detector" unique_id=1004668933]
+position = Vector2(0, 74)
+shape = SubResource("RectangleShape2D_5bs5c")
+debug_color = Color(0.6494422, 0.33006155, 1, 0.41960785)
 
 [node name="hitbox" type="Area2D" parent="." unique_id=1182043054 groups=["block bullet", "enemies", "enemies area"]]
 visible = false
@@ -195,7 +205,9 @@ autostart = true
 wait_time = 2.0
 one_shot = true
 
-[connection signal="animation_finished" from="slug_animation" to="." method="_on_slug_animation_animation_finished"]
+[connection signal="animation_finished" from="slug_animation" to="." method="_on_slug_animation_animation_finished" flags=6]
+[connection signal="body_entered" from="platform detector" to="." method="_on_platform_detector_body_entered"]
+[connection signal="body_exited" from="platform detector" to="." method="_on_platform_detector_body_exited"]
 [connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="timeout" from="check_player_position" to="." method="_on_check_player_position_timeout"]
 [connection signal="timeout" from="animation timer" to="." method="_on_animation_timer_timeout"]

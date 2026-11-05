@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://dj4iui4lqslh3"]
+
+[ext_resource type="Script" uid="uid://b4nesxh31faeh" path="res://scripts/enemies/bullets_pattern/bullet_1.gd" id="1_v4deb"]
+[ext_resource type="Texture2D" uid="uid://cmc4mg18qwine" path="res://resources/sprites/bullet_2/bullet_2(0).png" id="2_ig2hj"]
+[ext_resource type="Texture2D" uid="uid://bttb1ese6embx" path="res://resources/sprites/bullet_2/bullet_2(1).png" id="3_q3yyi"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ao2f3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ig2hj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_q3yyi")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cean3"]
+size = Vector2(125, 16)
+
+[node name="bullet_2" type="Node2D" unique_id=642658861 groups=["detectable_bullet"]]
+scale = Vector2(1.5, 4)
+script = ExtResource("1_v4deb")
+metadata/damage = 40
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=315207884]
+scale = Vector2(3.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_ao2f3")
+frame = 1
+frame_progress = 0.30895203
+
+[node name="Area2D" type="Area2D" parent="." unique_id=613928599 groups=["detectable_bullet"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=187248067]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_cean3")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=939345338]
+position = Vector2(-56, -104)
+rect = Rect2(-10, 72, 130, 16)
+
+[node name="out of screen timer" type="Timer" parent="VisibleOnScreenNotifier2D" unique_id=1326009431]
+wait_time = 5.0
+one_shot = true
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=25482971]
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="timeout" from="VisibleOnScreenNotifier2D/out of screen timer" to="." method="_on_out_of_screen_timer_timeout"]

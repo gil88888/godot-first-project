@@ -13,10 +13,9 @@ func _ready() -> void:
 
 	
 func spawning_enemy() -> void:
-	#for location in enemy_spawn_location_node.get_children():
-		#spawn_locations_list.append(location)
-	#spawn_location = spawn_locations_list.pick_random().get_node("CollisionShape2D")
-	spawn_location = $"../spawn locations/healing and enemy_1/CollisionShape2D"
+	for location in enemy_spawn_location_node.get_children():
+		spawn_locations_list.append(location)
+	spawn_location = spawn_locations_list.pick_random().get_node("CollisionShape2D")
 	var size = (spawn_location.shape as RectangleShape2D).size
 	var random_x = randf_range(spawn_location.global_position.x - size.x / 2,spawn_location.global_position.x + size.x / 2)
 	print("spawn location(enemy): " + str(spawn_location))
@@ -27,17 +26,23 @@ func spawning_enemy() -> void:
 func spawn_enemy() -> void:
 	match GlobalVariables.danger_level:
 		0:
-			respawn_timer.wait_time = randi_range(8, 10)
+			respawn_timer.wait_time = randi_range(10, 12)
 		1:
-			respawn_timer.wait_time = randi_range(7, 10)
+			respawn_timer.wait_time = randi_range(9, 12)
 		2:
-			respawn_timer.wait_time = randi_range(7, 9)
+			respawn_timer.wait_time = randi_range(9, 11)
 		3:
-			respawn_timer.wait_time = randi_range(6, 9)
+			respawn_timer.wait_time = randi_range(8, 11)
 		4:
-			respawn_timer.wait_time = randi_range(6, 8)
+			respawn_timer.wait_time = randi_range(8, 10)
 		5:
-			respawn_timer.wait_time = randi_range(4, 6)
+			respawn_timer.wait_time = randi_range(6, 8)
+		6:
+			respawn_timer.wait_time = 5
+		7:
+			respawn_timer.wait_time = 4
+		8:
+			respawn_timer.wait_time = 3
 	if enemy_to_spawn == "slug":
 		slug = slug_scene.instantiate()
 		get_parent().add_child.call_deferred(slug)
@@ -46,7 +51,6 @@ func spawn_enemy() -> void:
 
 func _process(_delta: float) -> void:
 	if len(self.get_tree().get_nodes_in_group("slug")) <= 10 and respawn_timer.is_stopped():
-
 		respawn_timer.start()
 
 

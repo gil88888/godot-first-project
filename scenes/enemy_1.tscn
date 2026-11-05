@@ -33,7 +33,7 @@ metadata/shocked = false
 shape = SubResource("RectangleShape2D_ejytf")
 debug_color = Color(0, 0.6, 0.7019608, 0.41960785)
 
-[node name="enemy_1" type="Area2D" parent="." unique_id=597861740 groups=["block bullet", "enemies area", "obstacle"]]
+[node name="enemy_1" type="Area2D" parent="." unique_id=597861740 groups=["block bullet", "enemies area"]]
 script = ExtResource("1_a1412")
 
 [node name="Sprite2D" type="Sprite2D" parent="enemy_1" unique_id=2131356840]

@@ -70,7 +70,6 @@
 [ext_resource type="Texture2D" uid="uid://jifri3ccu2t2" path="res://resources/sprites/loading bars/flying loading bar depleted.png" id="64_r4e17"]
 [ext_resource type="Texture2D" uid="uid://c3ql0jifglsla" path="res://resources/sprites/loading bars/flying loading bar filled.png" id="65_y57op"]
 [ext_resource type="Script" uid="uid://cucwx4yrjjmil" path="res://scripts/Ui/flying_progress_bar.gd" id="66_mlv25"]
-[ext_resource type="PackedScene" uid="uid://d32q2fhrh0k0b" path="res://scenes/enemy_3.tscn" id="71_a82wo"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ao2f3"]
 animations = [{
@@ -541,10 +540,6 @@ sources/0 = SubResource("TileSetAtlasSource_getpj")
 sources/2 = SubResource("TileSetAtlasSource_y57op")
 sources/1 = SubResource("TileSetAtlasSource_ids8r")
 
-[sub_resource type="LabelSettings" id="LabelSettings_ao2f3"]
-font_size = 64
-font_color = Color(0.99999994, 0.24939993, 0.04049562, 1)
-
 [sub_resource type="LabelSettings" id="LabelSettings_cean3"]
 font_size = 64
 font_color = Color(0.3276, 0.33246002, 0.36, 1)
@@ -556,10 +551,26 @@ keycode = 4194305
 [sub_resource type="Shortcut" id="Shortcut_ty1g6"]
 events = [SubResource("InputEventKey_ty1g6")]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mn4bo"]
+bg_color = Color(0.3164582, 0.6294463, 0.8681091, 1)
+border_width_left = 10
+border_width_top = 10
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vj4cc"]
+bg_color = Color(0.30980393, 0.8745098, 0.8745098, 1)
+border_width_left = 10
+border_width_top = 10
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Theme" id="Theme_mlv25"]
+ProgressBar/styles/background = SubResource("StyleBoxFlat_mn4bo")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_vj4cc")
+
 [node name="Main" type="Node2D" unique_id=1411518559]
 
 [node name="music manager" type="Node" parent="." unique_id=258433499]
-process_mode = 4
+process_mode = 3
 script = ExtResource("1_t5ykj")
 
 [node name="battle musics" type="Node" parent="music manager" unique_id=800069899]
@@ -739,11 +750,11 @@ color = Color(1, 0.38333333, 0, 1)
 
 [node name="platforms" type="Node2D" parent="blocks" unique_id=1364525757]
 
-[node name="platform" type="StaticBody2D" parent="blocks/platforms" unique_id=1623405801 groups=["obstacle"]]
+[node name="platform" type="StaticBody2D" parent="blocks/platforms" unique_id=1623405801 groups=["platform"]]
 position = Vector2(1504, 1)
 collision_layer = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="blocks/platforms/platform" unique_id=1793736444]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="blocks/platforms/platform" unique_id=1793736444 groups=["platform"]]
 position = Vector2(-32.542603, -1)
 shape = SubResource("RectangleShape2D_getpj")
 one_way_collision = true
@@ -780,10 +791,10 @@ frame_progress = 0.18239217
 script = ExtResource("24_o7ddy")
 metadata/synced = true
 
-[node name="platform2" type="StaticBody2D" parent="blocks/platforms" unique_id=880332345 groups=["obstacle"]]
+[node name="platform2" type="StaticBody2D" parent="blocks/platforms" unique_id=880332345 groups=["platform"]]
 collision_layer = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="blocks/platforms/platform2" unique_id=962951742]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="blocks/platforms/platform2" unique_id=962951742 groups=["platform"]]
 position = Vector2(-1504.2294, 1.0000014)
 scale = Vector2(0.9986972, 1.0236975)
 shape = SubResource("RectangleShape2D_getpj")
@@ -821,10 +832,10 @@ frame_progress = 0.18239217
 script = ExtResource("24_o7ddy")
 metadata/synced = true
 
-[node name="platform3" type="StaticBody2D" parent="blocks/platforms" unique_id=1515360190 groups=["obstacle"]]
+[node name="platform3" type="StaticBody2D" parent="blocks/platforms" unique_id=1515360190 groups=["platform"]]
 collision_layer = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="blocks/platforms/platform3" unique_id=1512813109]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="blocks/platforms/platform3" unique_id=1512813109 groups=["platform"]]
 position = Vector2(0, -783.5)
 shape = SubResource("RectangleShape2D_152kg")
 one_way_collision = true
@@ -845,10 +856,10 @@ frame_progress = 0.18239217
 script = ExtResource("24_o7ddy")
 metadata/synced = false
 
-[node name="platform4" type="StaticBody2D" parent="blocks/platforms" unique_id=1810027545 groups=["obstacle"]]
+[node name="platform4" type="StaticBody2D" parent="blocks/platforms" unique_id=1810027545 groups=["platform"]]
 collision_layer = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="blocks/platforms/platform4" unique_id=232796537]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="blocks/platforms/platform4" unique_id=232796537 groups=["platform"]]
 position = Vector2(3168.0625, -456.25)
 shape = SubResource("RectangleShape2D_ryguw")
 one_way_collision = true
@@ -877,10 +888,10 @@ frame_progress = 0.18239217
 script = ExtResource("24_o7ddy")
 metadata/synced = false
 
-[node name="platform5" type="StaticBody2D" parent="blocks/platforms" unique_id=1644143862 groups=["obstacle"]]
+[node name="platform5" type="StaticBody2D" parent="blocks/platforms" unique_id=1644143862 groups=["platform"]]
 collision_layer = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="blocks/platforms/platform5" unique_id=1413395920]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="blocks/platforms/platform5" unique_id=1413395920 groups=["platform"]]
 position = Vector2(5313.0625, -791)
 shape = SubResource("RectangleShape2D_r4e17")
 one_way_collision = true
@@ -917,10 +928,10 @@ frame_progress = 0.7147944
 script = ExtResource("24_o7ddy")
 metadata/synced = false
 
-[node name="platform6" type="StaticBody2D" parent="blocks/platforms" unique_id=2067273447 groups=["obstacle"]]
+[node name="platform6" type="StaticBody2D" parent="blocks/platforms" unique_id=2067273447 groups=["platform"]]
 collision_layer = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="blocks/platforms/platform6" unique_id=782500137]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="blocks/platforms/platform6" unique_id=782500137 groups=["platform"]]
 position = Vector2(6799.8594, -119.013916)
 shape = SubResource("RectangleShape2D_xhfw6")
 one_way_collision = true
@@ -949,33 +960,31 @@ frame_progress = 0.7147944
 script = ExtResource("24_o7ddy")
 metadata/synced = false
 
-[node name="platform7" type="StaticBody2D" parent="blocks/platforms" unique_id=979557306 groups=["obstacle"]]
-position = Vector2(-2576, 208)
+[node name="platform7" type="StaticBody2D" parent="blocks/platforms" unique_id=979557306 groups=["platform"]]
+position = Vector2(4216, 88)
 collision_layer = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="blocks/platforms/platform7" unique_id=1881219727]
-position = Vector2(6799.8594, -115.013916)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="blocks/platforms/platform7" unique_id=1881219727 groups=["platform"]]
 shape = SubResource("RectangleShape2D_xhfw6")
 one_way_collision = true
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="blocks/platforms/platform7" unique_id=1044922605]
-position = Vector2(6416.7813, -118.02783)
 scale = Vector2(11.016078, 7.064812)
 sprite_frames = SubResource("SpriteFrames_hhp3w")
 frame_progress = 0.18092488
 script = ExtResource("24_o7ddy")
-metadata/synced = false
+metadata/synced = true
 
 [node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="blocks/platforms/platform7" unique_id=622584715]
-position = Vector2(6800.781, -118.02783)
+position = Vector2(384, 0)
 scale = Vector2(11.016078, 7.064812)
 sprite_frames = SubResource("SpriteFrames_hhp3w")
 frame_progress = 0.7147944
 script = ExtResource("24_o7ddy")
-metadata/synced = true
+metadata/synced = false
 
 [node name="AnimatedSprite2D4" type="AnimatedSprite2D" parent="blocks/platforms/platform7" unique_id=1002479369]
-position = Vector2(7184.7813, -118.02783)
+position = Vector2(-384, 0)
 scale = Vector2(11.016078, 7.064812)
 sprite_frames = SubResource("SpriteFrames_hhp3w")
 frame_progress = 0.7147944
@@ -1115,11 +1124,11 @@ position = Vector2(-50048, 0)
 shape = SubResource("RectangleShape2D_u8ctb")
 debug_color = Color(0.59812933, 0.38967273, 0.9622646, 0.41960785)
 
-[node name="ground" type="StaticBody2D" parent="blocks" unique_id=368813554 groups=["obstacle"]]
+[node name="ground" type="StaticBody2D" parent="blocks" unique_id=368813554 groups=["obstacle", "platform"]]
 position = Vector2(0, -313)
 collision_layer = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="blocks/ground" unique_id=1696353113]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="blocks/ground" unique_id=1696353113 groups=["platform"]]
 position = Vector2(2496, 1097)
 shape = SubResource("RectangleShape2D_ao2f3")
 
@@ -1386,7 +1395,6 @@ disabled = true
 debug_color = Color(0.9829988, 0, 0.36233953, 0.41960785)
 
 [node name="reload timer" type="Timer" parent="Character/Player body/sword" unique_id=505193954 groups=["sword"]]
-wait_time = 0.5
 one_shot = true
 
 [node name="sword_sfx" type="AudioStreamPlayer" parent="Character/Player body/sword" unique_id=496124095]
@@ -1442,23 +1450,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="hp" type="Label" parent="Ui Layer/UI" unique_id=1302232616]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.2
-anchor_top = -0.072000004
-anchor_right = 1.223
-anchor_bottom = 1.0630001
-offset_left = 434.0
-offset_top = 77.76
-offset_right = -2118.1602
-offset_bottom = -1060.04
-text = "hp:"
-label_settings = SubResource("LabelSettings_ao2f3")
-vertical_alignment = 1
-script = ExtResource("1_5q0nq")
 metadata/_edit_use_anchors_ = true
 
 [node name="score" type="Label" parent="Ui Layer/UI" unique_id=301515035]
@@ -1527,6 +1518,18 @@ texture_under = ExtResource("64_r4e17")
 texture_progress = ExtResource("65_y57op")
 script = ExtResource("66_mlv25")
 
+[node name="hp" type="ProgressBar" parent="Ui Layer/UI" unique_id=81589509]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.16633333
+anchor_bottom = 0.052259263
+offset_right = 0.64001465
+offset_bottom = -0.44000244
+theme = SubResource("Theme_mlv25")
+show_percentage = false
+script = ExtResource("1_5q0nq")
+metadata/_edit_use_anchors_ = true
+
 [node name="Background" type="CanvasLayer" parent="." unique_id=1921576174]
 process_mode = 3
 layer = -1
@@ -1559,8 +1562,7 @@ grow_vertical = 2
 texture = ExtResource("56_dnhof")
 stretch_mode = 1
 script = ExtResource("57_1v6qk")
-
-[node name="enemy_3" parent="." unique_id=154259082 instance=ExtResource("71_a82wo")]
+metadata/move_background = true
 
 [connection signal="timeout" from="enemies/spawners/enemy_1 spawner/spawn_timer" to="enemies/spawners/enemy_1 spawner" method="_on_respawn_time_timeout"]
 [connection signal="timeout" from="enemies/spawners/enemy_1 spawner/respawn_timer" to="enemies/spawners/enemy_1 spawner" method="_on_respawn_timer_timeout"]

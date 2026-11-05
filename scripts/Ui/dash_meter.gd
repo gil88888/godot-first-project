@@ -14,6 +14,5 @@ func _process(_delta: float) -> void:
 	else:
 		self.value = 100
 	if player.player_dashing:
-		print("dashed")
 		var progress_tween = create_tween()
 		progress_tween.tween_property(self, "value", 0, 0.1)

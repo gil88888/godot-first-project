@@ -2,9 +2,8 @@
 *add hp bar and make the damage more random
 make the teleporting enemy bullets infinty range
 fixed the bug that make the enemy jump before the 3 seconds delay
-bug fixes:
-	fix a bug that make invincibility do nothing on certain bullets and enemies
-	fixed self enemies collision and the bug that was because of it that makes the enemies movement randomly corupted
-	fixed the bug that make the dash animation first show grey and red every 0.2 seconds which make the animation look weird 
-	fix spring obstacle
-	fix teleporting_enemy teleporting bugs
+make the enemies not attacking while shocked
+# added new attack pattern to the enemy_3 and make it attack only if it not close to the player
+# the slug can now spawn on platforms but their movement is not to the player position now the slug is moving back and forth in the platform 
+new abilities:
+	homing shots

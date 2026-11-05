@@ -10,7 +10,7 @@ func _init(enemy_ref: Node2D) -> void:
 	tree = enemy.get_tree()
 
 
-func attack_pattern(starting_place: Vector2, ending_place: Vector2, bullet: Node2D, bullet_speed: int, stop_in_the_air_time: float ,infinite_x: bool = false, infinite_y: bool = false, rotate: bool = false, move_x: bool = true, move_y: bool = true, add_child: bool = true, use_position_instead_of_global: bool = false) -> Tween:
+func attack_pattern(starting_place: Vector2, ending_place: Vector2, bullet: Node2D, bullet_speed: int, stop_in_the_air_time: float ,infinite_x: bool = false, infinite_y: bool = false, rotate: bool = false, move_x: bool = true, move_y: bool = true, add_child: bool = true, use_position_instead_of_global: bool = false, use_await: bool = false) -> Tween:
 	if add_child:
 		tree.current_scene.add_child(bullet)
 		bullet.global_position = starting_place
@@ -53,6 +53,8 @@ func attack_pattern(starting_place: Vector2, ending_place: Vector2, bullet: Node
 				tween.parallel().tween_property(bullet, "position:x", target_place.x, duration_x)
 			else:
 				tween.parallel().tween_property(bullet, "global_position:x", target_place.x, duration_x)
+		if use_await:
+			await tween.finished
 	else:
 		print("deleted")
 	return tween

@@ -6,6 +6,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gdyli"]
 size = Vector2(30, 12)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ao2f3"]
+radius = 63.245552
+
 [node name="gun bullet" type="Node2D" unique_id=356036695]
 
 [node name="teleporting enemy particles" type="CPUParticles2D" parent="." unique_id=511133523 groups=["teleporting enemy particles"]]
@@ -30,7 +33,7 @@ color = Color(0.22000003, 0.88300014, 1, 1)
 scale = Vector2(4, 4)
 texture = ExtResource("1_yw78l")
 script = ExtResource("2_gpgfc")
-metadata/bullet_damage = 20.0
+metadata/bullet_damage = 10.0
 
 [node name="Label" type="Label" parent="gun bullet" unique_id=519365452]
 visible = false
@@ -57,6 +60,14 @@ rect = Rect2(-16, -7, 32, 14)
 position = Vector2(4.7683716e-07, 0)
 shape = SubResource("RectangleShape2D_gdyli")
 
+[node name="homing hitbox" type="Area2D" parent="gun bullet" unique_id=719297792]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="gun bullet/homing hitbox" unique_id=648391257]
+shape = SubResource("CircleShape2D_ao2f3")
+debug_color = Color(0.88553935, 0.00030418634, 0.8089813, 0.41960785)
+
 [connection signal="screen_exited" from="gun bullet/VisibleOnScreenNotifier2D" to="gun bullet" method="_on_visible_on_screen_notifier_2d_screen_exited"]
 [connection signal="area_entered" from="gun bullet/Area2D" to="gun bullet" method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="gun bullet/Area2D" to="gun bullet" method="_on_area_2d_body_entered"]
+[connection signal="area_entered" from="gun bullet/homing hitbox" to="gun bullet" method="_on_homing_hitbox_area_entered"]
+[connection signal="area_exited" from="gun bullet/homing hitbox" to="gun bullet" method="_on_homing_hitbox_area_exited"]

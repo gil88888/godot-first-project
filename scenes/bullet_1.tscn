@@ -9,6 +9,7 @@ size = Vector2(68.05903, 105.20368)
 [node name="bullet_1" type="Node2D" unique_id=642658861 groups=["detectable_bullet"]]
 rotation = -2.3561945
 script = ExtResource("1_v6s6y")
+metadata/damage = 20
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1674682385]
 rotation = 1.5707964

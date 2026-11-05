@@ -32,7 +32,8 @@ var abilities: Dictionary = {
 	piercing = false, # false
 	piercing_plus = null, # null until having piercing and in wave 4
 	faster_sword_recharge = false, # false
-	fly_assistant = null # null until wave 4
+	fly_assistant = null, # null until wave 4
+	homing_shots = null, # null until wave 5
 	#increased_knockback = false,
 	#land_mines = false
 }

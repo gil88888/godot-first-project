@@ -11,7 +11,7 @@ func _process(_delta: float) -> void:
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	# hit the player and deal damage if it enter the player
 	if area.is_in_group("player damage collision"):
-		Playerhp.hurt_player(20)
+		Playerhp.hurt_player(get_meta("damage"))
 	if area.name == "fly hitbox":
 		area.get_parent().queue_free()
 		self.queue_free()

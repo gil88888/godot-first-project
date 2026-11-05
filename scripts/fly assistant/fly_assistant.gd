@@ -26,8 +26,7 @@ func despawn_animation() -> void:
 func get_random_position() -> Vector2:
 	var shape: CircleShape2D = moving_place.get_node("CollisionShape2D").shape
 	var random_position = Vector2.RIGHT.rotated(randf_range(0.0, TAU)) * sqrt(randf()) * shape.radius
-
-	return moving_place.to_global(random_position)
+	return moving_place.to_global(random_position) 
 
 func move_fly(tween: Tween, place, duration_time) -> void:
 	tween.tween_property(self, "global_position", place, duration_time)
@@ -43,7 +42,7 @@ func _process(_delta: float) -> void:
 			while place_to_move.x > get_meta("place_positon").x + 500 or place_to_move.x < get_meta("place_positon").x - 500 or place_to_move.y > get_meta("place_positon").y + 500 or place_to_move.y < get_meta("place_positon").y - 500 :
 				place_to_move = get_random_position()
 				crash_detector_1 += 1
-				if crash_detector_1 > 1000:
+				if crash_detector_1 > 10000:
 					push_error("place error")
 					return
 			if not crash_detector_1 > 1000:

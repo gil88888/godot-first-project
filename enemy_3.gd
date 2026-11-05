@@ -1,15 +1,16 @@
 extends CharacterBody2D
 
 const speed = 800.0
-const jump_power = -400.0
-const super_jump_power = -1250
-var enemy_hp: int = 500
+var current_speed = speed
+const super_jump_power = -1000
+var enemy_hp: int = 500 
 var gravity: int = 1500
 var can_move: bool = true
 var player_current_position: Vector2
 var player_location: String = "right"
 var attacking: bool = false
 var bullet: Node2D = null
+var in_attack_range: bool = false
 var bullet_spawn_locations_left: Array = [Vector2(-200, 100), Vector2(-200, 300), Vector2(-200, 500), Vector2(-200, 700), Vector2(-200, 900)]
 var bullet_spawn_locations_right: Array = [Vector2(200, 100), Vector2(200, 300), Vector2(200, 500), Vector2(200, 700), Vector2(200, 900)]
 var bullet_spawn_locations_down: Array = [Vector2(100, -100), Vector2(0, -100), Vector2(-100, -100)]
@@ -17,17 +18,36 @@ var bullet_spawn_locations_down: Array = [Vector2(100, -100), Vector2(0, -100), 
 @onready var enemy_animation: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_class = EnemyAttacks.new(self)
 @onready var attack_area: Sprite2D = $"attack area"
-var bullet_scene = preload("res://scenes/bullet_1.tscn")
+@onready var attack_cooldown_timer: Timer = $"attack cooldown"
+var bullet_1_scene = preload("res://scenes/bullet_1.tscn")
+var bullet_2_scene = preload("res://scenes/bullet_2.tscn")
+var attack_area_scene = preload("res://scenes/attack_area.tscn")
 var flying: bool = false
 var player_position: Vector2
 var flying_movement_animation_checker: int = 0
 var flying_animation_flag: bool = true
+var player_is_in_sky_detector: bool = false
+var slide: bool = false
+func attack_up(area):
+	var bullet_2 = bullet_2_scene.instantiate()
+	var tween: Tween = bullet_2.create_tween()
+	get_tree().current_scene.add_child(bullet_2)
+	bullet_2.global_position = self.global_position
+	await tween.tween_property(bullet_2, "global_position:y", bullet_2.global_position.y + 200, 0.1).finished
+	await get_tree().create_timer(0.2).timeout
+	bullet_2.get_node("AnimatedSprite2D").play()
+	await attack_class.attack_pattern(bullet_2.global_position, Vector2(bullet_2.global_position.x, -10200), bullet_2, 3000, 0, true, true, false, false, true, false, false, true)
+	bullet_2.queue_free()
+	if is_instance_valid(area):
+		area.queue_free()
+
+
 func flying_animation():
 	flying_animation_flag = false
 	if flying_movement_animation_checker % 2 == 0:
-		velocity.y -= 10
+		velocity.y -= 20
 	else:
-		velocity.y += 10
+		velocity.y += 20
 	flying_movement_animation_checker += 1
 	await get_tree().create_timer(0.1).timeout
 	flying_animation_flag = true
@@ -45,39 +65,39 @@ func attack():
 	# attack
 	print_rich("[color=green]" + str(player_position))
 	for i in range(4):
-		bullet = bullet_scene.instantiate()
+		bullet = bullet_1_scene.instantiate()
 		var tween: Tween = bullet.create_tween()
 		get_tree().current_scene.add_child(bullet)
 		bullet.global_position = self.global_position
+		bullet.set_meta("damage", 50)
 		if player_location == "right":
 			await tween.tween_property(bullet, "global_position", self.global_position - bullet_spawn_locations_right[i], 0.25).finished
 		else:
 			await tween.tween_property(bullet, "global_position", self.global_position - bullet_spawn_locations_left[i], 0.25).finished
 		attack_class.attack_pattern(bullet.global_position, player_position, bullet, 2000, 1 - (i * 0.25), true, true, true, true, true, false)
 	attack_area.visible = true
-	await get_tree().create_timer(0.5).timeout
-	for i in bullet_spawn_locations_down:
-		bullet = bullet_scene.instantiate()
-		get_tree().current_scene.add_child(bullet)
-		await rotate_bullet(bullet.get_node("Sprite2D"), i)
-		bullet.global_position = global_position - i
-		print_rich("[color=red]", global_position - i)
-		print_rich("[color=orange]", bullet.position)
-		var target_place: Vector2
-		var list_index = bullet_spawn_locations_down.find(i)
-		var move_x = true
-		print(list_index)
-		if list_index == 0:
-			target_place = Vector2(-100000000, -1000)
-			move_x = true
-		elif list_index == 1:
-			target_place = Vector2(0, -1000)
-			move_x = false
-		else:
-			target_place = Vector2(1000000, -1000)
-			move_x = true
-		print(target_place)
-		attack_class.attack_pattern(bullet.global_position, target_place, bullet, 1000, 0.5, true, true, false, move_x, true, false, true)
+	if randi_range(1, 2) == 1:
+		await get_tree().create_timer(0.5).timeout
+		for i in bullet_spawn_locations_down:
+			bullet = bullet_1_scene.instantiate()
+			get_tree().current_scene.add_child(bullet)
+			await rotate_bullet(bullet.get_node("Sprite2D"), i)
+			bullet.global_position = global_position - i
+			print_rich("[color=red]", global_position - i)
+			print_rich("[color=orange]", bullet.position)
+			var target_place: Vector2
+			var list_index = bullet_spawn_locations_down.find(i)
+			var move_x = true
+			if list_index == 0:
+				target_place = Vector2(-100000000, -1000)
+				move_x = true
+			elif list_index == 1:
+				target_place = Vector2(0, -1000)
+				move_x = false
+			else:
+				target_place = Vector2(1000000, -1000)
+				move_x = true
+			attack_class.attack_pattern(bullet.global_position, target_place, bullet, 1500, 0.5, true, true, false, move_x, true, false, true)
 	flying = false
 	can_move = true
 	velocity.y = 2000
@@ -87,6 +107,12 @@ func rotate_bullet(bullet_to_rotate: Sprite2D, rotate_position):
 	bullet_to_rotate.flip_v = true
 
 func _physics_process(delta: float) -> void:
+	if slide and not get_meta("shocked"):
+		slide = false
+		set_collision_mask_value(2, false)
+		await get_tree().create_timer(0.2).timeout
+		set_collision_mask_value(2, true)
+		
 	# make the attack area be the size from the enemy to the ground
 	var size = global_position.y - 449
 	attack_area.scale.y = size / attack_area.texture.get_size().y
@@ -117,8 +143,10 @@ func _physics_process(delta: float) -> void:
 	else:
 		attack_area.visible = false
 	if can_move and not get_meta("shocked"):
-		global_position.x = move_toward(global_position.x, player_current_position.x, speed * delta)
-			
+		if randi_range(1, 600) == 1:
+			global_position.x = move_toward(global_position.x, player_current_position.x, (current_speed * 4) * delta)
+		else:
+			global_position.x = move_toward(global_position.x, player_current_position.x, current_speed * delta)
 	
 	# if the slug reached the current player position, switch to the other side
 	if global_position.x == player_current_position.x:
@@ -143,7 +171,7 @@ func _physics_process(delta: float) -> void:
 
 func _on_check_player_position_timeout() -> void:
 	# check where the player supposed to be
-	if not flying:
+	if not attacking:
 		if player.global_position.x - self.global_position.x < 0:
 			player_location = "right"
 		else:
@@ -152,8 +180,12 @@ func _on_check_player_position_timeout() -> void:
 
 
 func _on_attack_cooldown_timeout() -> void:
-	if not attacking and velocity.y == 0 and is_on_floor() and global_position.y > -750:
-		jump_attack()
+	if not attacking and velocity.y == 0 and is_on_floor() and global_position.y > -750 and not get_meta("shocked") and not player_is_in_sky_detector:
+		if not in_attack_range:
+			if randf_range(1, 2) == 1:
+				jump_attack()
+		else:
+			jump_attack()
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
@@ -169,3 +201,44 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		set_meta("shocked", true)
 		await get_tree().create_timer(3).timeout
 		set_meta("shocked", false)
+		flying = false # beta
+
+
+func _on_jump_attck_disabled_range_area_entered(area: Area2D) -> void:
+	if area.is_in_group("player"):
+		in_attack_range = true
+		current_speed = 400
+
+func _on_jump_attck_disabled_range_area_exited(area: Area2D) -> void:
+	if area.is_in_group("player"):
+		in_attack_range = false
+		current_speed = speed
+		
+func _on_sky_detector_area_entered(area: Area2D) -> void:
+	if area.is_in_group("player"):
+		player_is_in_sky_detector = true
+
+func _on_sky_detector_area_exited(area: Area2D) -> void:
+	if area.is_in_group("player"):
+		player_is_in_sky_detector = false
+
+
+func _on_attack_up_cooldown_timeout() -> void:
+	if player_is_in_sky_detector:
+		var attack_area_2: Sprite2D = attack_area_scene.instantiate()
+		add_child(attack_area_2)
+		attack_area_2.scale = Vector2(2, 20)
+		attack_area_2.position.y = -705
+		await get_tree().create_timer(0.5).timeout
+		can_move = false
+		for i in range(10):
+			attack_up(attack_area_2)
+			await get_tree().create_timer(0.01).timeout
+		can_move = true
+
+
+func _on_sliding_timer_timeout() -> void:
+	if global_position.y < player.global_position.y:
+		slide = true
+		await get_tree().create_timer(0.1).timeout
+		slide = false

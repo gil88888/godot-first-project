@@ -26,7 +26,6 @@ func _ready() -> void:
 	
 func _process(delta: float) -> void:
 	# check if the enemy is shocked
-	print(get_meta("shocked"))
 	if get_meta("shocked"):
 		$enemy_1/Sprite2D.modulate = modulate.darkened(-0.5)
 	else:
@@ -104,20 +103,20 @@ func _physics_process(delta: float) -> void:
 		velocity.y += gravity * delta
 
 	if is_on_floor():
-		if enemy_ready_to_jump:
+		if enemy_ready_to_jump and not get_meta("shocked"):
 			velocity.y = -jump_power
-		elif enemy_ready_to_jump_to_player and player_in_enemy_ground_sky_detector and player_placement == "above":
+		elif enemy_ready_to_jump_to_player and player_in_enemy_ground_sky_detector and player_placement == "above" and not get_meta("shocked"):
 			jump_to_player_delay_timer.start()
 			if enemy_ready_to_jump_timer_ended:
 				velocity.y = -1500
 				enemy_ready_to_jump_timer_ended = false
 				enemy_ready_to_jump_to_player = false
 				$"enemy_1/jump to player cooldown".start()
-		elif enemy_ready_to_slide and player_in_enemy_ground_sky_detector and player_placement == "below":
+		elif enemy_ready_to_slide and player_in_enemy_ground_sky_detector and player_placement == "below" and not get_meta("shocked"):
 			enemy_ready_to_slide = false
 			set_collision_mask_value(2, false)
 			await get_tree().create_timer(0.2).timeout
-			set_collision_mask_value(2, true)			
+			set_collision_mask_value(2, true)
 			
 
 	move_and_slide()

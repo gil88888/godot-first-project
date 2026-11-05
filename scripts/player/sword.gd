@@ -34,7 +34,9 @@ func attack() -> void:
 	sword_sprite.rotation = 0
 	# if the player have the faster sword recharge
 	if GlobalVariables.abilities.get("faster_sword_recharge"):
-		reload_timer.wait_time = 0.25
+		reload_timer.wait_time = 0.5
+	else:
+		reload_timer.wait_time = 1
 
 func _on_reload_timer_timeout() -> void:
 	can_attack = true

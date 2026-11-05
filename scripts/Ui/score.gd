@@ -22,8 +22,7 @@ func _process(_delta: float) -> void:
 		$"../pause button".visible = false
 		power_chooser = power_chooser_scene.instantiate()
 		#power_chooser.scale = Vector2(0.5, 0.5)
-		if GlobalVariables.danger_level != 4:
-			GlobalVariables.danger_level += 1
+		GlobalVariables.danger_level += 1
 		next_ability_score_goal += 3000
 		GlobalVariables.game_stopped = true
 		$"../pause button".process_mode = Node.PROCESS_MODE_DISABLED

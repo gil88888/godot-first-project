@@ -5,12 +5,23 @@ var bullet_speed := 3000
 var bullet_rotation := 0
 var enemies_pierced: int = 0
 @onready var hit_sfx: AudioStreamPlayer = self.get_tree().get_first_node_in_group("bullet_hit_sfx")
+var homing_area: Area2D = null
+var homing_speed: int = 10
+
 func _ready() -> void:
 	if GlobalVariables.abilities.get("ranged_attack"):
 		set_meta("bullet_damage", 5)
 
 func _process(delta):
-	self.get_parent().global_position += (bullet_direction * bullet_speed * delta) 
+	
+	#global_position.y += 100 * delta
+	if homing_area != null and GlobalVariables.abilities.get("homing_shots"): # if the player have the homing ability and the bullet detect an enemy
+		var target_direction = (homing_area.global_position - global_position).normalized() # get the place of the enemy but keep the speed the same
+
+		bullet_direction = bullet_direction.slerp(target_direction, delta * homing_speed).normalized() # rotate the bullet toward the target place
+
+
+	self.get_parent().global_position += bullet_direction * bullet_speed * delta
 	self.rotation = bullet_direction.angle()
 	$Label.text = str(get_meta("bullet_damage"))
 	if GlobalVariables.abilities.get("ranged_attack"):
@@ -51,3 +62,15 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	await get_tree().create_timer(3).timeout
 	self.queue_free()
+
+
+func _on_homing_hitbox_area_entered(area: Area2D) -> void:
+	if area.is_in_group("enemies area"):
+		homing_area = area
+
+
+
+
+func _on_homing_hitbox_area_exited(area: Area2D) -> void:
+	if area == homing_area:
+		homing_area = null

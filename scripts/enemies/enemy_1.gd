@@ -30,7 +30,6 @@ func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("player damage collision") and GlobalVariables.player_invincible == false:
 		Playerhp.hurt_player(25)
 	if area.is_in_group("gun bullet"):
-		print(area)
 		enemy_hp -= area.get_parent().get_meta("bullet_damage")
 		GlobalVariables.score_label.add_score(randi_range(5, 15))
 		if enemy_hit_animation_flag:
@@ -71,4 +70,5 @@ func _on_area_attack_view_area_exited(area: Area2D) -> void:
 
 # on the attack cooldown end
 func _on_attack_cooldown_timeout() -> void:
-	attack()
+	if not get_parent().get_meta("shocked"):
+		attack()

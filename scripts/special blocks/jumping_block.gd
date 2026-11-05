@@ -1,15 +1,11 @@
 extends Area2D
 
-var   jump_block_disabled: bool = false
+var jump_block_disabled: bool = false
 var can_jump: bool = false
 @onready var timer = $Timer
 var timer_flag: bool = true
 @onready var animation = $AnimatedSprite2D
 var velocity_y: int = -1750
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
